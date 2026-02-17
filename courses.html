@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Courses - edHills</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f4f6fb;
+}
+
+/* Header */
+header{
+  background:#0e2f69;
+  color:white;
+  padding:15px 50px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+header h2{
+  margin:0;
+}
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:20px;
+}
+nav a:hover{
+  color:#facc15;
+}
+
+/* Banner */
+.banner{
+  background:linear-gradient(135deg,#0e2f69,#1746a2);
+  color:white;
+  padding:60px;
+  text-align:center;
+}
+.banner h1{
+  font-size:40px;
+}
+
+/* Course Section */
+.course-container{
+  padding:60px 8%;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+}
+
+.course-card{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.1);
+  transition:0.3s;
+}
+.course-card:hover{
+  transform:translateY(-8px);
+}
+
+.course-card h3{
+  margin-top:0;
+  color:#0e2f69;
+}
+
+.price{
+  font-size:20px;
+  font-weight:bold;
+  margin:10px 0;
+  color:#0e2f69;
+}
+
+.btn{
+  display:inline-block;
+  padding:10px 20px;
+  background:#0e2f69;
+  color:white;
+  text-decoration:none;
+  border-radius:25px;
+  transition:0.3s;
+}
+.btn:hover{
+  background:#facc15;
+  color:black;
+}
+
+/* Footer */
+footer{
+  background:#0e2f69;
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+/* WHY US */
+.why-us{
+  padding:70px 8%;
+  text-align:center;
+  background:#f9fafc;
+}
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+.why-card{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* EDUCATORS */
+.educators{
+  padding:70px 8%;
+  text-align:center;
+}
+.edu-grid{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+  margin-top:40px;
+}
+.edu-card{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  width:200px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+.edu-card img{
+  width:80px;
+}
+
+/* TESTIMONIALS */
+.testimonials{
+  padding:70px 8%;
+  background:#f4f6fb;
+  text-align:center;
+}
+.testimonial-card{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  margin:20px auto;
+  max-width:600px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* APP SECTION */
+.app-section{
+  padding:70px 8%;
+  background:linear-gradient(135deg,#0e2f69,#1746a2);
+  color:white;
+  text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>edHills</h2>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="courses.html">Courses</a>
+    <a href="#">Login</a>
+  </nav>
+</header>
+
+<section class="banner">
+  <h1>Explore Our Premium Courses</h1>
+  <p>Choose your goal and start learning today 🚀</p>
+</section>
+
+<section class="why-us">
+  <h2>Why Choose edHills?</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <h3>🎥 Live & Recorded Classes</h3>
+      <p>Learn anytime with unlimited access to video lectures.</p>
+    </div>
+
+    <div class="why-card">
+      <h3>📝 Free Notes & PDFs</h3>
+      <p>Download structured notes prepared by expert faculty.</p>
+    </div>
+
+    <div class="why-card">
+      <h3>📊 Weekly Test Series</h3>
+      <p>Improve performance with real exam-level mock tests.</p>
+    </div>
+
+    <div class="why-card">
+      <h3>💰 Affordable Fees</h3>
+      <p>High quality education at student-friendly pricing.</p>
+    </div>
+  </div>
+</section>
+
+<section class="educators">
+  <h2>Meet Our Top Educators</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+      <h3>Physics Expert</h3>
+      <p>10+ Years Experience</p>
+    </div>
+
+    <div class="edu-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png">
+      <h3>Chemistry Mentor</h3>
+      <p>8+ Years Experience</p>
+    </div>
+
+    <div class="edu-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+      <h3>Maths Specialist</h3>
+      <p>12+ Years Experience</p>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <h2>What Our Students Say</h2>
+
+  <div class="testimonial-card">
+    <p>"edHills helped me crack JEE with structured preparation!"</p>
+    <h4>- AIR 542 Student ⭐⭐⭐⭐⭐</h4>
+  </div>
+
+  <div class="testimonial-card">
+    <p>"Best platform for NEET preparation. Affordable & high quality."</p>
+    <h4>- NEET Qualified Student ⭐⭐⭐⭐⭐</h4>
+  </div>
+</section>
+
+<section class="app-section">
+  <div>
+    <h2>Download Our Mobile App</h2>
+    <p>Learn anytime, anywhere with our smart learning app.</p>
+    <a href="#" class="btn">Download Now</a>
+  </div>
+</section>
+
+
+<section class="course-container">
+
+  <div class="course-card">
+    <h3>JEE (Class 11 + 12)</h3>
+    <p>Complete PCM preparation with live & recorded classes.</p>
+    <div class="price">₹1500</div>
+    <a href="#" class="btn">Enroll Now</a>
+  </div>
+
+  <div class="course-card">
+    <h3>NEET Preparation</h3>
+    <p>Full PCB syllabus with test series & notes.</p>
+    <div class="price">₹1500</div>
+    <a href="#" class="btn">Enroll Now</a>
+  </div>
+
+  <div class="course-card">
+    <h3>CUET Crash Course</h3>
+    <p>Fast-track preparation for CUET entrance exam.</p>
+    <div class="price">₹999</div>
+    <a href="#" class="btn">Enroll Now</a>
+  </div>
+
+  <div class="course-card">
+    <h3>SSC & Banking</h3>
+    <p>Quant, Reasoning & English complete coverage.</p>
+    <div class="price">₹799</div>
+    <a href="#" class="btn">Enroll Now</a>
+  </div>
+
+</section>
+
+<footer>
+  © 2026 EduLearn. All Rights Reserved.
+</footer>
+
+</body>
+</html>
