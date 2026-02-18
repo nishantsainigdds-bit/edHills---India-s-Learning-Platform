@@ -1,110 +1,113 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Student Login - edHills</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login - edHills</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
 
-<style>
-body{
-  margin:0;
-  font-family:'Segoe UI', sans-serif;
-  background:linear-gradient(135deg,#0e2f69,#1746a2);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0e2f69, #1746a2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-/* Login Box */
-.login-container{
-  background:white;
-  padding:40px;
-  width:350px;
-  border-radius:20px;
-  box-shadow:0 15px 30px rgba(0,0,0,0.2);
-  text-align:center;
-}
+    /* Login Box */
+    .login-container {
+      background: white;
+      padding: 40px;
+      width: 350px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
 
-.login-container h2{
-  margin-bottom:20px;
-  color:#0e2f69;
-}
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: #0e2f69;
+    }
 
-input{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border-radius:8px;
-  border:1px solid #ccc;
-  font-size:14px;
-}
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
 
-input:focus{
-  outline:none;
-  border-color:#0e2f69;
-}
+    input:focus {
+      outline: none;
+      border-color: #0e2f69;
+    }
 
-button{
-  width:100%;
-  padding:12px;
-  margin-top:15px;
-  border:none;
-  border-radius:25px;
-  background:#0e2f69;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-  transition:0.3s;
-}
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 25px;
+      background: #0e2f69;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-button:hover{
-  background:#facc15;
-  color:black;
-}
+    button:hover {
+      background: #facc15;
+      color: black;
+    }
 
-.links{
-  margin-top:15px;
-  font-size:14px;
-}
+    .links {
+      margin-top: 15px;
+      font-size: 14px;
+    }
 
-.links a{
-  text-decoration:none;
-  color:#0e2f69;
-}
+    .links a {
+      text-decoration: none;
+      color: #0e2f69;
+    }
 
-.links a:hover{
-  text-decoration:underline;
-}
+    .links a:hover {
+      text-decoration: underline;
+    }
 
-.back-home{
-  position:absolute;
-  top:20px;
-  left:20px;
-  color:white;
-  text-decoration:none;
-  font-weight:500;
-}
-</style>
+    .back-home {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
 </head>
 
 <body>
 
-<a href="index.html" class="back-home">← Back to Home</a>
+  <a href="index.html" class="back-home"><i class="ri-arrow-left-line"></i> Back to Home</a>
 
-<div class="login-container">
-  <h2>Student Login</h2>
+  <div class="login-container">
+    <h2><i class="ri-login-circle-line"></i> Student Login</h2>
 
-  <form>
-    <input type="email" placeholder="Enter Email" required>
-    <input type="password" placeholder="Enter Password" required>
-    <button type="submit">Login</button>
-  </form>
+    <form>
+      <input type="email" placeholder="Enter Email" required>
+      <input type="password" placeholder="Enter Password" required>
+      <button type="submit">Login</button>
+    </form>
 
-  <div class="links">
-    <p>Don't have an account? <a href="#">Register</a></p>
-    <p><a href="#">Forgot Password?</a></p>
+    <div class="links">
+      <p>Don't have an account? <a href="#">Register</a></p>
+      <p><a href="#">Forgot Password?</a></p>
+    </div>
   </div>
-</div>
 
 </body>
+
 </html>

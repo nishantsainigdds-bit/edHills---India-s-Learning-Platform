@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JEE Main 2026 Syllabus - edHills</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6fb;
+            color: #333;
+        }
+
+        /* HEADER */
+        header {
+            background: #0e2f69;
+            color: white;
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        nav a:hover {
+            color: #facc15;
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            background: linear-gradient(135deg, #0e2f69, #1746a2);
+            color: white;
+            padding: 60px 8%;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            margin: 0 0 10px;
+            font-size: 36px;
+        }
+
+        .page-header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 18px;
+        }
+
+        /* SYLLABUS CONTAINER */
+        .syllabus-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .download-section {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .btn-download {
+            background: #facc15;
+            color: #0e2f69;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-download:hover {
+            background: #e0b700;
+        }
+
+        /* SUBJECT SECTIONS */
+        .subject-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .subject-header {
+            background: #0e2f69;
+            color: white;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .subject-header h3 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subject-content {
+            padding: 25px;
+            display: block;
+            /* Default open for simplicity, or can be toggled via JS */
+        }
+
+        .topic-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .topic-item {
+            background: #f9fafc;
+            padding: 15px;
+            border-left: 4px solid #0e2f69;
+            border-radius: 4px;
+        }
+
+        .topic-item h4 {
+            margin: 0 0 5px;
+            color: #0e2f69;
+        }
+
+        .topic-item p {
+            margin: 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0e2f69;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 600px) {
+            .topic-list {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 15px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>edHills</h2>
+        <nav>
+            <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
+            <a href="courses.html"><i class="ri-book-open-line"></i> Courses</a>
+            <a href="login.html"><i class="ri-user-line"></i> Login</a>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1><i class="ri-file-list-3-line"></i> JEE Main 2026 Syllabus</h1>
+        <p>Comprehensive Physics, Chemistry & Mathematics Syllabus for JEE Aspirants</p>
+    </div>
+
+    <div class="syllabus-container">
+
+        <div class="download-section">
+            <a href="#" class="btn-download" onclick="alert('PDF Download Started...')">
+                <i class="ri-download-cloud-2-line"></i> Download Syllabus PDF
+            </a>
+        </div>
+
+        <!-- PHYSICS -->
+        <div class="subject-section">
+            <div class="subject-header">
+                <h3><i class="ri-flashlight-line"></i> Physics</h3>
+                <i class="ri-arrow-down-s-line"></i>
+            </div>
+            <div class="subject-content">
+                <div class="topic-list">
+                    <div class="topic-item">
+                        <h4>Kinematics</h4>
+                        <p>Motion in 1D & 2D, Projectile Motion, Relative Velocity</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Laws of Motion</h4>
+                        <p>Newton's Laws, Friction, Circular Motion</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Electrostatics</h4>
+                        <p>Electric Field, Potential, Gauss's Law, Capacitors</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Optics</h4>
+                        <p>Ray Optics, Wave Optics, Instruments</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Thermodynamics</h4>
+                        <p>Laws of Thermodynamics, Kinetic Theory of Gases</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Modern Physics</h4>
+                        <p>Dual Nature, Atoms & Nuclei, Semiconductors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHEMISTRY -->
+        <div class="subject-section">
+            <div class="subject-header">
+                <h3><i class="ri-flask-line"></i> Chemistry</h3>
+                <i class="ri-arrow-down-s-line"></i>
+            </div>
+            <div class="subject-content">
+                <div class="topic-list">
+                    <div class="topic-item">
+                        <h4>Physical Chemistry</h4>
+                        <p>Mole Concept, Thermodynamics, Equilibrium, Kinetics</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Inorganic Chemistry</h4>
+                        <p>Periodic Table, Chemical Bonding, Coordination Compounds</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Organic Chemistry</h4>
+                        <p>General Organic Chemistry, Hydrocarbons, Aldehydes & Ketones</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Electrochemistry</h4>
+                        <p>Conductance, Nernst Equation, Cells</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MATHEMATICS -->
+        <div class="subject-section">
+            <div class="subject-header">
+                <h3><i class="ri-function-line"></i> Mathematics</h3>
+                <i class="ri-arrow-down-s-line"></i>
+            </div>
+            <div class="subject-content">
+                <div class="topic-list">
+                    <div class="topic-item">
+                        <h4>Calculus</h4>
+                        <p>Limits, Continuity, Differentiation, Integration, Differential Equations</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Algebra</h4>
+                        <p>Complex Numbers, Quadratic Equations, Sequences & Series, Matrices</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Coordinate Geometry</h4>
+                        <p>Straight Lines, Circles, Conic Sections</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Vectors & 3D</h4>
+                        <p>Vector Algebra, 3D Geometry, Planes</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Trigonometry</h4>
+                        <p>Identities, Equations, Inverse Trigonometric Functions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 edHills. All Rights Reserved.
+    </footer>
+
+</body>
+
+</html>

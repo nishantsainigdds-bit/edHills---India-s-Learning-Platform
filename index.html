@@ -1,254 +1,495 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>edHills - India's Learning Platform</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>edHills - India's Learning Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
 
-<style>
-body{
-  margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background:#f4f6fb;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6fb;
+    }
 
-/* HEADER */
-header{
-  background:#0e2f69;
-  color:white;
-  padding:15px 8%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-header h2{
-  margin:0;
-  letter-spacing:1px;
-}
-nav a{
-  color:white;
-  text-decoration:none;
-  margin-left:25px;
-  font-weight:500;
-}
-nav a:hover{
-  color:#facc15;
-}
+    /* HEADER */
+    header {
+      background: #0e2f69;
+      color: white;
+      padding: 15px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-/* HERO SECTION */
-.hero{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:100px 8%;
-  background:linear-gradient(135deg,#0e2f69,#1746a2);
-  color:white;
-  flex-wrap:wrap;
-}
-.hero-content{
-  max-width:550px;
-}
-.hero h1{
-  font-size:44px;
-  line-height:1.3;
-}
-.hero h1 span{
-  color:#facc15;
-}
-.hero p{
-  margin:20px 0;
-  font-size:18px;
-}
-.hero-buttons a{
-  text-decoration:none;
-  padding:12px 25px;
-  margin-right:15px;
-  border-radius:30px;
-  font-weight:bold;
-  transition:0.3s;
-}
-.btn-primary{
-  background:white;
-  color:#0e2f69;
-}
-.btn-primary:hover{
-  background:#facc15;
-  color:black;
-}
-.btn-outline{
-  border:2px solid white;
-  color:white;
-}
-.btn-outline:hover{
-  background:white;
-  color:#0e2f69;
-}
-.hero img{
-  width:350px;
-  animation:float 3s ease-in-out infinite;
-}
-@keyframes float{
-  0%{transform:translateY(0);}
-  50%{transform:translateY(-15px);}
-  100%{transform:translateY(0);}
-}
+    header h2 {
+      margin: 0;
+      letter-spacing: 1px;
+    }
 
-/* STATS SECTION */
-.stats{
-  display:flex;
-  justify-content:space-around;
-  background:white;
-  padding:40px 8%;
-  text-align:center;
-}
-.stats div h2{
-  color:#0e2f69;
-  margin:0;
-}
-.stats div p{
-  margin:5px 0 0;
-  color:#555;
-}
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-/* COURSES SECTION */
-.courses{
-  padding:70px 8%;
-  text-align:center;
-}
-.courses h2{
-  color:#0e2f69;
-}
-.course-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:30px;
-  margin-top:40px;
-}
-.card{
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
-  transition:0.3s;
-}
-.card:hover{
-  transform:translateY(-10px);
-}
-.card h3{
-  color:#0e2f69;
-}
-.price{
-  font-weight:bold;
-  margin:10px 0;
-}
-.btn{
-  display:inline-block;
-  padding:10px 20px;
-  background:#0e2f69;
-  color:white;
-  text-decoration:none;
-  border-radius:25px;
-}
-.btn:hover{
-  background:#facc15;
-  color:black;
-}
+    nav a:hover {
+      color: #facc15;
+    }
 
-/* FOOTER */
-footer{
-  background:#0e2f69;
-  color:white;
-  text-align:center;
-  padding:20px;
-}
+    /* HERO SECTION */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 100px 8%;
+      background: linear-gradient(135deg, #0e2f69, #1746a2);
+      color: white;
+      flex-wrap: wrap;
+    }
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  .hero{
-    text-align:center;
-  }
-  .hero img{
-    margin-top:40px;
-    width:250px;
-  }
-  .stats{
-    flex-direction:column;
-    gap:20px;
-  }
-}
-</style>
+    .hero-content {
+      max-width: 550px;
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      line-height: 1.3;
+    }
+
+    .hero h1 span {
+      color: #facc15;
+    }
+
+    .hero p {
+      margin: 20px 0;
+      font-size: 18px;
+    }
+
+    .hero-buttons a {
+      text-decoration: none;
+      padding: 12px 25px;
+      margin-right: 15px;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: white;
+      color: #0e2f69;
+    }
+
+    .btn-primary:hover {
+      background: #facc15;
+      color: black;
+    }
+
+    .btn-outline {
+      border: 2px solid white;
+      color: white;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: #0e2f69;
+    }
+
+    .hero img {
+      width: 350px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    /* STATS SECTION */
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      background: white;
+      padding: 40px 8%;
+      text-align: center;
+    }
+
+    .stats div h2 {
+      color: #0e2f69;
+      margin: 0;
+    }
+
+    .stats div p {
+      margin: 5px 0 0;
+      color: #555;
+    }
+
+    /* COURSES SECTION */
+    .courses {
+      padding: 70px 8%;
+      text-align: center;
+    }
+
+    .courses h2 {
+      color: #0e2f69;
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card h3 {
+      color: #0e2f69;
+    }
+
+    .price {
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #0e2f69;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+    }
+
+    .btn:hover {
+      background: #facc15;
+      color: black;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0e2f69;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* UPDATES SECTION */
+    .updates {
+      padding: 70px 8%;
+      background: #fdfdfd;
+    }
+
+    .updates h2 {
+      color: #0e2f69;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .update-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .update-item {
+      background: white;
+      padding: 20px;
+      border-left: 5px solid #facc15;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .update-item p {
+      margin: 0;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .update-date {
+      color: #777;
+      font-size: 14px;
+    }
+
+    /* EXAM INFO SECTION */
+    .exam-info {
+      padding: 70px 8%;
+      background: #eef1f6;
+    }
+
+    .exam-info h2 {
+      color: #0e2f69;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .exam-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .exam-card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      border-top: 5px solid #0e2f69;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .exam-card h3 {
+      color: #0e2f69;
+      margin-top: 0;
+    }
+
+    .exam-details p {
+      margin: 10px 0;
+      color: #555;
+      font-size: 15px;
+    }
+
+    .exam-card .btn {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    /* POPUP */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .popup-content {
+      background: white;
+      padding: 40px;
+      width: 400px;
+      border-radius: 20px;
+      text-align: center;
+      position: relative;
+      animation: popIn 0.5s ease;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #aaa;
+    }
+
+    .popup-content h2 {
+      color: #0e2f69;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:900px) {
+      .hero {
+        text-align: center;
+      }
+
+      .hero img {
+        margin-top: 40px;
+        width: 250px;
+      }
+
+      .stats {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <h2>edHills</h2>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="courses.html">Courses</a>
-    <a href="login.html">Login</a>
-  </nav>
-</header>
+  <header>
+    <h2>edHills</h2>
+    <nav>
+      <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
+      <a href="courses.html"><i class="ri-book-open-line"></i> Courses</a>
+      <a href="login.html"><i class="ri-user-line"></i> Login</a>
+    </nav>
+  </header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>Empower Your <span>Dream Career</span> With Smart Learning</h1>
-    <p>JEE • NEET • CUET • Boards • SSC • Banking</p>
-    <div class="hero-buttons">
-      <a href="courses.html" class="btn-primary">Explore Courses</a>
-      <a href="#" class="btn-outline">Watch Demo</a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Empower Your <span>Dream Career</span> With Smart Learning</h1>
+      <p>JEE • NEET • CUET • Boards • SSC • Banking</p>
+      <div class="hero-buttons">
+        <a href="courses.html" class="btn-primary">Explore Courses</a>
+        <a href="#" class="btn-outline">Watch Demo</a>
+      </div>
+    </div>
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png">
+  </section>
+
+  <!-- UPDATES -->
+  <section class="updates">
+    <h2><i class="ri-notification-3-line"></i> Upcoming Updates & Notifications</h2>
+    <div class="update-list">
+      <div class="update-item">
+        <p><i class="ri-rocket-line"></i> JEE Main 2026 Crash Course starting from next Monday!</p>
+        <span class="update-date">New</span>
+      </div>
+      <div class="update-item">
+        <p><i class="ri-megaphone-line"></i> NEET Admit Cards have been released. Download now.</p>
+        <span class="update-date">2 hrs ago</span>
+      </div>
+      <div class="update-item">
+        <p><i class="ri-file-text-line"></i> Scholarship Test results are out. Check your rank.</p>
+        <span class="update-date">Yesterday</span>
+      </div>
+      <div class="update-item">
+        <p><i class="ri-graduation-cap-line"></i> New batch for CUET 2026 registrations open.</p>
+        <span class="update-date">2 days ago</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXAM INFORMATION -->
+  <section class="exam-info">
+    <h2><i class="ri-file-list-3-line"></i> Exam Information</h2>
+    <div class="exam-grid">
+      <div class="exam-card">
+        <h3>JEE Main 2026</h3>
+        <div class="exam-details">
+          <p><strong><i class="ri-calendar-event-line"></i> Date:</strong> Jan 24 - Feb 01, 2026</p>
+          <p><strong><i class="ri-user-star-line"></i> Eligibility:</strong> Class 12th Pass/Appearing</p>
+          <p><strong><i class="ri-computer-line"></i> Mode:</strong> Online (CBT)</p>
+        </div>
+        <a href="jee-syllabus.html" class="btn">View Syllabus</a>
+      </div>
+
+      <div class="exam-card">
+        <h3>NEET UG 2026</h3>
+        <div class="exam-details">
+          <p><strong><i class="ri-calendar-event-line"></i> Date:</strong> May 03, 2026</p>
+          <p><strong><i class="ri-parent-line"></i> Eligibility:</strong> 17+ Years Age</p>
+          <p><strong><i class="ri-edit-line"></i> Mode:</strong> Offline (Pen & Paper)</p>
+        </div>
+        <a href="neet-syllabus.html" class="btn">View Syllabus</a>
+      </div>
+
+      <div class="exam-card">
+        <h3>CUET 2026</h3>
+        <div class="exam-details">
+          <p><strong><i class="ri-calendar-event-line"></i> Date:</strong> May 15 - May 31, 2026</p>
+          <p><strong><i class="ri-graduation-cap-line"></i> Eligibility:</strong> Class 12th Pass</p>
+          <p><strong><i class="ri-laptop-line"></i> Mode:</strong> Hybrid Mode</p>
+        </div>
+        <a href="cuet-syllabus.html" class="btn">View Syllabus</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="courses">
+    <h2><i class="ri-book-mark-line"></i> Popular Courses</h2>
+
+    <div class="course-grid">
+      <div class="card">
+        <h3>JEE Preparation</h3>
+        <p>Complete PCM preparation with live classes.</p>
+        <div class="price">₹1500</div>
+        <a href="#" class="btn">Enroll Now</a>
+      </div>
+
+      <div class="card">
+        <h3>NEET Preparation</h3>
+        <p>Full PCB syllabus with test series.</p>
+        <div class="price">₹1500</div>
+        <a href="#" class="btn">Enroll Now</a>
+      </div>
+
+      <div class="card">
+        <h3>CUET Course</h3>
+        <p>Crash course for CUET entrance exam.</p>
+        <div class="price">₹999</div>
+        <a href="#" class="btn">Enroll Now</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 edHills. All Rights Reserved.
+  </footer>
+
+  <!-- LOGIN POPUP -->
+  <div class="popup-overlay" id="loginPopup">
+    <div class="popup-content">
+      <span class="close-popup" onclick="closePopup()">×</span>
+      <h2><i class="ri-login-circle-line"></i> Login to Continue</h2>
+      <p>Get exclusive access to free mock tests and notes!</p>
+      <br>
+      <a href="login.html" class="btn">Login / Register</a>
     </div>
   </div>
-  <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png">
-</section>
 
-<!-- STATS -->
-<section class="stats">
-  <div>
-    <h2>10K+</h2>
-    <p>Active Students</p>
-  </div>
-  <div>
-    <h2>50+</h2>
-    <p>Expert Teachers</p>
-  </div>
-  <div>
-    <h2>100+</h2>
-    <p>Courses Available</p>
-  </div>
-</section>
+  <script>
+    // Show Popup after 15 seconds
+    window.onload = function () {
+      setTimeout(function () {
+        document.getElementById('loginPopup').style.display = 'flex';
+      }, 15000);
+    };
 
-<!-- COURSES -->
-<section class="courses">
-  <h2>Popular Courses</h2>
-
-  <div class="course-grid">
-    <div class="card">
-      <h3>JEE Preparation</h3>
-      <p>Complete PCM preparation with live classes.</p>
-      <div class="price">₹1500</div>
-      <a href="#" class="btn">Enroll Now</a>
-    </div>
-
-    <div class="card">
-      <h3>NEET Preparation</h3>
-      <p>Full PCB syllabus with test series.</p>
-      <div class="price">₹1500</div>
-      <a href="#" class="btn">Enroll Now</a>
-    </div>
-
-    <div class="card">
-      <h3>CUET Course</h3>
-      <p>Crash course for CUET entrance exam.</p>
-      <div class="price">₹999</div>
-      <a href="#" class="btn">Enroll Now</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  © 2026 edHills. All Rights Reserved.
-</footer>
+    function closePopup() {
+      document.getElementById('loginPopup').style.display = 'none';
+    }
+  </script>
 
 </body>
+
 </html>

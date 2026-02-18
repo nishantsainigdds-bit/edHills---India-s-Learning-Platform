@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NEET UG 2026 Syllabus - edHills</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6fb;
+            color: #333;
+        }
+
+        /* HEADER */
+        header {
+            background: #0e2f69;
+            color: white;
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        nav a:hover {
+            color: #facc15;
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            background: linear-gradient(135deg, #0e2f69, #1746a2);
+            color: white;
+            padding: 60px 8%;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            margin: 0 0 10px;
+            font-size: 36px;
+        }
+
+        .page-header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 18px;
+        }
+
+        /* SYLLABUS CONTAINER */
+        .syllabus-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .download-section {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .btn-download {
+            background: #facc15;
+            color: #0e2f69;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-download:hover {
+            background: #e0b700;
+        }
+
+        /* SUBJECT SECTIONS */
+        .subject-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .subject-header {
+            background: #0e2f69;
+            color: white;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .subject-header h3 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subject-content {
+            padding: 25px;
+            display: block;
+        }
+
+        .topic-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .topic-item {
+            background: #f9fafc;
+            padding: 15px;
+            border-left: 4px solid #0e2f69;
+            border-radius: 4px;
+        }
+
+        .topic-item h4 {
+            margin: 0 0 5px;
+            color: #0e2f69;
+        }
+
+        .topic-item p {
+            margin: 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0e2f69;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 600px) {
+            .topic-list {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 15px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h2>edHills</h2>
+        <nav>
+            <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
+            <a href="courses.html"><i class="ri-book-open-line"></i> Courses</a>
+            <a href="login.html"><i class="ri-user-line"></i> Login</a>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1><i class="ri-file-list-3-line"></i> NEET UG 2026 Syllabus</h1>
+        <p>Comprehensive Physics, Chemistry & Biology Syllabus for Medical Aspirants</p>
+    </div>
+
+    <div class="syllabus-container">
+
+        <div class="download-section">
+            <a href="#" class="btn-download" onclick="alert('PDF Download Started...')">
+                <i class="ri-download-cloud-2-line"></i> Download Syllabus PDF
+            </a>
+        </div>
+
+        <!-- PHYSICS -->
+        <div class="subject-section">
+            <div class="subject-header">
+                <h3><i class="ri-flashlight-line"></i> Physics</h3>
+                <i class="ri-arrow-down-s-line"></i>
+            </div>
+            <div class="subject-content">
+                <div class="topic-list">
+                    <div class="topic-item">
+                        <h4>Mechanics</h4>
+                        <p>Laws of Motion, Work Energy Power, Rotational Motion</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Thermodynamics</h4>
+                        <p>Thermal Properties, Kinetic Theory, Thermodynamics Laws</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Electrodynamics</h4>
+                        <p>Electrostatics, Current Electricity, EM Waves</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Optics & Modern Physics</h4>
+                        <p>Ray & Wave Optics, Atoms, Nuclei, Semiconductors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHEMISTRY -->
+        <div class="subject-section">
+            <div class="subject-header">
+                <h3><i class="ri-flask-line"></i> Chemistry</h3>
+                <i class="ri-arrow-down-s-line"></i>
+            </div>
+            <div class="subject-content">
+                <div class="topic-list">
+                    <div class="topic-item">
+                        <h4>Physical Chemistry</h4>
+                        <p>Mole Concept, Equilibrium, Chemical Kinetics, Solutions</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Inorganic Chemistry</h4>
+                        <p>Periodic Table, p-block, d and f block elements, Coordination Compounds</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Organic Chemistry</h4>
+                        <p>Hydrocarbons, Haloalkanes, Alcohols, Aldehydes, Amines</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BIOLOGY -->
+        <div class="subject-section">
+            <div class="subject-header">
+                <h3><i class="ri-plant-line"></i> Biology (Botany & Zoology)</h3>
+                <i class="ri-arrow-down-s-line"></i>
+            </div>
+            <div class="subject-content">
+                <div class="topic-list">
+                    <div class="topic-item">
+                        <h4>Diversity in Living World</h4>
+                        <p>Plant Kingdom, Animal Kingdom, Biological Classification</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Cell Structure & Function</h4>
+                        <p>Cell Cycle, Biomolecules, Cell Division</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Plant Physiology</h4>
+                        <p>Photosynthesis, Respiration, Plant Growth & Development</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Human Physiology</h4>
+                        <p>Digestion, Breathing, Circulation, Neural Control</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Genetics & Evolution</h4>
+                        <p>Inheritance, Molecular Basis of Inheritance, Evolution</p>
+                    </div>
+                    <div class="topic-item">
+                        <h4>Ecology & Environment</h4>
+                        <p>Organisms, Populations, Ecosystem, Biodiversity</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 edHills. All Rights Reserved.
+    </footer>
+
+</body>
+
+</html>
