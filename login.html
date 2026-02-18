@@ -1,111 +1,326 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <title>Student Login - edHills</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #0e2f69, #1746a2);
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', 'Segoe UI', sans-serif;
+      background: #f4f6fb;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      overflow: hidden;
     }
 
-    /* Login Box */
-    .login-container {
+    .container {
+      display: flex;
+      width: 900px;
+      height: 550px;
       background: white;
-      padding: 40px;
-      width: 350px;
-      border-radius: 20px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-      text-align: center;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
     }
 
-    .login-container h2 {
-      margin-bottom: 20px;
-      color: #0e2f69;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-
-    input:focus {
-      outline: none;
-      border-color: #0e2f69;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 25px;
-      background: #0e2f69;
+    /* Left Side - Branding */
+    .branding-section {
+      width: 50%;
+      background: linear-gradient(135deg, #0e2f69, #1746a2);
       color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+    }
+
+    .branding-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/cubes.png');
+      opacity: 0.1;
+    }
+
+    .branding-section h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .branding-section h1 span {
+      color: #facc15;
+    }
+
+    .branding-section p {
       font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
+      opacity: 0.9;
+      margin-bottom: 30px;
+      line-height: 1.5;
     }
 
-    button:hover {
-      background: #facc15;
-      color: black;
+    .branding-img {
+      width: 280px;
+      animation: float 4s ease-in-out infinite;
     }
 
-    .links {
-      margin-top: 15px;
-      font-size: 14px;
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
     }
 
-    .links a {
-      text-decoration: none;
-      color: #0e2f69;
-    }
-
-    .links a:hover {
-      text-decoration: underline;
+    /* Right Side - Login Form */
+    .login-section {
+      width: 50%;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .back-home {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      color: white;
+      top: 25px;
+      right: 30px;
+      color: #777;
       text-decoration: none;
-      font-weight: 500;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: 0.3s;
+    }
+
+    .back-home:hover {
+      color: #0e2f69;
+    }
+
+    .login-header h2 {
+      font-size: 28px;
+      color: #0e2f69;
+      margin-bottom: 10px;
+    }
+
+    .login-header p {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aaa;
+      transition: 0.3s;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 14px 14px 45px;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.3s;
+      font-family: inherit;
+    }
+
+    .input-group input:focus {
+      border-color: #0e2f69;
+    }
+
+    .input-group input:focus+i {
+      color: #0e2f69;
+    }
+
+    .input-group input::placeholder {
+      color: #bbb;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #0e2f69;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .login-btn:hover {
+      background: #facc15;
+      color: #0e2f69;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(250, 204, 21, 0.3);
+    }
+
+    .extra-links {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    .extra-links a {
+      color: #666;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .extra-links a:hover {
+      color: #0e2f69;
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+      }
+
+      .branding-section {
+        width: 100%;
+        padding: 30px 20px;
+        display: none;
+        /* Hide branding on small screens for cleaner login */
+      }
+
+      .login-section {
+        width: 100%;
+        padding: 40px 30px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <a href="index.html" class="back-home"><i class="ri-arrow-left-line"></i> Back to Home</a>
+  <div class="container">
 
-  <div class="login-container">
-    <h2><i class="ri-login-circle-line"></i> Student Login</h2>
-
-    <form>
-      <input type="email" placeholder="Enter Email" required>
-      <input type="password" placeholder="Enter Password" required>
-      <button type="submit">Login</button>
-    </form>
-
-    <div class="links">
-      <p>Don't have an account? <a href="#">Register</a></p>
-      <p><a href="#">Forgot Password?</a></p>
+    <!-- Branding Side -->
+    <div class="branding-section">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" class="branding-img"
+        alt="Learning illustration">
+      <h1>Welcome to <span>edHills</span></h1>
+      <p>Join thousands of students achieving their dreams with India's best learning platform.</p>
     </div>
+
+    <!-- Login Form Side -->
+    <div class="login-section">
+      <a href="index.html" class="back-home"><i class="ri-arrow-left-line"></i> Back to Home</a>
+
+      <div class="login-header">
+        <h2>Student Login</h2>
+        <p>Enter your credentials to access your dashboard.</p>
+      </div>
+
+      <form id="loginForm">
+        <div class="input-group">
+          <input type="email" id="email" placeholder="Email Address" required>
+          <i class="ri-mail-line"></i>
+        </div>
+
+        <div class="input-group">
+          <input type="password" id="password" placeholder="Password" required>
+          <i class="ri-lock-2-line"></i>
+        </div>
+
+        <button type="submit" class="login-btn">
+          Sign In <i class="ri-arrow-right-line"></i>
+        </button>
+      </form>
+
+      <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+          e.preventDefault();
+
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+          const btn = document.querySelector('.login-btn');
+          const originalBtnText = btn.innerHTML;
+
+          // Simple loading state
+          btn.innerHTML = 'Signing In...';
+          btn.disabled = true;
+
+          try {
+            const response = await fetch('http://localhost:5000/api/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+              alert('Login Successful! Welcome ' + data.user.email);
+              // Redirect to dashboard or home
+              window.location.href = 'index.html';
+            } else {
+              alert('Login Failed: ' + data.message);
+            }
+          } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again later. Make sure the backend server is running.');
+          } finally {
+            btn.innerHTML = originalBtnText;
+            btn.disabled = false;
+          }
+        });
+      </script>
+
+      <div class="extra-links">
+        <a href="#">Forgot Password?</a>
+        <a href="#">Create an Account</a>
+      </div>
+    </div>
+
   </div>
 
 </body>
