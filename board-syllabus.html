@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>JEE Main 2026 Syllabus - edHills</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Exam Syllabus - edHills</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
     <style>
         body {
             margin: 0;
@@ -118,7 +118,6 @@
             color: white;
         }
 
-        /* RESPONSIVE HEADER */
         @media (max-width: 900px) {
             header {
                 padding: 15px 5%;
@@ -138,8 +137,6 @@
                 background: #0e2f69;
                 padding: 30px 0;
                 text-align: center;
-                z-index: 1000;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
                 gap: 20px;
             }
 
@@ -149,7 +146,6 @@
 
             nav a {
                 margin: 0;
-                font-size: 18px;
             }
 
             .nav-btn {
@@ -161,140 +157,82 @@
         .page-header {
             background: linear-gradient(135deg, #0e2f69, #1746a2);
             color: white;
-            padding: 80px 8%;
+            padding: 80px 8% 120px;
             text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/cubes.png');
-            opacity: 0.1;
         }
 
         .page-header h1 {
-            margin: 0 0 15px;
             font-size: 42px;
-            font-weight: 700;
-            position: relative;
+            margin: 0 0 15px;
         }
 
         .page-header p {
-            margin: 0;
-            opacity: 0.9;
             font-size: 20px;
+            opacity: 0.9;
             font-weight: 300;
-            position: relative;
         }
 
-        /* SYLLABUS CONTAINER */
-        .syllabus-container {
+        /* CLASS SELECTION */
+        .selection-container {
             max-width: 1100px;
-            margin: -40px auto 80px;
+            margin: -60px auto 40px;
             padding: 0 20px;
-            position: relative;
-            z-index: 10;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
         }
 
-        .download-section {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .btn-download {
-            background: #facc15;
-            color: #0e2f69;
-            padding: 16px 35px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.3s;
-            box-shadow: 0 10px 25px rgba(250, 204, 21, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 14px;
-        }
-
-        .btn-download:hover {
+        .class-card {
             background: white;
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.4);
-        }
-
-        /* PREMIUM ACCORDION SUBJECT SECTIONS */
-        .subject-section {
-            background: white;
+            padding: 40px;
             border-radius: 20px;
+            text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            margin-bottom: 25px;
-            overflow: hidden;
-            transition: 0.3s;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .subject-section:hover {
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-        }
-
-        .subject-header {
-            background: white;
-            color: #0e2f69;
-            padding: 25px 35px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             cursor: pointer;
             transition: 0.3s;
+            border: 2px solid transparent;
         }
 
-        .subject-section.active .subject-header {
-            background: #0e2f69;
-            color: white;
+        .class-card.active {
+            border-color: #facc15;
+            background: #fffdf5;
         }
 
-        .subject-header h3 {
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 24px;
-            font-weight: 600;
+        .class-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .subject-header i.arrow {
-            font-size: 24px;
-            transition: 0.4s;
-        }
-
-        .subject-section.active i.arrow {
-            transform: rotate(180deg);
-        }
-
-        .subject-content {
-            padding: 40px;
-            display: none;
-            border-top: 1px solid #f0f2f5;
-            background: #fafbfc;
-        }
-
-        .subject-section.active .subject-content {
+        .class-card i {
+            font-size: 50px;
+            color: #0e2f69;
+            margin-bottom: 20px;
             display: block;
-            animation: slideDown 0.4s ease-out;
         }
 
-        @keyframes slideDown {
+        .class-card h2 {
+            margin: 0 0 10px;
+            color: #0e2f69;
+        }
+
+        /* SYLLABUS SECTIONS */
+        .syllabus-wrapper {
+            max-width: 1100px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+            display: none;
+        }
+
+        .syllabus-wrapper.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
+                transform: translateY(20px);
             }
 
             to {
@@ -303,38 +241,80 @@
             }
         }
 
-        .topic-list {
+        .subject-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
         }
 
-        .topic-item {
+        .subject-card {
             background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
-            border-bottom: 3px solid #facc15;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
             transition: 0.3s;
         }
 
-        .topic-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        .subject-card:hover {
+            transform: scale(1.02);
         }
 
-        .topic-item h4 {
-            margin: 0 0 10px;
-            color: #0e2f69;
+        .subject-head {
+            background: #0e2f69;
+            color: white;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             font-size: 18px;
             font-weight: 600;
         }
 
-        .topic-item p {
-            margin: 0;
+        .subject-head span {
+            background: #facc15;
+            color: #0e2f69;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .topic-list {
+            padding: 20px 25px;
+        }
+
+        .topic-list li {
+            list-style: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            color: #555;
             font-size: 15px;
-            color: #666;
-            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topic-list li i {
+            color: #facc15;
+        }
+
+        .topic-list li:last-child {
+            border: none;
+        }
+
+        .download-btn {
+            display: block;
+            text-align: center;
+            background: #f0f4ff;
+            color: #0e2f69;
+            padding: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #0e2f69;
+            color: white;
         }
 
         /* PREMIUM DETAILED FOOTER */
@@ -343,7 +323,6 @@
             color: white;
             padding: 80px 8% 40px;
             font-family: 'Outfit', sans-serif;
-            margin-top: 50px;
         }
 
         .footer-container {
@@ -372,7 +351,6 @@
         }
 
         .footer-column p {
-            line-height: 1.6;
             font-size: 15px;
             opacity: 0.8;
         }
@@ -418,7 +396,6 @@
             justify-content: center;
             border-radius: 10px;
             color: white;
-            text-decoration: none;
             transition: 0.3s;
             font-size: 20px;
         }
@@ -436,13 +413,13 @@
             opacity: 0.6;
         }
 
-        .footer-bottom p {
-            margin: 0;
-        }
-
         @media (max-width: 768px) {
-            footer {
-                padding: 60px 5% 30px;
+            .selection-container {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
             }
 
             .footer-container {
@@ -473,11 +450,9 @@
             <i class="ri-graduation-cap-fill"></i>
             ed<span>Hills</span>
         </a>
-
         <div class="menu-toggle" id="mobile-menu">
             <i class="ri-menu-3-line"></i>
         </div>
-
         <nav id="nav-menu">
             <a href="index.html">Home</a>
             <a href="courses.html">Courses</a>
@@ -486,114 +461,115 @@
     </header>
 
     <div class="page-header">
-        <h1><i class="ri-file-list-3-line"></i> JEE Main 2026 Syllabus</h1>
-        <p>Comprehensive Physics, Chemistry & Mathematics Syllabus for JEE Aspirants</p>
+        <h1>Board Exam Syllabus 2026</h1>
+        <p>Class-wise detailed syllabus for secondary and senior secondary education.</p>
     </div>
 
-    <div class="syllabus-container">
-
-        <div class="download-section">
-            <a href="#" class="btn-download" onclick="alert('PDF Download Started...')">
-                <i class="ri-download-cloud-2-line"></i> Download Syllabus PDF
-            </a>
+    <div class="selection-container">
+        <div class="class-card active" onclick="showSyllabus('class10', this)">
+            <i class="ri-book-3-line"></i>
+            <h2>Class 10th</h2>
+            <p>Secondary School Examination</p>
         </div>
+        <div class="class-card" onclick="showSyllabus('class12', this)">
+            <i class="ri-medal-line"></i>
+            <h2>Class 12th</h2>
+            <p>Senior Secondary Examination</p>
+        </div>
+    </div>
 
-        <!-- PHYSICS -->
-        <div class="subject-section">
-            <div class="subject-header">
-                <h3><i class="ri-flashlight-line"></i> Physics</h3>
-                <i class="ri-arrow-down-s-line arrow"></i>
-            </div>
-            <div class="subject-content">
-                <div class="topic-list">
-                    <div class="topic-item">
-                        <h4>Kinematics</h4>
-                        <p>Motion in 1D & 2D, Projectile Motion, Relative Velocity</p>
-                    </div>
-                    <div class="topic-item">
-                        <h4>Laws of Motion</h4>
-                        <p>Newton's Laws, Friction, Circular Motion</p>
-                    </div>
-                    <div class="topic-item">
-                        <h4>Electrostatics</h4>
-                        <p>Electric Field, Potential, Gauss's Law, Capacitors</p>
-                    </div>
-                    <div class="topic-item">
-                        <h4>Optics</h4>
-                        <p>Ray Optics, Wave Optics, Instruments</p>
-                    </div>
-                    <div class="topic-item">
-                        <h4>Thermodynamics</h4>
-                        <p>Laws of Thermodynamics, Kinetic Theory of Gases</p>
-                    </div>
-                    <div class="topic-item">
-                        <h4>Modern Physics</h4>
-                        <p>Dual Nature, Atoms & Nuclei, Semiconductors</p>
-                    </div>
+    <!-- CLASS 10 SYLLABUS -->
+    <div id="class10" class="syllabus-wrapper active">
+        <div class="subject-grid">
+            <div class="subject-card">
+                <div class="subject-head">
+                    <i class="ri-calculator-line"></i> Mathematics <span>Core</span>
                 </div>
-            </div>
-        </div>
-
-        <!-- CHEMISTRY -->
-        <div class="subject-section">
-            <div class="subject-header">
-                <h3><i class="ri-flask-line"></i> Chemistry</h3>
-                <i class="ri-arrow-down-s-line arrow"></i>
-            </div>
-            <div class="subject-content">
                 <div class="topic-list">
-                    <div class="topic-item">
-                        <h4>Physical Chemistry</h4>
-                        <p>Mole Concept, Thermodynamics, Equilibrium, Kinetics</p>
-                    </div>
-                    <div class="topic-item">
-                        <h4>Inorganic Chemistry</h4>
-                        <p>Periodic Table, Chemical Bonding, Coordination Compounds</p>
-                    </div>
-                    <div class="topic-item">
-                        <h4>Organic Chemistry</h4>
-                        <p>General Organic Chemistry, Hydrocarbons, Aldehydes & Ketones</p>
-                    </div>
-                    <div class="topic-item">
-                        <h4>Electrochemistry</h4>
-                        <p>Conductance, Nernst Equation, Cells</p>
-                    </div>
+                    <li><i class="ri-check-double-line"></i> Real Numbers & Polynomials</li>
+                    <li><i class="ri-check-double-line"></i> Quadratic Equations</li>
+                    <li><i class="ri-check-double-line"></i> Arithmetic Progressions</li>
+                    <li><i class="ri-check-double-line"></i> Coordinate Geometry</li>
+                    <li><i class="ri-check-double-line"></i> Trigonometry & Statistics</li>
                 </div>
+                <a href="#" class="download-btn">Download PDF</a>
             </div>
-        </div>
 
-        <!-- MATHEMATICS -->
-        <div class="subject-section">
-            <div class="subject-header">
-                <h3><i class="ri-function-line"></i> Mathematics</h3>
-                <i class="ri-arrow-down-s-line arrow"></i>
-            </div>
-            <div class="subject-content">
+            <div class="subject-card">
+                <div class="subject-head">
+                    <i class="ri-microscope-line"></i> Science <span>Theory</span>
+                </div>
                 <div class="topic-list">
-                    <div class="topic-item">
-                        <h4>Calculus</h4>
-                        <p>Limits, Continuity, Differentiation, Integration, Differential Equations</p>
-                    </div>
-                    <div class="topic-item">
-                        <h4>Algebra</h4>
-                        <p>Complex Numbers, Quadratic Equations, Sequences & Series, Matrices</p>
-                    </div>
-                    <div class="topic-item">
-                        <h4>Coordinate Geometry</h4>
-                        <p>Straight Lines, Circles, Conic Sections</p>
-                    </div>
-                    <div class="topic-item">
-                        <h4>Vectors & 3D</h4>
-                        <p>Vector Algebra, 3D Geometry, Planes</p>
-                    </div>
-                    <div class="topic-item">
-                        <h4>Trigonometry</h4>
-                        <p>Identities, Equations, Inverse Trigonometric Functions</p>
-                    </div>
+                    <li><i class="ri-check-double-line"></i> Chemical Reactions & Salts</li>
+                    <li><i class="ri-check-double-line"></i> Life Processes & Heredity</li>
+                    <li><i class="ri-check-double-line"></i> Light - Reflection & Refraction</li>
+                    <li><i class="ri-check-double-line"></i> Electricity & Magnetism</li>
+                    <li><i class="ri-check-double-line"></i> Carbon & its Compounds</li>
                 </div>
+                <a href="#" class="download-btn">Download PDF</a>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-head">
+                    <i class="ri-earth-line"></i> Social Science <span>Full</span>
+                </div>
+                <div class="topic-list">
+                    <li><i class="ri-check-double-line"></i> History: Rise of Nationalism</li>
+                    <li><i class="ri-check-double-line"></i> Geography: Resources & Agri</li>
+                    <li><i class="ri-check-double-line"></i> Civics: Power Sharing</li>
+                    <li><i class="ri-check-double-line"></i> Economics: Money & Credit</li>
+                    <li><i class="ri-check-double-line"></i> Map Work & Case Studies</li>
+                </div>
+                <a href="#" class="download-btn">Download PDF</a>
             </div>
         </div>
+    </div>
 
+    <!-- CLASS 12 SYLLABUS -->
+    <div id="class12" class="syllabus-wrapper">
+        <div class="subject-grid">
+            <div class="subject-card">
+                <div class="subject-head">
+                    <i class="ri-flashlight-line"></i> Physics <span>Science</span>
+                </div>
+                <div class="topic-list">
+                    <li><i class="ri-check-double-line"></i> Electrostatics & Capacitors</li>
+                    <li><i class="ri-check-double-line"></i> Current Electricity</li>
+                    <li><i class="ri-check-double-line"></i> Optics & Wave Optics</li>
+                    <li><i class="ri-check-double-line"></i> Atoms & Nuclei</li>
+                    <li><i class="ri-check-double-line"></i> Electronic Devices</li>
+                </div>
+                <a href="#" class="download-btn">Download PDF</a>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-head">
+                    <i class="ri-flask-line"></i> Chemistry <span>Science</span>
+                </div>
+                <div class="topic-list">
+                    <li><i class="ri-check-double-line"></i> Solutions & Electrochemistry</li>
+                    <li><i class="ri-check-double-line"></i> Chemical Kinetics</li>
+                    <li><i class="ri-check-double-line"></i> Haloalkanes & Phenols</li>
+                    <li><i class="ri-check-double-line"></i> Coordination Compounds</li>
+                    <li><i class="ri-check-double-line"></i> P-Block Elements</li>
+                </div>
+                <a href="#" class="download-btn">Download PDF</a>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-head">
+                    <i class="ri-hand-coin-line"></i> Accountancy <span>Commerce</span>
+                </div>
+                <div class="topic-list">
+                    <li><i class="ri-check-double-line"></i> Partnership Accounting</li>
+                    <li><i class="ri-check-double-line"></i> Issue of Shares & Debentures</li>
+                    <li><i class="ri-check-double-line"></i> Cash Flow Statements</li>
+                    <li><i class="ri-check-double-line"></i> Financial Analysis</li>
+                    <li><i class="ri-check-double-line"></i> Non-profit Organizations</li>
+                </div>
+                <a href="#" class="download-btn">Download PDF</a>
+            </div>
+        </div>
     </div>
 
     <footer>
@@ -643,9 +619,8 @@
                 </ul>
             </div>
         </div>
-
         <div class="footer-bottom">
-            <p>&copy; 2026 edHills Learning Platform. All Rights Reserved. Designed for Excellence.</p>
+            <p>&copy; 2026 edHills Learning Platform. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -666,26 +641,18 @@
             }
         });
 
-        // Syllabus Accordion Interaction
-        const subjectHeaders = document.querySelectorAll('.subject-header');
+        // Syllabus Class Toggler
+        function showSyllabus(classId, element) {
+            // Remove active from all cards
+            document.querySelectorAll('.class-card').forEach(card => card.classList.remove('active'));
+            // Add active to selected
+            element.classList.add('active');
 
-        // Open first section by default
-        if (subjectHeaders.length > 0) {
-            subjectHeaders[0].parentElement.classList.add('active');
+            // Hide all wrappers
+            document.querySelectorAll('.syllabus-wrapper').forEach(wrapper => wrapper.classList.remove('active'));
+            // Show selected wrapper
+            document.getElementById(classId).classList.add('active');
         }
-
-        subjectHeaders.forEach(header => {
-            header.addEventListener('click', () => {
-                const parent = header.parentElement;
-
-                // Optional: Close other sections (Exclusive Accordion)
-                // document.querySelectorAll('.subject-section').forEach(sec => {
-                //     if(sec !== parent) sec.classList.remove('active');
-                // });
-
-                parent.classList.toggle('active');
-            });
-        });
     </script>
 </body>
 
