@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Student Details | edHills</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0e2f69;
+            --secondary: #1746a2;
+            --accent: #facc15;
+            --bg: #f4f6fb;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Background Shapes */
+        .shape {
+            position: absolute;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+
+        .shape-1 {
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .shape-2 {
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            border-radius: 50%;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            display: flex;
+            overflow: hidden;
+            margin: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Left Side: Branding */
+        .branding-side {
+            flex: 1;
+            background: var(--primary);
+            color: white;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .branding-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.1;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .logo i {
+            font-size: 40px;
+            color: var(--accent);
+            background: rgba(250, 204, 21, 0.1);
+            padding: 8px;
+            border-radius: 15px;
+        }
+
+        .branding-side h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .benefit-item i {
+            color: var(--accent);
+            font-size: 20px;
+        }
+
+        /* Right Side: Form */
+        .form-side {
+            flex: 1.2;
+            padding: 60px;
+            background: white;
+        }
+
+        .form-header {
+            margin-bottom: 40px;
+        }
+
+        .form-header h2 {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 0 0 10px;
+        }
+
+        .form-header p {
+            color: #666;
+            margin: 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 18px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 15px;
+            transition: 0.3s;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--secondary);
+            background: #f8fbff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(23, 70, 162, 0.2);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        @media (max-width: 850px) {
+            .register-container {
+                flex-direction: column;
+                max-width: 500px;
+            }
+
+            .branding-side {
+                padding: 40px;
+                text-align: center;
+            }
+
+            .logo {
+                justify-content: center;
+            }
+
+            .form-side {
+                padding: 40px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+
+    <div class="register-container">
+        <div class="branding-side">
+            <a href="index.html" class="logo">
+                <i class="ri-graduation-cap-fill"></i>
+                ed<span>Hills</span>
+            </a>
+            <h1>Join the Community of High Achievers.</h1>
+            <p style="opacity: 0.8; margin-bottom: 40px;">Create your student profile to access premium courses, live
+                classes, and free study materials.</p>
+
+            <div class="benefit-item">
+                <i class="ri-checkbox-circle-fill"></i>
+                <span>Access to JEE, NEET & CUET Resources</span>
+            </div>
+            <div class="benefit-item">
+                <i class="ri-checkbox-circle-fill"></i>
+                <span>Weekly Mock Tests & Performance Reports</span>
+            </div>
+            <div class="benefit-item">
+                <i class="ri-checkbox-circle-fill"></i>
+                <span>Direct Mentorship from Top Educators</span>
+            </div>
+        </div>
+
+        <div class="form-side">
+            <div class="form-header">
+                <h2>Create Account</h2>
+                <p>Please enter your student details to get started.</p>
+            </div>
+
+            <form id="registerForm">
+                <div class="form-grid">
+                    <!-- Full Name -->
+                    <div class="input-group full-width">
+                        <label>Student Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="ri-user-line"></i>
+                            <input type="text" id="name" placeholder="Enter your full name" required>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="ri-mail-line"></i>
+                            <input type="email" id="email" placeholder="email@example.com" required>
+                        </div>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <div class="input-wrapper">
+                            <i class="ri-phone-line"></i>
+                            <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX">
+                        </div>
+                    </div>
+
+                    <!-- Class -->
+                    <div class="input-group">
+                        <label>Standard / Class</label>
+                        <div class="input-wrapper">
+                            <i class="ri-book-open-line"></i>
+                            <select id="class" style="padding-left: 45px;">
+                                <option value="Class 10">Class 10th</option>
+                                <option value="Class 11">Class 11th</option>
+                                <option value="Class 12">Class 12th</option>
+                                <option value="Dropper">Dropper / Repeater</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Roll Number (Unique Identity) -->
+                    <div class="input-group">
+                        <label>School / Coaching Roll No.</label>
+                        <div class="input-wrapper">
+                            <i class="ri-hashtag"></i>
+                            <input type="text" id="rollNumber" placeholder="e.g. EDH9901" required>
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-group full-width">
+                        <label>Create Password</label>
+                        <div class="input-wrapper">
+                            <i class="ri-lock-password-line"></i>
+                            <input type="password" id="password" placeholder="Min. 8 characters" required>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="regBtn">
+                    Create My Account <i class="ri-arrow-right-line"></i>
+                </button>
+            </form>
+
+            <div class="login-link">
+                Already have an account? <a href="login.html">Login Here</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const btn = document.getElementById('regBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> Processing...';
+            btn.disabled = true;
+
+            const userData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                class: document.getElementById('class').value,
+                rollNumber: document.getElementById('rollNumber').value,
+                password: document.getElementById('password').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Store data locally for the "Student Details" view
+                    localStorage.setItem('currentUser', JSON.stringify(userData));
+
+                    alert('Account Created Successfully! Redirecting to student dashboard...');
+                    window.location.href = 'student-details.html';
+                } else {
+                    alert('Error: ' + result.error || result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Could not connect to the server. Please check if backend is running.');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
