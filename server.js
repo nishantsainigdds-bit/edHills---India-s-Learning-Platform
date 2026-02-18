@@ -168,4 +168,87 @@ app.post('/api/forgot-password', async (req, res) => {
   }
 });
 
+// Temporary storage for OTPs (In-memory for demo)
+const otpStore = new Map();
+
+// Send OTP Route
+app.post('/api/send-otp', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Generate a 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    otpStore.set(email, otp);
+
+    // In a real app, send this via email API (Nodemailer/SendGrid)
+    console.log(`[OTP DEBUG] OTP for ${email}: ${otp}`);
+    
+    res.json({ message: 'OTP sent successfully to your registered email' });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Verify OTP Login Route
+app.post('/api/verify-otp', async (req, res) => {
+  const { email, otp } = req.body;
+  
+  try {
+    const storedOtp = otpStore.get(email);
+    
+    if (!storedOtp || storedOtp !== otp) {
+      return res.status(400).json({ message: 'Invalid or expired OTP' });
+    }
+
+    // Clear OTP after successful use
+    otpStore.delete(email);
+
+    // Fetch User & Student Details
+    const user = await User.findOne({ email });
+    const student = await Student.findOne({ email });
+
+    res.json({ 
+      message: 'Login successful via OTP', 
+      user: { 
+        email: user.email,
+        name: student ? student.name : 'Student',
+        rollNumber: student ? student.rollNumber : 'N/A',
+        class: student ? student.class : 'N/A',
+        phone: student ? student.phone : 'N/A'
+      } 
+    });
+
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Final Password Reset Route
+app.post('/api/reset-password', async (req, res) => {
+  const { email, otp, newPassword } = req.body;
+  
+  try {
+    const storedOtp = otpStore.get(email);
+    if (!storedOtp || storedOtp !== otp) {
+      return res.status(400).json({ message: 'Invalid or expired OTP' });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    // Update password (use bcrypt in production)
+    user.password = newPassword;
+    await user.save();
+
+    otpStore.delete(email);
+    res.json({ message: 'Password reset successful' });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
