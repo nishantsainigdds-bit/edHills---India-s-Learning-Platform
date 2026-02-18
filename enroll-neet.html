@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEET UG 2026 Batch Enrollment | edHills</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0e2f69;
+            --secondary: #1746a2;
+            --accent: #facc15;
+            --bg: #f4f6fb;
+            --white: #ffffff;
+            --medical-green: #10b981;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--primary);
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        /* ENROLLMENT HERO */
+        .enroll-hero {
+            background: linear-gradient(135deg, #0e2f69, #10b981);
+            color: white;
+            padding: 80px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-text h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text h1 span {
+            color: var(--accent);
+        }
+
+        .price-tag {
+            background: rgba(250, 204, 21, 0.2);
+            border: 2px solid var(--accent);
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .price-tag strike {
+            font-size: 18px;
+            opacity: 0.6;
+        }
+
+        /* FEATURES GRID */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: -50px;
+            padding: 0 8% 80px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-bottom: 4px solid var(--medical-green);
+            transition: 0.3s;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-item i {
+            font-size: 35px;
+            color: var(--medical-green);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        /* ENROLLMENT SECTION */
+        .enrollment-main {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            padding: 0 8% 100px;
+            align-items: start;
+        }
+
+        .course-details h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .curriculum-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .curriculum-list li {
+            padding: 15px;
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid #eee;
+        }
+
+        .curriculum-list li i {
+            color: var(--medical-green);
+        }
+
+        /* ENROLLMENT FORM */
+        .enroll-form-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .enroll-form-card h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            outline: none;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--medical-green);
+            background: #f8fbff;
+        }
+
+        .submit-enroll {
+            width: 100%;
+            padding: 15px;
+            background: var(--medical-green);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .submit-enroll:hover {
+            background: #059669;
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        @media (max-width: 900px) {
+            .enrollment-main {
+                grid-template-columns: 1fr;
+            }
+
+            .enroll-hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <i class="ri-graduation-cap-fill"></i>
+            ed<span>Hills</span>
+        </a>
+        <a href="courses.html" style="color: white; text-decoration: none; font-weight: 500;">
+            <i class="ri-arrow-left-line"></i> Back to Courses
+        </a>
+    </header>
+
+    <div class="enroll-hero">
+        <div class="hero-text">
+            <div class="price-tag">
+                <strike>₹4,999</strike> ₹1,500 <span>(70% Off)</span>
+            </div>
+            <h1>Complete <span>NEET UG 2026</span> <br>Preparation Masterclass</h1>
+            <p>Master Physics, Chemistry, and Biology with expert faculty. In-depth NCERT coverage and specialized
+                medical entrance strategies.</p>
+        </div>
+        <div class="hero-image">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Medical" width="300">
+        </div>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-item">
+            <i class="ri-microscope-line"></i>
+            <h3>NCERT focused Learning</h3>
+            <p>Detailed analysis of every NCERT chapter for Biology and Chemistry.</p>
+        </div>
+        <div class="feature-item">
+            <i class="ri-pulse-line"></i>
+            <h3>All India Test Series</h3>
+            <p>Compete with thousands of aspirants in our bi-weekly test series.</p>
+        </div>
+        <div class="feature-item">
+            <i class="ri-medicine-bottle-line"></i>
+            <h3>Biology Diagrams Masterclass</h3>
+            <p>Special sessions focused on important diagrams and labeling.</p>
+        </div>
+    </div>
+
+    <main class="enrollment-main">
+        <div class="course-details">
+            <h2>Course Highlights</h2>
+            <p>The edHills NEET UG Masterclass is specifically designed for medical aspirants aiming for top government
+                colleges. We strictly follow the latest NMC pattern.</p>
+
+            <ul class="curriculum-list">
+                <li><i class="ri-shield-check-fill"></i> Complete PCB NCERT Coverage (Class 11 & 12)</li>
+                <li><i class="ri-shield-check-fill"></i> Previous 20 Years Solved Question Papers</li>
+                <li><i class="ri-shield-check-fill"></i> 10,000+ Practice Questions with Solutions</li>
+                <li><i class="ri-shield-check-fill"></i> Mentorship from Top Medical Professionals</li>
+                <li><i class="ri-shield-check-fill"></i> Dedicated Doubt Support for Physics Numericals</li>
+            </ul>
+
+            <h2 style="margin-top: 40px;">Expert Medical Faculty</h2>
+            <p>Our educators include PhD scholars and medical experts with a track record of producing single-digit
+                ranks in NEET.</p>
+        </div>
+
+        <div class="enroll-form-card">
+            <h3>Confirm Enrollment</h3>
+            <form id="courseEnrollForm">
+                <div class="input-group">
+                    <label>Confirm Full Name</label>
+                    <input type="text" id="studentName" placeholder="As per your Aadhaar/School record" required>
+                </div>
+                <div class="input-group">
+                    <label>WhatsApp Number</label>
+                    <input type="tel" id="studentPhone" placeholder="+91 XXXXX XXXXX" required>
+                </div>
+                <div class="input-group">
+                    <label>Target Year</label>
+                    <select id="targetYear">
+                        <option value="2026">NEET UG 2026</option>
+                        <option value="2027">NEET UG 2027</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Batch Preference</label>
+                    <select id="batchTime">
+                        <option value="morning">Morning (8:00 AM - 12:00 PM)</option>
+                        <option value="evening">Evening (4:00 PM - 8:00 PM)</option>
+                    </select>
+                </div>
+
+                <div
+                    style="margin: 20px 0; padding: 15px; background: #fffdf5; border-radius: 12px; border: 1px dashed var(--medical-green);">
+                    <div style="display: flex; justify-content: space-between; font-weight: 700;">
+                        <span>Total Payable:</span>
+                        <span style="color: var(--medical-green);">₹1,500</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-enroll" id="enrollBtn">
+                    Proceed to Payment <i class="ri-bank-card-line"></i>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('courseEnrollForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('enrollBtn');
+            btn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> Securing Seat...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                alert('Congratulations! Your enrollment request for NEET UG 2026 has been received. Redirecting to payment gateway...');
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+    </script>
+</body>
+
+</html>

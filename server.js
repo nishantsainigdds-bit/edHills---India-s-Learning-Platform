@@ -124,6 +124,32 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// Admin Login Route
+app.post('/api/admin/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ message: 'Authorization Failed' });
+    }
+
+    // Check Password
+    if (user.password !== password) {
+      return res.status(401).json({ message: 'Invalid Credentials' });
+    }
+
+    // Check Role
+    if (user.role !== 'admin') {
+      return res.status(403).json({ message: 'Access Denied: Not an Admin' });
+    }
+
+    res.json({ message: 'Admin Welcome', token: 'mock-admin-token-123' });
+  } catch (err) {
+    res.status(500).json({ error: 'Security Server Error' });
+  }
+});
+
 // Forgot Password Route
 app.post('/api/forgot-password', async (req, res) => {
   const { email } = req.body;

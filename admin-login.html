@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal Login | edHills</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #facc15;
+            --admin-red: #ef4444;
+            --bg: #020617;
+            --glass: rgba(15, 23, 42, 0.8);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Abstract Background */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 30%, rgba(26, 31, 76, 1) 0%, rgba(2, 6, 23, 1) 100%);
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+        }
+
+        .c1 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent);
+            top: -200px;
+            right: -100px;
+        }
+
+        .c2 {
+            width: 400px;
+            height: 400px;
+            background: #3b82f6;
+            bottom: -150px;
+            left: -100px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 420px;
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            padding: 50px 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .admin-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(250, 204, 21, 0.1);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 40px;
+            box-shadow: 0 0 20px rgba(250, 204, 21, 0.2);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0 0 10px;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 15px;
+            margin-bottom: 35px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #94a3b8;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: 18px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 20px 14px 50px;
+            background: rgba(2, 6, 23, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: white;
+            font-family: inherit;
+            font-size: 15px;
+            transition: 0.3s;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            background: rgba(2, 6, 23, 0.8);
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .login-btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .security-badge {
+            margin-top: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .back-home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-animation"></div>
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+
+    <div class="login-box">
+        <a href="index.html" class="back-home">
+            <i class="ri-arrow-left-line"></i> Back to Home
+        </a>
+        <div class="admin-icon">
+            <i class="ri-shield-keyhole-line"></i>
+        </div>
+        <h1>Admin Portal</h1>
+        <p>Secure access for edHills administrative staff only.</p>
+
+        <form id="adminLoginForm">
+            <div class="input-group">
+                <label>Admin ID / Email</label>
+                <div class="input-wrapper">
+                    <i class="ri-admin-line"></i>
+                    <input type="text" id="adminId" placeholder="admin@edhills.com" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Security Password</label>
+                <div class="input-wrapper">
+                    <i class="ri-lock-2-line"></i>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">
+                Authorized Access <i class="ri-arrow-right-circle-line"></i>
+            </button>
+        </form>
+
+        <div class="footer-links">
+            Lost your keys? <a href="#">Contact Head Office</a>
+        </div>
+
+        <div class="security-badge">
+            <i class="ri-shield-check-fill"></i> End-to-End Encrypted
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const btn = document.getElementById('loginBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> Authenticating...';
+            btn.disabled = true;
+
+            const adminEmail = document.getElementById('adminId').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('http://localhost:5000/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: adminEmail, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Admin Authentication Successful!');
+                    localStorage.setItem('adminToken', data.token);
+                    // Redirect to actual admin dashboard (to be created)
+                    window.location.href = 'index.html';
+                } else {
+                    alert('Access Denied: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Could not connect to the security server.');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
