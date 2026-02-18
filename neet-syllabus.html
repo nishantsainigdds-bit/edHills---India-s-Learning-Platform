@@ -43,6 +43,43 @@
             color: #facc15;
         }
 
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* RESPONSIVE HEADER */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #0e2f69;
+                padding: 20px 0;
+                text-align: center;
+                z-index: 1000;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            nav a {
+                margin: 15px 0;
+                font-size: 18px;
+                display: block;
+            }
+        }
+
         /* PAGE HEADER */
         .page-header {
             background: linear-gradient(135deg, #0e2f69, #1746a2);
@@ -172,7 +209,10 @@
 
     <header>
         <h2>edHills</h2>
-        <nav>
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="ri-menu-3-line"></i>
+        </div>
+        <nav id="nav-menu">
             <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
             <a href="courses.html"><i class="ri-book-open-line"></i> Courses</a>
             <a href="login.html"><i class="ri-user-line"></i> Login</a>
@@ -286,6 +326,22 @@
         © 2026 edHills. All Rights Reserved.
     </footer>
 
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('ri-menu-3-line');
+                icon.classList.add('ri-close-line');
+            } else {
+                icon.classList.remove('ri-close-line');
+                icon.classList.add('ri-menu-3-line');
+            }
+        });
+    </script>
 </body>
 
 </html>
