@@ -410,6 +410,126 @@
       color: white;
       text-align: center;
     }
+
+    /* PREMIUM HERO CAROUSEL */
+    .hero-slider {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+    }
+
+    .slider-container {
+      display: flex;
+      transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+      width: 100%;
+    }
+
+    .slide {
+      min-width: 100%;
+      flex-shrink: 0;
+    }
+
+    .slide a {
+      display: block;
+      width: 100%;
+      line-height: 0;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .desktop-img {
+      display: block;
+    }
+
+    .mobile-img {
+      display: none;
+    }
+
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .nav-arrow {
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: 0.3s;
+      font-size: 24px;
+      opacity: 0;
+    }
+
+    .hero-slider:hover .nav-arrow {
+      opacity: 1;
+    }
+
+    .nav-arrow:hover {
+      background: #facc15;
+      color: #0e2f69;
+      transform: scale(1.1);
+    }
+
+    .slider-indicators {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .indicator {
+      width: 8px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .indicator.active {
+      background: #facc15;
+      width: 25px;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-img {
+        display: none;
+      }
+
+      .mobile-img {
+        display: block;
+      }
+
+      .nav-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 
@@ -426,11 +546,66 @@
     </div>
 
     <nav id="nav-menu">
-      <a href="index.html">Home</a>
-      <a href="courses.html">Courses</a>
+      <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
+      <a href="index.html#popular-courses"><i class="ri-star-line"></i> Popular Courses</a>
+      <a href="courses.html"><i class="ri-book-open-line"></i> Courses</a>
+      <a href="index.html#exam-info"><i class="ri-file-list-3-line"></i> Exam Info</a>
       <a href="login.html" class="nav-btn">Get Started</a>
     </nav>
   </header>
+
+  <!-- HERO CAROUSEL -->
+  <section class="hero-slider">
+    <div class="slider-container" id="mainSlider">
+      <!-- Slide 1: VP SAT -->
+      <div class="slide">
+        <a href="#"><img
+            src="https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/1bdf187d-d323-4f4e-823d-a9de220c3f11.webp"
+            class="desktop-img" alt="VP SAT"><img
+            src="https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/78a2ef8b-4171-4250-a2d6-7f55849c8449.webp"
+            class="mobile-img" alt="VP SAT"></a>
+      </div>
+      <!-- Slide 2: NEET -->
+      <div class="slide">
+        <a href="#"><img
+            src="https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/2925d069-fc6c-4751-b4a5-8298f1072ef0.webp"
+            class="desktop-img" alt="NEET"><img
+            src="https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/27f6df55-07f6-4b55-b2c4-1b134b4a309f.webp"
+            class="mobile-img" alt="NEET"></a>
+      </div>
+      <!-- Slide 3: JEE -->
+      <div class="slide">
+        <a href="#"><img
+            src="https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/188432c6-b537-4120-91a1-423da94bc6b0.webp"
+            class="desktop-img" alt="JEE"><img
+            src="https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/1381f0fa-a81d-4161-8127-4d50c33271bd.webp"
+            class="mobile-img" alt="JEE"></a>
+      </div>
+      <!-- Slide 4: Power Batch -->
+      <div class="slide">
+        <a href="#"><img
+            src="https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/5672183b-c9f6-44aa-8c08-bc3192c30499.webp"
+            class="desktop-img" alt="Power Batch"><img
+            src="https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/63cff798-f2c1-4978-8e13-95aefc30f6ae.webp"
+            class="mobile-img" alt="Power Batch"></a>
+      </div>
+      <!-- Slide 5: SSC -->
+      <div class="slide">
+        <a href="#"><img
+            src="https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/85b320da-b017-455e-bf23-903af99cc53e.webp"
+            class="desktop-img" alt="SSC"><img
+            src="https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/e95372f7-ac78-4d74-adb2-29b8d8b4544c.webp"
+            class="mobile-img" alt="SSC"></a>
+      </div>
+    </div>
+
+    <div class="slider-nav">
+      <div class="nav-arrow" id="prevSlide"><i class="ri-arrow-left-s-line"></i></div>
+      <div class="nav-arrow" id="nextSlide"><i class="ri-arrow-right-s-line"></i></div>
+    </div>
+
+    <div class="slider-indicators" id="sliderIndicators"></div>
+  </section>
 
   <section class="banner">
     <h1>Explore Our Premium Courses</h1>
@@ -605,6 +780,72 @@
         icon.classList.add('ri-menu-3-line');
       }
     });
+
+    // Slider Logic
+    const slider = document.getElementById('mainSlider');
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    const indicatorContainer = document.getElementById('sliderIndicators');
+
+    let currentSlide = 0;
+    const slideCount = slides.length;
+    let autoPlayInterval;
+
+    // Create Indicators
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.classList.add('indicator');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(index));
+      indicatorContainer.appendChild(dot);
+    });
+
+    const indicators = document.querySelectorAll('.indicator');
+
+    function updateSlider() {
+      slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+      indicators.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+    }
+
+    function goToSlide(index) {
+      currentSlide = index;
+      updateSlider();
+      resetAutoPlay();
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slideCount;
+      updateSlider();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+      updateSlider();
+    }
+
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetAutoPlay();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetAutoPlay();
+    });
+
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(nextSlide, 5000);
+    }
+
+    function resetAutoPlay() {
+      clearInterval(autoPlayInterval);
+      startAutoPlay();
+    }
+
+    startAutoPlay();
   </script>
 
 </body>
