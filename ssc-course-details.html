@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSC & Banking Masterclass | edHills</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0e2f69;
+            --secondary: #1746a2;
+            --accent: #facc15;
+            --ssc-red: #ff6b6b;
+            --bg: #f4f6fb;
+            --white: #ffffff;
+            --text: #333;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(14, 47, 105, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        /* HERO SECTION */
+        .course-hero {
+            background: linear-gradient(135deg, #0e2f69, #ff6b6b);
+            color: white;
+            padding: 100px 8%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .course-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .badge {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        /* MAIN CONTENT */
+        .details-container {
+            max-width: 1200px;
+            margin: -50px auto 80px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .main-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .curriculum-item {
+            background: #fff5f5;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid var(--ssc-red);
+        }
+
+        .curriculum-item h4 {
+            margin: 0 0 10px;
+            color: var(--primary);
+        }
+
+        /* SIDEBAR CARD */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .enroll-sidebar-card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid #eee;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .feature-list i {
+            color: var(--ssc-red);
+        }
+
+        .btn-large {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: var(--ssc-red);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            transition: 0.3s;
+            box-sizing: border-box;
+        }
+
+        .btn-large:hover {
+            background: #ff4757;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.2);
+        }
+
+        /* FACULTY */
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .faculty-card {
+            text-align: center;
+            padding: 20px;
+            background: #fff5f5;
+            border-radius: 20px;
+        }
+
+        .faculty-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 80px 8% 40px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .details-container {
+                grid-template-columns: 1fr;
+            }
+
+            .course-hero h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <i class="ri-graduation-cap-fill"></i>
+            ed<span>Hills</span>
+        </a>
+        <nav>
+            <a href="courses.html" style="color: white; text-decoration: none; font-weight: 500;">
+                <i class="ri-arrow-left-line"></i> Back to Courses
+            </a>
+        </nav>
+    </header>
+
+    <section class="course-hero">
+        <span class="badge">GOVT EXAMS 2026</span>
+        <h1>SSC & Banking Masterclass</h1>
+        <p>Your comprehensive preparation for CGL, CHSL, IBPS, SBI, and more. Crack government exams with our proven
+            speed-math strategies.</p>
+    </section>
+
+    <main class="details-container">
+        <div class="main-card">
+            <h2 class="section-title"><i class="ri-government-line"></i> Why Choose Our Masterclass?</h2>
+            <p>Landing a government job is one of the most sought-after career goals. Our SSC & Banking Masterclass is
+                designed to help you dominate competitive exams by focusing on the three pillars of success: Speed,
+                Accuracy, and Logical thinking.</p>
+
+            <h2 class="section-title" style="margin-top: 40px;"><i class="ri-book-open-line"></i> Exam Coverage</h2>
+            <div class="curriculum-grid">
+                <div class="curriculum-item">
+                    <h4>Quantitative Aptitude</h4>
+                    <p>Speed math tricks, Arithmetic, Advance Maths, and Data Interpretation for high-speed solving.</p>
+                </div>
+                <div class="curriculum-item">
+                    <h4>Logical Reasoning</h4>
+                    <p>Master Puzzles, Syllogism, Blood Relations, and Analytical Reasoning with step-by-step methods.
+                    </p>
+                </div>
+                <div class="curriculum-item">
+                    <h4>English Mastery</h4>
+                    <p>Grammar rules, Vocabulary building, and Reading Comprehension tailored for Banking & SSC
+                        patterns.</p>
+                </div>
+                <div class="curriculum-item">
+                    <h4>GA & Current Affairs</h4>
+                    <p>Daily GA boosters, Static GK notes, and deep-dive into Finance/Banking awareness.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title"><i class="ri-user-star-line"></i> Our Expert Mentors</h2>
+            <div class="faculty-grid">
+                <div class="faculty-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Faculty">
+                    <h5 style="margin: 5px 0;">Vikash Chaudhary</h5>
+                    <p style="font-size: 12px; margin: 0;">Quant Guru (Ex-Banker)</p>
+                </div>
+                <div class="faculty-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Faculty">
+                    <h5 style="margin: 5px 0;">Ritika Khanna</h5>
+                    <p style="font-size: 12px; margin: 0;">Reasoning Expert</p>
+                </div>
+                <div class="faculty-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Faculty">
+                    <h5 style="margin: 5px 0;">Samir Gupta</h5>
+                    <p style="font-size: 12px; margin: 0;">English Specialist</p>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 40px;"><i class="ri-timer-2-line"></i> Batch Features</h2>
+            <div style="background: #fafafa; padding: 20px; border-radius: 15px;">
+                <p><strong>• Daily Updates:</strong> 15-minute Morning Flash for Daily Current Affairs.</p>
+                <p><strong>• Test series:</strong> 100+ Sectional Tests & 50+ Full-length Mock Tests for SSC & Banking.
+                </p>
+                <p><strong>• Doubt Support:</strong> Real-time doubt resolution through our dedicated app community.</p>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="enroll-sidebar-card">
+                <h3 style="margin-top: 0; color: var(--primary);">Program Features</h3>
+                <ul class="feature-list">
+                    <li><i class="ri-checkbox-circle-fill"></i> Speed Math Masterclass</li>
+                    <li><i class="ri-checkbox-circle-fill"></i> Daily GA PDF Notes</li>
+                    <li><i class="ri-checkbox-circle-fill"></i> Bilingual Classes (Hn/En)</li>
+                    <li><i class="ri-checkbox-circle-fill"></i> Exam-Specific Strategy</li>
+                    <li><i class="ri-checkbox-circle-fill"></i> PYQ Analysis Sessions</li>
+                </ul>
+                <a href="enroll-ssc.html" class="btn-large">Enroll Now</a>
+                <p style="text-align: center; font-size: 12px; color: #777; margin-top: 15px;">New Batch starts from 1st
+                    of next month!</p>
+            </div>
+
+            <div
+                style="background: #fff5f5; border: 1px solid var(--ssc-red); padding: 20px; border-radius: 20px; margin-top: 20px; display: flex; align-items: center; gap: 15px;">
+                <i class="ri-graduation-cap-line" style="font-size: 30px; color: var(--ssc-red);"></i>
+                <div>
+                    <p style="margin: 0; font-weight: 700; color: var(--primary);">Success Stories</p>
+                    <p style="margin: 0; font-size: 13px;">Join our 5000+ selections</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-flex;">
+                    <i class="ri-graduation-cap-fill"></i>
+                    ed<span>Hills</span>
+                </a>
+                <p>Empowering students with structured preparation for government careers.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Exams We Cover</h3>
+                <p style="font-size: 14px; opacity: 0.8; margin: 5px 0;">SSC CGL / CHSL / MTS</p>
+                <p style="font-size: 14px; opacity: 0.8; margin: 5px 0;">IBPS PO / Clerk</p>
+                <p style="font-size: 14px; opacity: 0.8; margin: 5px 0;">SBI PO / Clerk</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Contact</h3>
+                <p>📧 help@edhills.com</p>
+                <p>📍 New Delhi, India</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 50px; opacity: 0.6; font-size: 14px;">
+            <p>&copy; 2026 edHills Learning Platform. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
