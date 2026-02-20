@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | edHills</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0e2f69;
+            --secondary: #1746a2;
+            --accent: #facc15;
+            --bg: #f4f6fb;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: #333;
+        }
+
+        header {
+            background: var(--primary);
+            padding: 15px 8%;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .user-pill {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .dashboard-container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        .profile-card {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            background: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 40px;
+            color: var(--primary);
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-item {
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+            color: #555;
+        }
+
+        .menu-item.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .menu-item:hover:not(.active) {
+            background: #f0f4ff;
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .info-item {
+            padding: 20px;
+            background: #f9fbff;
+            border-radius: 15px;
+            border: 1px solid #edf2ff;
+        }
+
+        .info-label {
+            font-size: 13px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #e6fffa;
+            color: #2d3748;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .logout-btn {
+            margin-top: 40px;
+            padding: 12px 25px;
+            background: #fff0f0;
+            color: #e53e3e;
+            border: 1px solid #feb2b2;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #e53e3e;
+            color: white;
+        }
+
+        @media (max-width: 800px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <i class="ri-graduation-cap-fill"></i>
+            ed<span>Hills</span>
+        </a>
+        <div class="user-pill">
+            <i class="ri-user-smile-line"></i>
+            <span id="headerName">Student Portal</span>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile-card">
+                <div class="profile-img">
+                    <i class="ri-user-star-fill"></i>
+                </div>
+                <h3 id="sidebarName">Student Name</h3>
+                <p id="sidebarEmail" style="font-size: 13px; color: #888;">email@example.com</p>
+            </div>
+
+            <ul class="menu-list">
+                <li class="menu-item active"><i class="ri-dashboard-line"></i> Dashboard</li>
+                <li class="menu-item"><i class="ri-book-3-line"></i> My Courses</li>
+                <li class="menu-item"><i class="ri-file-list-3-line"></i> Test Results</li>
+                <li class="menu-item"><i class="ri-settings-4-line"></i> Settings</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="section-title">
+                <i class="ri-shield-user-line"></i> Student Academic Profile
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Full Name</div>
+                    <div class="info-value" id="dispName">N/A</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">Current Roll Number</div>
+                    <div class="info-value"><span class="badge" id="dispRoll">N/A</span></div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">Assigned Class</div>
+                    <div class="info-value" id="dispClass">N/A</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">Contact Email</div>
+                    <div class="info-value" id="dispEmail">N/A</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">Phone Number</div>
+                    <div class="info-value" id="dispPhone">N/A</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">Portal Status</div>
+                    <div class="info-value" style="color: #38a169;">● Verified Student</div>
+                </div>
+            </div>
+
+            <button class="logout-btn" onclick="logout()">
+                <i class="ri-logout-box-r-line"></i> Logout Session
+            </button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = async () => {
+            const cachedUser = JSON.parse(localStorage.getItem('currentUser'));
+
+            if (!cachedUser || !cachedUser.email) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Immediately show cached data (works even without backend)
+            function renderUser(user) {
+                document.getElementById('headerName').innerText = user.name || 'Student';
+                document.getElementById('sidebarName').innerText = user.name || 'Anonymous';
+                document.getElementById('sidebarEmail').innerText = user.email || '';
+                document.getElementById('dispName').innerText = user.name || 'N/A';
+                document.getElementById('dispEmail').innerText = user.email || 'N/A';
+                document.getElementById('dispRoll').innerText = user.rollNumber || 'PENDING';
+                document.getElementById('dispClass').innerText = user.class || 'N/A';
+                document.getElementById('dispPhone').innerText = user.phone || 'N/A';
+
+                if (user.enrolledCourses && user.enrolledCourses.length > 0) {
+                    const old = document.getElementById('coursesGrid');
+                    if (!old) {
+                        const section = document.createElement('div');
+                        section.innerHTML = `
+                            <div class="section-title" style="margin-top:40px;">
+                                <i class="ri-book-read-line"></i> My Active Courses
+                            </div>
+                            <div class="info-grid" id="coursesGrid"></div>`;
+                        document.querySelector('.main-content').insertBefore(section, document.querySelector('.logout-btn'));
+                    }
+                    const grid = document.getElementById('coursesGrid') || old;
+                    grid.innerHTML = '';
+                    user.enrolledCourses.forEach(course => {
+                        const card = document.createElement('div');
+                        card.className = 'info-item';
+                        card.style.background = 'linear-gradient(to right, #f0f4ff, #fff)';
+                        card.innerHTML = `
+                            <div class="info-label">Active Batch</div>
+                            <div class="info-value" style="color:var(--secondary);">${course}</div>
+                            <div style="margin-top:8px;font-size:12px;color:#38a169;">
+                                <i class="ri-checkbox-circle-line"></i> Enrollment Active
+                            </div>`;
+                        grid.appendChild(card);
+                    });
+                }
+            }
+
+            renderUser(cachedUser);
+
+            // Try to refresh from API (optional — works if server is running)
+            try {
+                const res = await fetch(`http://localhost:5000/api/student/profile/${cachedUser.email}`);
+                if (res.ok) {
+                    const liveUser = await res.json();
+                    // Merge and update cache
+                    const merged = { ...cachedUser, ...liveUser };
+                    localStorage.setItem('currentUser', JSON.stringify(merged));
+                    renderUser(merged);
+                }
+            } catch (_) {
+                // Server offline — cached data already shown above, no crash
+            }
+        };
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('edHillsToken');
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+
+</body>
+
+</html>

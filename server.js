@@ -1,254 +1,303 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+// ============================================================
+//  edHills Backend - server.js
+//  Self-contained: uses JSON file as database (no MongoDB needed)
+//  Dependencies: express, cors, bcryptjs, jsonwebtoken
+// ============================================================
 
-const app = express();
+const express    = require('express');
+const cors       = require('cors');
+const bcrypt     = require('bcryptjs');
+const jwt        = require('jsonwebtoken');
+const fs         = require('fs');
+const path       = require('path');
+
+const app  = express();
 const PORT = process.env.PORT || 5000;
+const JWT_SECRET = 'edhills_super_secret_2026';
 
-// Middleware
+// ── Middleware ──────────────────────────────────────────────
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-// MongoDB Connection
-// Replace with your actual MongoDB connection string
-const mongoURI = 'mongodb://localhost:27017/edhills'; 
+// Serve static HTML files from the same directory
+app.use(express.static(path.join(__dirname)));
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB Connected'))
-.catch(err => console.log(err));
+// ── JSON File Database helpers ──────────────────────────────
+const DB_FILE = path.join(__dirname, 'db.json');
 
-// Models
-const User = require('./models/User');
-const Student = require('./models/Student');
-
-// Routes
-// Bulk Import Students (Excel Data)
-app.post('/api/students/import', async (req, res) => {
-  const studentsData = req.body; // Expecting an array of student objects
-
-  if (!Array.isArray(studentsData)) {
-    return res.status(400).json({ error: 'Data must be an array' });
+function readDB() {
+  if (!fs.existsSync(DB_FILE)) {
+    const initial = { users: [], students: [] };
+    fs.writeFileSync(DB_FILE, JSON.stringify(initial, null, 2));
+    return initial;
   }
+  return JSON.parse(fs.readFileSync(DB_FILE, 'utf8'));
+}
 
-  try {
-    const students = await Student.insertMany(studentsData);
-    res.status(201).json({ message: 'Students imported successfully', count: students.length });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to import students. Check for duplicate roll numbers.' });
-  }
-});
+function writeDB(data) {
+  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+}
 
-// Get All Students
-app.get('/api/students', async (req, res) => {
-  try {
-    const students = await Student.find().sort({ dateAdded: -1 });
-    res.json(students);
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+// ── Seed: default admin account (only once) ─────────────────
+(async () => {
+  const db = readDB();
+  const adminExists = db.users.find(u => u.email === 'admin@edhills.com');
+  if (!adminExists) {
+    const hashed = await bcrypt.hash('Admin@2026', 10);
+    db.users.push({
+      id: 'admin-001',
+      email: 'admin@edhills.com',
+      password: hashed,
+      role: 'admin',
+      createdAt: new Date().toISOString()
+    });
+    writeDB(db);
+    console.log('✅ Default admin created → admin@edhills.com / Admin@2026');
   }
-});
-// Register Route (User + Student Details)
+})();
+
+// ══════════════════════════════════════════════════════════════
+//  STUDENT REGISTER
+//  POST /api/register
+//  Body: { name, email, password, phone, class, rollNumber }
+// ══════════════════════════════════════════════════════════════
 app.post('/api/register', async (req, res) => {
-  const { name, email, password, rollNumber, class: studentClass, phone } = req.body;
+  const { name, email, password, phone, class: studentClass, rollNumber } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ error: 'Name, email, and password are required.' });
+  }
+
+  const db = readDB();
+
+  // Check duplicate email
+  if (db.users.find(u => u.email === email)) {
+    return res.status(400).json({ error: 'Email is already registered. Please login.' });
+  }
+
+  // Check duplicate roll number (optional field)
+  if (rollNumber && db.students.find(s => s.rollNumber === rollNumber)) {
+    return res.status(400).json({ error: 'Roll Number already exists. Use a different one.' });
+  }
 
   try {
-    // 1. Check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ error: 'Email already registered' });
-    }
+    const hashed = await bcrypt.hash(password, 10);
+    const userId = 'USR-' + Date.now();
 
-    // 2. Check if Roll Number is unique
-    const existingStudent = await Student.findOne({ rollNumber });
-    if (existingStudent) {
-      return res.status(400).json({ error: 'Roll Number already exists' });
-    }
+    // Save user credentials
+    db.users.push({
+      id: userId,
+      email,
+      password: hashed,
+      role: 'student',
+      createdAt: new Date().toISOString()
+    });
 
-    // 3. Create User Account
-    const newUser = new User({ email, password });
-    await newUser.save();
-
-    // 4. Create Student Details Profile
-    const newStudent = new Student({
+    // Save student profile
+    db.students.push({
+      userId,
       name,
       email,
-      rollNumber,
-      class: studentClass,
-      phone
+      phone: phone || '',
+      class: studentClass || 'Class 12',
+      rollNumber: rollNumber || ('EDH-' + Date.now()),
+      enrolledCourses: [],
+      createdAt: new Date().toISOString()
     });
-    await newStudent.save();
 
-    res.status(201).json({ message: 'Account and Student Profile created successfully' });
+    writeDB(db);
+
+    const token = jwt.sign({ userId, email, role: 'student' }, JWT_SECRET, { expiresIn: '7d' });
+
+    res.status(201).json({
+      message: 'Account created successfully! Welcome to edHills.',
+      token,
+      user: {
+        name,
+        email,
+        phone: phone || '',
+        class: studentClass || 'Class 12',
+        rollNumber: rollNumber || '',
+        enrolledCourses: []
+      }
+    });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error during registration' });
+    console.error('[REGISTER ERROR]', err);
+    res.status(500).json({ error: 'Server error during registration.' });
   }
 });
 
-// Login Route
+// ══════════════════════════════════════════════════════════════
+//  STUDENT / USER LOGIN
+//  POST /api/login
+//  Body: { identifier (email or phone), password }
+// ══════════════════════════════════════════════════════════════
 app.post('/api/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { identifier, password } = req.body;
 
-  try {
-    // Check for user
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: 'User not found' });
-    }
-
-    // Check password (in a real app, use bcrypt)
-    if (user.password !== password) {
-      return res.status(400).json({ message: 'Invalid credentials' });
-    }
-
-    // Fetch Student Details
-    const student = await Student.findOne({ email });
-
-    res.json({ 
-      message: 'Login successful', 
-      user: { 
-        email: user.email,
-        name: student ? student.name : 'Student',
-        rollNumber: student ? student.rollNumber : 'N/A',
-        class: student ? student.class : 'N/A',
-        phone: student ? student.phone : 'N/A'
-      } 
-    });
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+  if (!identifier || !password) {
+    return res.status(400).json({ message: 'Email/Phone and password are required.' });
   }
+
+  const db = readDB();
+  let user = null;
+  let student = null;
+
+  // Find by email
+  if (identifier.includes('@')) {
+    user = db.users.find(u => u.email === identifier);
+    student = db.students.find(s => s.email === identifier);
+  } else {
+    // Find by phone
+    student = db.students.find(s => s.phone === identifier);
+    if (student) {
+      user = db.users.find(u => u.email === student.email);
+    }
+  }
+
+  if (!user) {
+    return res.status(400).json({ message: 'Account not found. Please register first.' });
+  }
+
+  const passwordMatch = await bcrypt.compare(password, user.password);
+  if (!passwordMatch) {
+    return res.status(400).json({ message: 'Incorrect password. Please try again.' });
+  }
+
+  const token = jwt.sign({ userId: user.id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
+
+  res.json({
+    message: 'Login successful! Welcome back.',
+    token,
+    user: {
+      name:            student ? student.name            : 'Student',
+      email:           user.email,
+      phone:           student ? student.phone           : '',
+      class:           student ? student.class           : 'N/A',
+      rollNumber:      student ? student.rollNumber      : 'N/A',
+      enrolledCourses: student ? student.enrolledCourses : [],
+      role:            user.role
+    }
+  });
 });
 
-// Admin Login Route
+// ══════════════════════════════════════════════════════════════
+//  GET STUDENT PROFILE
+//  GET /api/student/profile/:email
+// ══════════════════════════════════════════════════════════════
+app.get('/api/student/profile/:email', (req, res) => {
+  const db = readDB();
+  const student = db.students.find(s => s.email === req.params.email);
+  if (!student) return res.status(404).json({ message: 'Profile not found.' });
+  res.json(student);
+});
+
+// ══════════════════════════════════════════════════════════════
+//  ADMIN LOGIN
+//  POST /api/admin/login
+//  Body: { email, password }
+// ══════════════════════════════════════════════════════════════
 app.post('/api/admin/login', async (req, res) => {
   const { email, password } = req.body;
+  const db = readDB();
+  const user = db.users.find(u => u.email === email);
 
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(401).json({ message: 'Authorization Failed' });
-    }
+  if (!user) return res.status(401).json({ message: 'Admin account not found.' });
 
-    // Check Password
-    if (user.password !== password) {
-      return res.status(401).json({ message: 'Invalid Credentials' });
-    }
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) return res.status(401).json({ message: 'Invalid credentials.' });
 
-    // Check Role
-    if (user.role !== 'admin') {
-      return res.status(403).json({ message: 'Access Denied: Not an Admin' });
-    }
+  if (user.role !== 'admin') return res.status(403).json({ message: 'Access Denied: Not an Admin.' });
 
-    res.json({ message: 'Admin Welcome', token: 'mock-admin-token-123' });
-  } catch (err) {
-    res.status(500).json({ error: 'Security Server Error' });
-  }
+  const token = jwt.sign({ userId: user.id, email, role: 'admin' }, JWT_SECRET, { expiresIn: '1d' });
+  res.json({ message: 'Admin authenticated successfully.', token });
 });
 
-// Forgot Password Route
-app.post('/api/forgot-password', async (req, res) => {
+// ══════════════════════════════════════════════════════════════
+//  FORGOT PASSWORD (send reset link simulation)
+//  POST /api/forgot-password
+// ══════════════════════════════════════════════════════════════
+app.post('/api/forgot-password', (req, res) => {
   const { email } = req.body;
-
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ message: 'User with this email does not exist' });
-    }
-
-    // In a real app, you would generate a token and send an actual email here.
-    // For this demo, we simulate success.
-    res.json({ message: 'Reset link sent successfully' });
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
-  }
+  const db = readDB();
+  const user = db.users.find(u => u.email === email);
+  if (!user) return res.status(404).json({ message: 'No account found with that email.' });
+  // In production, send email. For now, simulate success.
+  res.json({ message: 'Password reset link sent! Check your email.' });
 });
 
-// Temporary storage for OTPs (In-memory for demo)
+// ══════════════════════════════════════════════════════════════
+//  LIST ALL STUDENTS (Admin only)
+//  GET /api/admin/students
+// ══════════════════════════════════════════════════════════════
+app.get('/api/admin/students', (req, res) => {
+  const db = readDB();
+  res.json(db.students);
+});
+
+// ══════════════════════════════════════════════════════════════
+//  OTP store (in-memory, for demo)
+// ══════════════════════════════════════════════════════════════
 const otpStore = new Map();
 
-// Send OTP Route
-app.post('/api/send-otp', async (req, res) => {
-  const { email } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
+app.post('/api/send-otp', (req, res) => {
+  const { identifier } = req.body;
+  if (!identifier) return res.status(400).json({ message: 'Identifier required.' });
 
-    // Generate a 6-digit OTP
-    const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    otpStore.set(email, otp);
-
-    // In a real app, send this via email API (Nodemailer/SendGrid)
-    console.log(`[OTP DEBUG] OTP for ${email}: ${otp}`);
-    
-    res.json({ message: 'OTP sent successfully to your registered email' });
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+  const db = readDB();
+  let email = identifier;
+  if (!identifier.includes('@')) {
+    const s = db.students.find(s => s.phone === identifier);
+    if (!s) return res.status(404).json({ message: 'Mobile number not registered.' });
+    email = s.email;
   }
+
+  const user = db.users.find(u => u.email === email);
+  if (!user) return res.status(404).json({ message: 'User not found.' });
+
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  otpStore.set(email, { otp, expiresAt: Date.now() + 5 * 60 * 1000 });
+  console.log(`[OTP] ${email} → ${otp}`);
+  res.json({ message: `OTP sent to ${identifier}. (Check server console for demo OTP)` });
 });
 
-// Verify OTP Login Route
 app.post('/api/verify-otp', async (req, res) => {
-  const { email, otp } = req.body;
-  
-  try {
-    const storedOtp = otpStore.get(email);
-    
-    if (!storedOtp || storedOtp !== otp) {
-      return res.status(400).json({ message: 'Invalid or expired OTP' });
-    }
-
-    // Clear OTP after successful use
-    otpStore.delete(email);
-
-    // Fetch User & Student Details
-    const user = await User.findOne({ email });
-    const student = await Student.findOne({ email });
-
-    res.json({ 
-      message: 'Login successful via OTP', 
-      user: { 
-        email: user.email,
-        name: student ? student.name : 'Student',
-        rollNumber: student ? student.rollNumber : 'N/A',
-        class: student ? student.class : 'N/A',
-        phone: student ? student.phone : 'N/A'
-      } 
-    });
-
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+  const { identifier, otp } = req.body;
+  const db = readDB();
+  let email = identifier;
+  if (!identifier.includes('@')) {
+    const s = db.students.find(s => s.phone === identifier);
+    if (!s) return res.status(404).json({ message: 'Mobile number not registered.' });
+    email = s.email;
   }
+
+  const stored = otpStore.get(email);
+  if (!stored || stored.otp !== otp || Date.now() > stored.expiresAt) {
+    return res.status(400).json({ message: 'Invalid or expired OTP.' });
+  }
+  otpStore.delete(email);
+
+  const user = db.users.find(u => u.email === email);
+  const student = db.students.find(s => s.email === email);
+  const token = jwt.sign({ userId: user.id, email, role: user.role }, JWT_SECRET, { expiresIn: '7d' });
+
+  res.json({
+    message: 'OTP verified. Login successful!',
+    token,
+    user: {
+      name:            student ? student.name            : 'Student',
+      email,
+      phone:           student ? student.phone           : '',
+      class:           student ? student.class           : 'N/A',
+      rollNumber:      student ? student.rollNumber      : 'N/A',
+      enrolledCourses: student ? student.enrolledCourses : []
+    }
+  });
 });
 
-// Final Password Reset Route
-app.post('/api/reset-password', async (req, res) => {
-  const { email, otp, newPassword } = req.body;
-  
-  try {
-    const storedOtp = otpStore.get(email);
-    if (!storedOtp || storedOtp !== otp) {
-      return res.status(400).json({ message: 'Invalid or expired OTP' });
-    }
-
-    const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: 'User not found' });
-
-    // Update password (use bcrypt in production)
-    user.password = newPassword;
-    await user.save();
-
-    otpStore.delete(email);
-    res.json({ message: 'Password reset successful' });
-  } catch (err) {
-    res.status(500).json({ error: 'Server error' });
-  }
+// ── Start server ────────────────────────────────────────────
+app.listen(PORT, () => {
+  console.log(`\n🚀 edHills Server running at http://localhost:${PORT}`);
+  console.log(`📁 Database file: db.json (auto-created)`);
+  console.log(`👤 Admin login  : admin@edhills.com / Admin@2026\n`);
 });
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

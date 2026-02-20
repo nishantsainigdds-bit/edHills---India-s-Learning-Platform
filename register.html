@@ -354,14 +354,7 @@
                         </div>
                     </div>
 
-                    <!-- Roll Number (Unique Identity) -->
-                    <div class="input-group">
-                        <label>School / Coaching Roll No.</label>
-                        <div class="input-wrapper">
-                            <i class="ri-hashtag"></i>
-                            <input type="text" id="rollNumber" placeholder="e.g. EDH9901" required>
-                        </div>
-                    </div>
+
 
                     <!-- Password -->
                     <div class="input-group full-width">
@@ -373,9 +366,15 @@
                     </div>
                 </div>
 
-                <button type="submit" class="submit-btn" id="regBtn">
-                    Create My Account <i class="ri-arrow-right-line"></i>
-                </button>
+                <div style="display: flex; gap: 15px; margin-top: 20px;">
+                    <button type="submit" class="submit-btn" id="regBtn" style="flex: 2;">
+                        Create My Account <i class="ri-arrow-right-line"></i>
+                    </button>
+                    <a href="login.html" class="submit-btn"
+                        style="flex: 1; min-width: 120px; background: #f0f4ff; color: #0e2f69; border: 1px solid #0e2f69; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 14px;">
+                        Sign In
+                    </a>
+                </div>
             </form>
 
             <div class="login-link">
@@ -384,22 +383,79 @@
         </div>
     </div>
 
+    <!-- Toast notification -->
+    <style>
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            z-index: 9999;
+            transition: 0.4s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .toast.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .toast.success {
+            background: #065f46;
+        }
+
+        .toast.error {
+            background: #991b1b;
+        }
+    </style>
+    <div class="toast" id="regToast"></div>
+
     <script>
+        function showToast(msg, type = 'error') {
+            const t = document.getElementById('regToast');
+            t.className = 'toast show ' + type;
+            t.innerHTML = (type === 'success' ? '&#9989; ' : '&#9888; ') + msg;
+            setTimeout(() => t.className = 'toast', 4000);
+        }
+
+        window.onload = () => {
+            if (localStorage.getItem('currentUser')) {
+                window.location.href = 'student-dashboard.html';
+            }
+        };
+
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-
             const btn = document.getElementById('regBtn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> Processing...';
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> Creating Account...';
             btn.disabled = true;
 
+            const password = document.getElementById('password').value;
+            if (password.length < 6) {
+                showToast('Password must be at least 6 characters.', 'error');
+                btn.innerHTML = originalHTML; btn.disabled = false; return;
+            }
+
             const userData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
                 class: document.getElementById('class').value,
-                rollNumber: document.getElementById('rollNumber').value,
-                password: document.getElementById('password').value
+                rollNumber: document.getElementById('rollNumber').value.trim(),
+                password
             };
 
             try {
@@ -408,24 +464,21 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userData)
                 });
-
                 const result = await response.json();
 
                 if (response.ok) {
-                    // Store data locally for the "Student Details" view
-                    localStorage.setItem('currentUser', JSON.stringify(userData));
-
-                    alert('Account Created Successfully! Redirecting to student dashboard...');
-                    window.location.href = 'student-details.html';
+                    localStorage.setItem('edHillsToken', result.token);
+                    localStorage.setItem('currentUser', JSON.stringify(result.user));
+                    showToast('Account created! Welcome to edHills 🎉', 'success');
+                    setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1500);
                 } else {
-                    alert('Error: ' + result.error || result.message);
+                    showToast(result.error || result.message || 'Registration failed.', 'error');
+                    btn.innerHTML = originalHTML; btn.disabled = false;
                 }
             } catch (error) {
-                console.error('Error:', error);
-                alert('Could not connect to the server. Please check if backend is running.');
-            } finally {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
+                console.error('Registration Error:', error);
+                showToast('Cannot connect to server. Run: npm start in your project folder.', 'error');
+                btn.innerHTML = originalHTML; btn.disabled = false;
             }
         });
     </script>

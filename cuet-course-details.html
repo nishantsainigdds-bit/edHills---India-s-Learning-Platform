@@ -245,8 +245,9 @@
             <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
             <a href="index.html#popular-courses"><i class="ri-star-line"></i> Popular Courses</a>
             <a href="courses.html"><i class="ri-book-open-line"></i> Courses</a>
+            <a href="updates.html"><i class="ri-notification-3-line"></i> Updates</a>
             <a href="index.html#exam-info"><i class="ri-file-list-3-line"></i> Exam Info</a>
-            <a href="login.html" class="nav-btn">Get Started</a>
+            <a href="login.html" class="nav-btn" id="navAction">Get Started</a>
         </nav>
     </header>
 
@@ -365,6 +366,24 @@
         </div>
     </footer>
 
+    <script>
+        // Session detection
+        window.addEventListener('load', () => {
+            const userStr = localStorage.getItem('currentUser');
+            const navBtn = document.getElementById('navAction');
+            if (userStr && navBtn) {
+                try {
+                    const user = JSON.parse(userStr);
+                    if (user && user.name) {
+                        navBtn.innerHTML = '<i class="ri-dashboard-line"></i> Dashboard';
+                        navBtn.href = 'student-dashboard.html';
+                    }
+                } catch (e) {
+                    localStorage.removeItem('currentUser');
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

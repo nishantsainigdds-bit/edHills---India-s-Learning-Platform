@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Narayan e-Gurukul</title>
+  <title>edHills</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -431,44 +431,136 @@
 
     /* UPDATES SECTION */
     .updates {
-      padding: 70px 8%;
-      background: #fdfdfd;
+      padding: 90px 8%;
+      background: #ffffff;
+      position: relative;
     }
 
     .updates h2 {
       color: #0e2f69;
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
+      font-size: 32px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
     }
 
-    .update-list {
+    .updates-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+    }
+
+    .new-batches-card {
+      background: linear-gradient(135deg, #0e2f69, #1746a2);
+      border-radius: 25px;
+      padding: 40px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(14, 47, 105, 0.2);
+    }
+
+    .new-batches-card::before {
+      content: 'NEW';
+      position: absolute;
+      top: 20px;
+      right: -30px;
+      background: #facc15;
+      color: #0e2f69;
+      padding: 10px 40px;
+      transform: rotate(45deg);
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .new-batches-card h3 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #facc15;
+    }
+
+    .batch-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: 0.3s;
+    }
+
+    .batch-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(10px);
+    }
+
+    .batch-icon {
+      width: 50px;
+      height: 50px;
+      background: #facc15;
+      color: #0e2f69;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .batch-info h4 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .batch-info p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .update-sidebar {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      max-width: 800px;
-      margin: 0 auto;
     }
 
-    .update-item {
-      background: white;
+    .sidebar-update-item {
+      background: #f8fafc;
       padding: 20px;
-      border-left: 5px solid #facc15;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-      border-radius: 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      border-radius: 15px;
+      border-left: 4px solid #facc15;
+      transition: 0.3s;
     }
 
-    .update-item p {
+    .sidebar-update-item:hover {
+      background: #f1f5f9;
+      transform: translateY(-5px);
+    }
+
+    .sidebar-update-item p {
       margin: 0;
-      color: #333;
+      font-size: 15px;
       font-weight: 500;
+      color: #1e293b;
     }
 
-    .update-date {
-      color: #777;
-      font-size: 14px;
+    .sidebar-update-item .time {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 8px;
+      display: block;
+    }
+
+    @media (max-width: 992px) {
+      .updates-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* EXAM INFO SECTION */
@@ -598,6 +690,9 @@
       <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
       <a href="#popular-courses"><i class="ri-star-line"></i> Popular Courses</a>
       <a href="courses.html"><i class="ri-book-open-line"></i> Courses</a>
+      <a href="test-series.html"><i class="ri-file-list-3-line"></i> Test Series</a>
+      <a href="free-resources.html"><i class="ri-gift-line"></i> Free Materials</a>
+      <a href="updates.html"><i class="ri-notification-3-line"></i> Updates</a>
       <a href="#exam-info"><i class="ri-file-list-3-line"></i> Exam Info</a>
       <a href="login.html" class="nav-btn">Get Started</a>
     </nav>
@@ -616,25 +711,57 @@
     <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png">
   </section>
 
-  <!-- UPDATES -->
+  <!-- UPDATES & NEW BATCHES -->
   <section class="updates">
-    <h2><i class="ri-notification-3-line"></i> Upcoming Updates & Notifications</h2>
-    <div class="update-list">
-      <div class="update-item">
-        <p><i class="ri-rocket-line"></i> JEE Main 2026 Crash Course starting from next Monday!</p>
-        <span class="update-date">New</span>
+    <h2><i class="ri-notification-3-line"></i> Upcoming Updates & New Batches</h2>
+    <div class="updates-grid">
+      <!-- NEW BATCHES STARTING NOW -->
+      <div class="new-batches-card">
+        <h3><i class="ri-rocket-2-line"></i> New Batches Starting Now</h3>
+        <div class="batch-list">
+          <div class="batch-item">
+            <div class="batch-icon"><i class="ri-flag-2-line"></i></div>
+            <div class="batch-info">
+              <h4>JEE Main 2026 Ultimate Crash Course</h4>
+              <p>Starting: Feb 26 • Limited 50 Seats</p>
+            </div>
+          </div>
+          <div class="batch-item">
+            <div class="batch-icon"><i class="ri-microscope-line"></i></div>
+            <div class="batch-info">
+              <h4>NEET 2026 Biology Mastery Batch</h4>
+              <p>Starting: Mar 01 • Pure NCERT Based</p>
+            </div>
+          </div>
+          <div class="batch-item">
+            <div class="batch-icon"><i class="ri-government-line"></i></div>
+            <div class="batch-info">
+              <h4>CUET 2026 Domain Expert Batch</h4>
+              <p>Starting: Mar 05 • Interactive Sessions</p>
+            </div>
+          </div>
+        </div>
+        <a href="courses.html" class="btn"
+          style="background: #facc15; color: #0e2f69; margin-top: 20px; font-weight: 700;">Join a Batch Now</a>
       </div>
-      <div class="update-item">
-        <p><i class="ri-megaphone-line"></i> NEET Admit Cards have been released. Download now.</p>
-        <span class="update-date">2 hrs ago</span>
-      </div>
-      <div class="update-item">
-        <p><i class="ri-file-text-line"></i> Scholarship Test results are out. Check your rank.</p>
-        <span class="update-date">Yesterday</span>
-      </div>
-      <div class="update-item">
-        <p><i class="ri-graduation-cap-line"></i> New batch for CUET 2026 registrations open.</p>
-        <span class="update-date">2 days ago</span>
+
+      <!-- NOTIFICATIONS SIDEBAR -->
+      <div class="update-sidebar">
+        <div class="sidebar-update-item">
+          <p><i class="ri-megaphone-line"></i> NEET Admit Cards Released for Phase 1.</p>
+          <span class="time">2 hours ago</span>
+        </div>
+        <div class="sidebar-update-item">
+          <p><i class="ri-file-text-line"></i> Scholarship Test results of 15th Feb are out.</p>
+          <span class="time">Yesterday</span>
+        </div>
+        <div class="sidebar-update-item">
+          <p><i class="ri-user-follow-line"></i> New mentorship slots open for Board Exam students.</p>
+          <span class="time">2 days ago</span>
+        </div>
+        <a href="updates.html"
+          style="color: #0e2f69; text-decoration: none; font-weight: 600; text-align: center; margin-top: 10px;">View
+          All Updates <i class="ri-arrow-right-line"></i></a>
       </div>
     </div>
   </section>
@@ -752,7 +879,9 @@
         <ul>
           <li><a href="index.html"><i class="ri-home-line"></i> Home</a></li>
           <li><a href="courses.html"><i class="ri-book-open-line"></i> Courses</a></li>
-          <li><a href="#"><i class="ri-notification-badge-line"></i> Updates</a></li>
+          <li><a href="test-series.html"><i class="ri-file-list-3-line"></i> Test Series</a></li>
+          <li><a href="updates.html"><i class="ri-notification-badge-line"></i> Updates</a></li>
+          <li><a href="free-resources.html"><i class="ri-gift-line"></i> Free Materials</a></li>
           <li><a href="login.html"><i class="ri-user-heart-line"></i> Student Portal</a></li>
           <li><a href="admin-login.html" style="opacity: 0.5;"><i class="ri-admin-line"></i> Admin Login</a></li>
         </ul>
@@ -780,7 +909,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; 2026 Narayan e-Gurukul. All Rights Reserved. Designed for Excellence.</p>
+      <p>&copy; 2026 edHills. All Rights Reserved. Designed for Excellence.</p>
     </div>
   </footer>
 
@@ -798,9 +927,26 @@
   <script>
     // Show Popup after 15 seconds
     window.onload = function () {
-      setTimeout(function () {
-        document.getElementById('loginPopup').style.display = 'flex';
-      }, 15000);
+      // Check login status for navigation button
+      const userStr = localStorage.getItem('currentUser');
+      const getStartedBtn = document.querySelector('.nav-btn');
+      if (userStr && getStartedBtn) {
+        try {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            getStartedBtn.innerHTML = '<i class="ri-dashboard-line"></i> Dashboard';
+            getStartedBtn.href = 'student-dashboard.html';
+          }
+        } catch (e) {
+          localStorage.removeItem('currentUser');
+        }
+      }
+
+      if (!userStr) {
+        setTimeout(function () {
+          document.getElementById('loginPopup').style.display = 'flex';
+        }, 15000);
+      }
     };
 
     function closePopup() {

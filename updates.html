@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updates & Notifications | edHills - India's Learning Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0e2f69;
+            --secondary: #1746a2;
+            --accent: #facc15;
+            --bg: #f4f6fb;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.8);
+            --shadow: 0 15px 35px rgba(14, 47, 105, 0.1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* PREMIUM HEADER */
+        header {
+            background: var(--white);
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .logo i {
+            font-size: 32px;
+            color: var(--accent);
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white !important;
+            padding: 10px 22px;
+            border-radius: 50px;
+            transition: 0.4s;
+        }
+
+        .nav-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(14, 47, 105, 0.2);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 80px 8% 120px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--bg);
+            border-radius: 50% 50% 0 0;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin: 0 0 15px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        /* NOTIFICATION CONTAINER */
+        .updates-container {
+            max-width: 1000px;
+            margin: -60px auto 100px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .filter-tabs {
+            background: var(--white);
+            padding: 10px;
+            border-radius: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            color: #666;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab:hover:not(.active) {
+            background: #f0f4ff;
+            color: var(--primary);
+        }
+
+        /* UPDATE CARDS */
+        .notification-list {
+            display: grid;
+            gap: 25px;
+        }
+
+        .update-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            gap: 25px;
+            box-shadow: var(--shadow);
+            transition: 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            animation: slideIn 0.5s ease backwards;
+        }
+
+        .update-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(14, 47, 105, 0.15);
+        }
+
+        .update-date {
+            min-width: 80px;
+            height: 80px;
+            background: #f0f4ff;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .update-date span {
+            font-size: 24px;
+            display: block;
+        }
+
+        .update-date label {
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .update-content {
+            flex: 1;
+        }
+
+        .category-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .tag-batch {
+            background: #e6fffa;
+            color: #00a38d;
+        }
+
+        .tag-exam {
+            background: #fff5f5;
+            color: #e53e3e;
+        }
+
+        .tag-system {
+            background: #f0f4ff;
+            color: #3b82f6;
+        }
+
+        .update-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0 0 10px;
+        }
+
+        .update-desc {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .view-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .view-link:hover i {
+            transform: translateX(5px);
+        }
+
+        .view-link i {
+            transition: 0.3s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .update-card {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .update-date {
+                flex-direction: row;
+                width: 100%;
+                height: 40px;
+                gap: 10px;
+                justify-content: flex-start;
+                padding-left: 15px;
+                box-sizing: border-box;
+            }
+
+            .update-date span {
+                font-size: 18px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+
+        footer {
+            background: var(--primary);
+            padding: 60px 8% 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <i class="ri-graduation-cap-fill"></i>
+            ed<span>Hills</span>
+        </a>
+        <nav id="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="free-resources.html">Free Materials</a>
+            <a href="updates.html" style="color: var(--primary); font-weight: 700;">Updates</a>
+            <a href="login.html" class="nav-btn" id="navAction">Get Started</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Upcoming Updates</h1>
+        <p>Stay ahead with the latest batch announcements, exam notifications, and platform upgrades at edHills.</p>
+    </section>
+
+    <div class="updates-container">
+        <div class="filter-tabs">
+            <div class="tab active">All Updates</div>
+            <div class="tab">Exam Alerts</div>
+            <div class="tab">New Batches</div>
+            <div class="tab">System News</div>
+        </div>
+
+        <!-- NEW BATCHES HIGHLIGHT -->
+        <div id="new-batches-highlight"
+            style="margin-bottom: 40px; background: linear-gradient(135deg, #0e2f69, #1746a2); padding: 30px; border-radius: 20px; color: white;">
+            <h2 style="margin-top: 0; display: flex; align-items: center; gap: 10px; font-size: 24px; color: #facc15;">
+                <i class="ri-rocket-2-line"></i> New Batches Starting Now
+            </h2>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div
+                    style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">
+                    <h4 style="margin: 0; color: #facc15;">JEE Crash Course</h4>
+                    <p style="margin: 5px 0 0; font-size: 14px; opacity: 0.9;">Starting Feb 26 • Register Today</p>
+                </div>
+                <div
+                    style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">
+                    <h4 style="margin: 0; color: #facc15;">NEET Biology Batch</h4>
+                    <p style="margin: 5px 0 0; font-size: 14px; opacity: 0.9;">Starting Mar 01 • Pure NCERT Based</p>
+                </div>
+                <div
+                    style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">
+                    <h4 style="margin: 0; color: #facc15;">CUET Domain Prep</h4>
+                    <p style="margin: 5px 0 0; font-size: 14px; opacity: 0.9;">Starting Mar 05 • Interactive sessions
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="notification-list">
+            <!-- Update 1 -->
+            <div class="update-card" style="animation-delay: 0.1s;">
+                <div class="update-date">
+                    <span>25</span>
+                    <label>Feb</label>
+                </div>
+                <div class="update-content">
+                    <span class="category-tag tag-batch">New Batch</span>
+                    <h3 class="update-title">JEE Advanced 2026: Fast-Track Batch Starting</h3>
+                    <p class="update-desc">Intensive preparation batch for JEE Advanced 2026 kicks off next week.
+                        Registration open for limited seats with Rankers' Scholarship.</p>
+                    <a href="jee-course-details.html" class="view-link">Course Details <i
+                            class="ri-arrow-right-s-line"></i></a>
+                </div>
+            </div>
+
+            <!-- Update 2 -->
+            <div class="update-card" style="animation-delay: 0.2s;">
+                <div class="update-date">
+                    <span>02</span>
+                    <label>Mar</label>
+                </div>
+                <div class="update-content">
+                    <span class="category-tag tag-exam">Exam Alert</span>
+                    <h3 class="update-title">CUET 2026 Registration Guidelines Released</h3>
+                    <p class="update-desc">Official guidelines for CUET 2026 applications are out. Join our free webinar
+                        on Mar 5th for a step-by-step filling guide.</p>
+                    <a href="cuet-syllabus.html" class="view-link">Read Guidelines <i
+                            class="ri-arrow-right-s-line"></i></a>
+                </div>
+            </div>
+
+            <!-- Update 3 -->
+            <div class="update-card" style="animation-delay: 0.3s;">
+                <div class="update-date">
+                    <span>15</span>
+                    <label>Mar</label>
+                </div>
+                <div class="update-content">
+                    <span class="category-tag tag-system">Platform</span>
+                    <h3 class="update-title">AI-Powered Performance Analytics Beta</h3>
+                    <p class="update-desc">We are rolling out a new AI dashboard for student performance tracking.
+                        Personalized learning paths will now be generated after every test.</p>
+                    <a href="student-dashboard.html" class="view-link">Explore Dashboard <i
+                            class="ri-arrow-right-s-line"></i></a>
+                </div>
+            </div>
+
+            <!-- Update 4 -->
+            <div class="update-card" style="animation-delay: 0.4s;">
+                <div class="update-date">
+                    <span>28</span>
+                    <label>Mar</label>
+                </div>
+                <div class="update-content">
+                    <span class="category-tag tag-batch">Medical</span>
+                    <h3 class="update-title">NEET 2026 Special Biology Crash Course</h3>
+                    <p class="update-desc">A 45-day focused biology revision series for NEET aspirants covering the most
+                        critical diagrams and concepts.</p>
+                    <a href="neet-course-details.html" class="view-link">Enroll Now <i
+                            class="ri-arrow-right-s-line"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="logo" style="justify-content: center; margin-bottom: 20px;">
+            <i class="ri-graduation-cap-fill" style="color: var(--accent);"></i>
+            <span style="color: white;">ed<span>Hills</span></span>
+        </div>
+        <p>Your Trusted Partner in Academic Excellence.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2026 edHills. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Use the same login status logic as other pages
+        window.onload = () => {
+            const userStr = localStorage.getItem('currentUser');
+            const navBtn = document.getElementById('navAction');
+            if (userStr && navBtn) {
+                try {
+                    const user = JSON.parse(userStr);
+                    if (user && user.name) {
+                        navBtn.innerHTML = '<i class="ri-dashboard-line"></i> Dashboard';
+                        navBtn.href = 'student-dashboard.html';
+                    }
+                } catch (e) {
+                    localStorage.removeItem('currentUser');
+                }
+            }
+        };
+
+        // Filter functionality
+        const tabs = document.querySelectorAll('.tab');
+        const cards = document.querySelectorAll('.update-card');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filter = tab.innerText;
+                cards.forEach(card => {
+                    if (filter === 'All Updates') {
+                        card.style.display = 'flex';
+                    } else {
+                        const tag = card.querySelector('.category-tag').innerText;
+                        if (tag.includes(filter.replace('New ', '').replace('Alerts', '').replace('News', '')) ||
+                            (filter === 'System News' && tag === 'System')) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

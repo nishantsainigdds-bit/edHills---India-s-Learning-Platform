@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Series 2026 | edHills - JEE, NEET, CUET</title>
+    <meta name="description"
+        content="Attempt India's best test series for JEE Main 2026, NEET UG 2026, and CUET 2026. NTA-pattern full mocks, chapter tests, and detailed analysis.">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0e2f69;
+            --secondary: #1746a2;
+            --accent: #facc15;
+            --bg: #f0f4ff;
+            --white: #ffffff;
+            --text: #1a1a2e;
+            --jee: #3b82f6;
+            --neet: #10b981;
+            --cuet: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(14, 47, 105, 0.97);
+            backdrop-filter: blur(12px);
+            padding: 14px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        nav a:hover {
+            background: rgba(250, 204, 21, 0.15);
+            color: var(--accent);
+        }
+
+        .nav-btn {
+            background: var(--accent) !important;
+            color: var(--primary) !important;
+            font-weight: 700 !important;
+            border-radius: 50px !important;
+            padding: 10px 22px !important;
+        }
+
+        .nav-btn:hover {
+            background: white !important;
+            transform: translateY(-2px);
+        }
+
+        /* HERO */
+        .ts-hero {
+            background: linear-gradient(135deg, #060d2e 0%, #0e2f69 50%, #1a4a9e 100%);
+            padding: 90px 8% 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ts-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 50%);
+        }
+
+        .ts-hero .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(250, 204, 21, 0.15);
+            border: 1px solid rgba(250, 204, 21, 0.4);
+            color: var(--accent);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            animation: fadeDown 0.6s ease;
+        }
+
+        .ts-hero h1 {
+            font-size: clamp(36px, 5vw, 62px);
+            font-weight: 800;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            animation: fadeDown 0.7s ease;
+        }
+
+        .ts-hero h1 span {
+            color: var(--accent);
+        }
+
+        .ts-hero p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            animation: fadeDown 0.8s ease;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            animation: fadeDown 0.9s ease;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat strong {
+            display: block;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .hero-stat span {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        /* FLOATING CHIPS */
+        .chips-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 30px 8%;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .chip-jee {
+            background: #eff6ff;
+            color: var(--jee);
+            border-color: #bfdbfe;
+        }
+
+        .chip-neet {
+            background: #f0fdf4;
+            color: var(--neet);
+            border-color: #bbf7d0;
+        }
+
+        .chip-cuet {
+            background: #fffbeb;
+            color: var(--cuet);
+            border-color: #fde68a;
+        }
+
+        .chip:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .chip.active {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* SECTION TITLES */
+        .section-head {
+            text-align: center;
+            padding: 70px 8% 30px;
+        }
+
+        .section-head .tag {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .section-head h2 {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .section-head p {
+            color: #666;
+            font-size: 17px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* TEST SERIES CARDS */
+        .series-section {
+            padding: 20px 8% 80px;
+        }
+
+        .series-block {
+            margin-bottom: 80px;
+        }
+
+        .series-block-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px 28px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .series-block-header::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sbh-jee {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+        }
+
+        .sbh-neet {
+            background: linear-gradient(135deg, #065f46, #10b981);
+        }
+
+        .sbh-cuet {
+            background: linear-gradient(135deg, #92400e, #f59e0b);
+        }
+
+        .series-block-header .sbh-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .series-block-header .sbh-info h3 {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .series-block-header .sbh-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .sbh-count {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 18px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        /* TEST CARDS GRID */
+        .test-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 22px;
+        }
+
+        .test-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+            transition: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .test-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .test-card-top {
+            padding: 22px 24px 18px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .card-type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-full {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .badge-chapter {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .badge-part {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .badge-mini {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .badge-pyq {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .test-card-top h4 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .test-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .test-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .test-card-bottom {
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .difficulty {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .difficulty-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .difficulty-dots .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e0e0e0;
+        }
+
+        .diff-easy .dot:nth-child(-n+1) {
+            background: var(--neet) !important;
+        }
+
+        .diff-medium .dot:nth-child(-n+2) {
+            background: var(--cuet) !important;
+        }
+
+        .diff-hard .dot {
+            background: #ef4444 !important;
+        }
+
+        .attempt-btn {
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .btn-jee {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+        }
+
+        .btn-neet {
+            background: linear-gradient(135deg, #065f46, #10b981);
+            color: white;
+        }
+
+        .btn-cuet {
+            background: linear-gradient(135deg, #92400e, #f59e0b);
+            color: white;
+        }
+
+        .attempt-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-tag-free {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 50px;
+        }
+
+        /* HOW IT WORKS */
+        .how-section {
+            background: linear-gradient(135deg, #0e2f69, #1746a2);
+            padding: 80px 8%;
+            text-align: center;
+        }
+
+        .how-section h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .how-section p {
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 50px;
+            font-size: 17px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 35px 25px;
+            transition: 0.3s;
+        }
+
+        .step-card:hover {
+            background: rgba(255, 255, 255, 0.14);
+            transform: translateY(-5px);
+        }
+
+        .step-num {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: var(--primary);
+            font-size: 22px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+        }
+
+        .step-card h4 {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        /* WHY CHOOSE */
+        .why-section {
+            padding: 80px 8%;
+            background: #fff;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .why-card {
+            background: linear-gradient(145deg, #f8fbff, #edf2ff);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #e0e7ff;
+            transition: 0.3s;
+        }
+
+        .why-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(14, 47, 105, 0.1);
+        }
+
+        .why-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 18px;
+        }
+
+        .why-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .why-card p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        /* CTA STRIP */
+        .cta-strip {
+            background: linear-gradient(135deg, #060d2e, #0e2f69);
+            padding: 60px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .cta-strip h3 {
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .cta-strip p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .cta-strip a {
+            padding: 16px 36px;
+            border-radius: 50px;
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 16px;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .cta-strip a:hover {
+            background: white;
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px 8% 30px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 10px;
+            transition: 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width:900px) {
+            .ts-hero {
+                padding: 70px 5% 90px;
+            }
+
+            .hero-stats {
+                gap: 25px;
+            }
+
+            .series-section {
+                padding: 10px 5% 60px;
+            }
+
+            .chips-bar {
+                padding: 20px 5%;
+            }
+
+            .how-section,
+            .why-section,
+            .cta-strip {
+                padding: 60px 5%;
+            }
+
+            .sbh-count {
+                display: none;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="ri-graduation-cap-fill"></i>
+            ed<span>Hills</span>
+        </a>
+        <nav id="nav-menu">
+            <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
+            <a href="courses.html"><i class="ri-book-open-line"></i> Courses</a>
+            <a href="test-series.html"><i class="ri-file-list-3-line"></i> Test Series</a>
+            <a href="updates.html"><i class="ri-notification-3-line"></i> Updates</a>
+            <a href="login.html" class="nav-btn" id="navAction">Get Started</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="ts-hero">
+        <div class="hero-badge"><i class="ri-award-line"></i> India's #1 Test Series Platform</div>
+        <h1>Master Every Exam with<br><span>Targeted Test Series 2026</span></h1>
+        <p>NTA-pattern full mocks, chapter tests & PYQs for JEE Main, NEET UG & CUET — with deep performance analytics.
+        </p>
+        <div class="hero-stats">
+            <div class="hero-stat"><strong>500+</strong><span>Total Tests</span></div>
+            <div class="hero-stat"><strong>2.8L+</strong><span>Students Enrolled</span></div>
+            <div class="hero-stat"><strong>98%</strong><span>Accuracy Match</span></div>
+            <div class="hero-stat"><strong>Free</strong><span>First Mock Free</span></div>
+        </div>
+    </section>
+
+    <!-- CHIPS BAR -->
+    <div class="chips-bar">
+        <div class="chip chip-jee active" onclick="scrollTo('jee-series')"><i class="ri-rocket-2-line"></i> JEE Main
+            2026</div>
+        <div class="chip chip-neet" onclick="scrollTo('neet-series')"><i class="ri-pulse-line"></i> NEET UG 2026</div>
+        <div class="chip chip-cuet" onclick="scrollTo('cuet-series')"><i class="ri-graduation-cap-line"></i> CUET 2026
+        </div>
+        <div class="chip" style="background:#f5f3ff;color:#7c3aed;border-color:#ddd6fe;"
+            onclick="scrollTo('how-it-works')"><i class="ri-question-line"></i> How It Works</div>
+    </div>
+
+    <!-- SECTION TITLE -->
+    <div class="section-head reveal">
+        <div class="tag" style="background:#eff6ff;color:#1d4ed8;">📋 All Test Series</div>
+        <h2>Choose Your Exam & Start Practicing</h2>
+        <p>Each test series is crafted by top educators and strictly follows the latest NTA/NMC/NTA-CUET patterns.</p>
+    </div>
+
+    <div class="series-section">
+
+        <!-- JEE MAIN 2026 -->
+        <div class="series-block reveal" id="jee-series">
+            <div class="series-block-header sbh-jee">
+                <div class="sbh-icon"><i class="ri-rocket-2-line"></i></div>
+                <div class="sbh-info">
+                    <h3>JEE Main 2026 Test Series</h3>
+                    <p>Physics · Chemistry · Mathematics | NTA CBT Pattern</p>
+                </div>
+                <div class="sbh-count"><i class="ri-file-list-3-line"></i> 15 Tests</div>
+            </div>
+            <div class="test-cards-grid">
+
+                <div class="test-card">
+                    <span class="card-tag-free">FREE</span>
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-full"><i class="ri-file-list-3-line"></i> Full Length
+                            Mock</span>
+                        <h4>JEE Main Grand Mock Test #1</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 3 Hours</span>
+                            <span><i class="ri-question-answer-line"></i> 90 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 300 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-medium">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Medium
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-jee"><i class="ri-play-circle-line"></i> Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-full"><i class="ri-file-list-3-line"></i> Full Length
+                            Mock</span>
+                        <h4>JEE Main Grand Mock Test #2</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 3 Hours</span>
+                            <span><i class="ri-question-answer-line"></i> 90 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 300 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-hard">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Hard
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-jee"><i class="ri-play-circle-line"></i> Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-chapter"><i class="ri-book-2-line"></i> Chapter Test</span>
+                        <h4>Physics: Mechanics & Laws of Motion</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 1 Hour</span>
+                            <span><i class="ri-question-answer-line"></i> 30 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 120 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-easy">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Easy
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-jee"><i class="ri-play-circle-line"></i> Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-chapter"><i class="ri-book-2-line"></i> Chapter Test</span>
+                        <h4>Chemistry: Organic — Reaction Mechanisms</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 1 Hour</span>
+                            <span><i class="ri-question-answer-line"></i> 30 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 120 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-medium">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Medium
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-jee"><i class="ri-play-circle-line"></i> Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-pyq"><i class="ri-history-line"></i> PYQ Series</span>
+                        <h4>JEE Main PYQs 2019–2025 (PCM)</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 3 Hours</span>
+                            <span><i class="ri-question-answer-line"></i> 90 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 300 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-hard">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Hard
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-jee"><i class="ri-play-circle-line"></i> Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-mini"><i class="ri-timer-line"></i> Speed Test</span>
+                        <h4>Maths: Calculus & Coordinate Geometry Sprint</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 30 Min</span>
+                            <span><i class="ri-question-answer-line"></i> 20 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 80 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-medium">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Medium
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-jee"><i class="ri-play-circle-line"></i> Attempt</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- NEET UG 2026 -->
+        <div class="series-block reveal" id="neet-series">
+            <div class="series-block-header sbh-neet">
+                <div class="sbh-icon"><i class="ri-pulse-line"></i></div>
+                <div class="sbh-info">
+                    <h3>NEET UG 2026 Test Series</h3>
+                    <p>Biology · Physics · Chemistry | NMC Offline Pattern</p>
+                </div>
+                <div class="sbh-count"><i class="ri-file-list-3-line"></i> 15 Tests</div>
+            </div>
+            <div class="test-cards-grid">
+
+                <div class="test-card">
+                    <span class="card-tag-free">FREE</span>
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-full"><i class="ri-file-list-3-line"></i> Full Length
+                            Mock</span>
+                        <h4>NEET UG Grand Mock Test #1</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 3 Hr 20 Min</span>
+                            <span><i class="ri-question-answer-line"></i> 200 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 720 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-medium">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Medium
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-neet"><i class="ri-play-circle-line"></i>
+                            Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-full"><i class="ri-file-list-3-line"></i> Full Length
+                            Mock</span>
+                        <h4>NEET UG Grand Mock Test #2</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 3 Hr 20 Min</span>
+                            <span><i class="ri-question-answer-line"></i> 200 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 720 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-hard">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Hard
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-neet"><i class="ri-play-circle-line"></i>
+                            Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-chapter"><i class="ri-book-2-line"></i> Chapter Test</span>
+                        <h4>Biology: Cell Structure & Biomolecules</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 1 Hour</span>
+                            <span><i class="ri-question-answer-line"></i> 45 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 180 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-easy">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Easy
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-neet"><i class="ri-play-circle-line"></i>
+                            Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-chapter"><i class="ri-book-2-line"></i> Chapter Test</span>
+                        <h4>Biology: Human Physiology & Genetics</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 1 Hour</span>
+                            <span><i class="ri-question-answer-line"></i> 45 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 180 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-medium">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Medium
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-neet"><i class="ri-play-circle-line"></i>
+                            Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-pyq"><i class="ri-history-line"></i> PYQ Series</span>
+                        <h4>NEET PYQs 2018–2024 Compilation</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 3 Hr 20 Min</span>
+                            <span><i class="ri-question-answer-line"></i> 200 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 720 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-hard">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Hard
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-neet"><i class="ri-play-circle-line"></i>
+                            Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-mini"><i class="ri-timer-line"></i> Speed Test</span>
+                        <h4>Chemistry: NCERT Rapid Fire — 25 Mins</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 25 Min</span>
+                            <span><i class="ri-question-answer-line"></i> 25 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 100 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-easy">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Easy
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-neet"><i class="ri-play-circle-line"></i>
+                            Attempt</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CUET 2026 -->
+        <div class="series-block reveal" id="cuet-series">
+            <div class="series-block-header sbh-cuet">
+                <div class="sbh-icon"><i class="ri-graduation-cap-line"></i></div>
+                <div class="sbh-info">
+                    <h3>CUET 2026 Test Series</h3>
+                    <p>Domain Subjects · General Test · Language | NTA Pattern</p>
+                </div>
+                <div class="sbh-count"><i class="ri-file-list-3-line"></i> 12 Tests</div>
+            </div>
+            <div class="test-cards-grid">
+
+                <div class="test-card">
+                    <span class="card-tag-free">FREE</span>
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-full"><i class="ri-file-list-3-line"></i> Full Mock</span>
+                        <h4>CUET Full Mock Test #1 (Science Stream)</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 2 Hours</span>
+                            <span><i class="ri-question-answer-line"></i> 125 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 500 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-easy">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Easy
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-cuet"><i class="ri-play-circle-line"></i>
+                            Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-full"><i class="ri-file-list-3-line"></i> Full Mock</span>
+                        <h4>CUET Full Mock Test #2 (Commerce Stream)</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 2 Hours</span>
+                            <span><i class="ri-question-answer-line"></i> 125 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 500 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-medium">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Medium
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-cuet"><i class="ri-play-circle-line"></i>
+                            Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-chapter"><i class="ri-book-2-line"></i> Section Test</span>
+                        <h4>CUET General Test — Quantitative Aptitude</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 1 Hour</span>
+                            <span><i class="ri-question-answer-line"></i> 40 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 200 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-medium">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Medium
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-cuet"><i class="ri-play-circle-line"></i>
+                            Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-chapter"><i class="ri-book-2-line"></i> Section Test</span>
+                        <h4>CUET English Language & Comprehension</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 45 Min</span>
+                            <span><i class="ri-question-answer-line"></i> 40 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 200 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-easy">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Easy
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-cuet"><i class="ri-play-circle-line"></i>
+                            Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-pyq"><i class="ri-history-line"></i> PYQ Series</span>
+                        <h4>CUET PYQs 2022–2024 Full Compilation</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 2 Hours</span>
+                            <span><i class="ri-question-answer-line"></i> 125 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 500 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-hard">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Hard
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-cuet"><i class="ri-play-circle-line"></i>
+                            Attempt</a>
+                    </div>
+                </div>
+
+                <div class="test-card">
+                    <div class="test-card-top">
+                        <span class="card-type-badge badge-mini"><i class="ri-timer-line"></i> Mini Test</span>
+                        <h4>CUET GK & Current Affairs Sprint</h4>
+                        <div class="test-meta">
+                            <span><i class="ri-time-line"></i> 20 Min</span>
+                            <span><i class="ri-question-answer-line"></i> 20 Questions</span>
+                            <span><i class="ri-bar-chart-line"></i> 100 Marks</span>
+                        </div>
+                    </div>
+                    <div class="test-card-bottom">
+                        <div class="difficulty diff-easy">
+                            <div class="difficulty-dots"><span class="dot"></span><span class="dot"></span><span
+                                    class="dot"></span></div>
+                            Easy
+                        </div>
+                        <a href="login.html" class="attempt-btn btn-cuet"><i class="ri-play-circle-line"></i>
+                            Attempt</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section reveal" id="how-it-works">
+        <h2><i class="ri-map-2-line"></i> How It Works</h2>
+        <p>Four simple steps to go from test-taker to topper</p>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">1</div>
+                <h4>Register & Login</h4>
+                <p>Create your free edHills account and gain instant access to the dashboard.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">2</div>
+                <h4>Pick Your Test</h4>
+                <p>Choose from full mocks, chapter tests, PYQs, or speed sprints based on your study plan.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">3</div>
+                <h4>Attempt in Real Conditions</h4>
+                <p>Our NTA-replica interface simulates the actual exam UI with auto-save & timer.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">4</div>
+                <h4>Analyze & Improve</h4>
+                <p>Get instant solutions, rank comparison, time-per-question analysis, and a personalized weak-topic
+                    report.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE -->
+    <section class="why-section">
+        <div class="section-head" style="padding-top:0;">
+            <div class="tag" style="background:#eff6ff;color:#1d4ed8;">✨ Why edHills Test Series</div>
+            <h2>Built by Toppers. Trusted by Lakhs.</h2>
+        </div>
+        <div class="why-grid reveal">
+            <div class="why-card">
+                <div class="why-icon"><i class="ri-trophy-line"></i></div>
+                <h4>NTA-Exact Pattern</h4>
+                <p>Every test replicates the official NTA/NMC interface, so the real exam feels like home.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon"><i class="ri-bar-chart-grouped-line"></i></div>
+                <h4>Deep Analytics</h4>
+                <p>Time analysis, accuracy graphs, subject-wise breakdowns, and All India Rank after every test.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon"><i class="ri-vidicon-line"></i></div>
+                <h4>Video Solutions</h4>
+                <p>Every question has a video explanation by IITian / AIIMS-qualified subject experts.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon"><i class="ri-shield-check-line"></i></div>
+                <h4>Curated Question Bank</h4>
+                <p>10,000+ unique questions updated every year — zero repetition, maximum coverage.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon"><i class="ri-device-line"></i></div>
+                <h4>Any Device, Anytime</h4>
+                <p>Attempt tests on mobile, tablet, or laptop — fully responsive and offline-ready.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon"><i class="ri-gift-line"></i></div>
+                <h4>First Mock Free</h4>
+                <p>Try one full mock test per exam for free before you buy — no credit card needed.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA STRIP -->
+    <div class="cta-strip reveal">
+        <div>
+            <h3>Ready to crack your exam? 🚀</h3>
+            <p>Join 2.8 lakh+ students who are already practising with edHills Test Series.</p>
+        </div>
+        <a href="register.html"><i class="ri-user-add-line"></i> Start for Free Today</a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom:15px;display:inline-flex;">
+                    <i class="ri-graduation-cap-fill"></i> ed<span>Hills</span>
+                </a>
+                <p>India's smart learning platform for JEE, NEET, CUET and more.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Test Series</h3>
+                <a href="#jee-series">JEE Main 2026</a>
+                <a href="#neet-series">NEET UG 2026</a>
+                <a href="#cuet-series">CUET 2026</a>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="courses.html">Courses</a>
+                <a href="updates.html">Updates</a>
+                <a href="login.html">Student Portal</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <a href="mailto:info@edhills.com"><i class="ri-mail-line"></i> info@edhills.com</a>
+                <a href="#"><i class="ri-map-pin-line"></i> New Delhi, India</a>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 edHills Learning Platform. All Rights Reserved.</div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+        }, { threshold: 0.1 });
+        reveals.forEach(r => observer.observe(r));
+
+        // Smooth scroll chips
+        function scrollTo(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Session detection
+        window.addEventListener('load', () => {
+            const userStr = localStorage.getItem('currentUser');
+            const navBtn = document.getElementById('navAction');
+            if (userStr && navBtn) {
+                try {
+                    const user = JSON.parse(userStr);
+                    if (user && user.name) {
+                        navBtn.innerHTML = '<i class="ri-dashboard-line"></i> Dashboard';
+                        navBtn.href = 'student-dashboard.html';
+                    }
+                } catch (e) { localStorage.removeItem('currentUser'); }
+            }
+        });
+    </script>
+</body>
+
+</html>

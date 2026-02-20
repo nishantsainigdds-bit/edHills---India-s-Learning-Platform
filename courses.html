@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Courses - Narayan e-Gurukul</title>
+  <title>Courses - edHills</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -403,12 +403,120 @@
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
-    /* APP SECTION */
-    .app-section {
-      padding: 70px 8%;
-      background: linear-gradient(135deg, #0e2f69, #1746a2);
-      color: white;
-      text-align: center;
+    /* PREMIUM APP DOWNLOAD SECTION */
+    .app-download-section {
+      max-width: 1140px;
+      margin: 80px auto;
+      background: linear-gradient(135deg, #F1EFFF 0%, #DEDAFF 100%);
+      min-height: 350px;
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 60px;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(110, 89, 255, 0.1);
+    }
+
+    .app-content {
+      padding: 50px 0;
+      flex: 1;
+      z-index: 2;
+    }
+
+    .app-content h2 {
+      font-size: 36px;
+      color: #1B2124;
+      margin-bottom: 25px;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .app-features {
+      margin-bottom: 35px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+      color: #1B2124;
+      font-size: 17px;
+    }
+
+    .feature-item i {
+      color: #3b82f6;
+      font-size: 22px;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 4px;
+      border-radius: 50%;
+    }
+
+    .store-badges {
+      display: flex;
+      gap: 15px;
+    }
+
+    .store-badges a img {
+      height: 45px;
+      transition: 0.3s;
+      border-radius: 8px;
+    }
+
+    .store-badges a:hover img {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .app-image-container {
+      flex: 0 0 320px;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-image-container img {
+      width: 100%;
+      height: auto;
+      transform: translateY(40px);
+      transition: 0.5s ease;
+    }
+
+    .app-download-section:hover .app-image-container img {
+      transform: translateY(20px);
+    }
+
+    @media (max-width: 992px) {
+      .app-download-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 50px 30px 0;
+        margin: 60px 5%;
+        min-height: auto;
+      }
+
+      .app-content h2 {
+        font-size: 28px;
+      }
+
+      .app-image-container {
+        flex: none;
+        width: 280px;
+        margin-top: 30px;
+      }
+
+      .store-badges {
+        justify-content: center;
+      }
+
+      .feature-item {
+        justify-content: center;
+      }
     }
 
     /* PREMIUM HERO CAROUSEL */
@@ -549,6 +657,9 @@
       <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
       <a href="index.html#popular-courses"><i class="ri-star-line"></i> Popular Courses</a>
       <a href="courses.html"><i class="ri-book-open-line"></i> Courses</a>
+      <a href="test-series.html"><i class="ri-file-list-3-line"></i> Test Series</a>
+      <a href="free-resources.html"><i class="ri-gift-line"></i> Free Materials</a>
+      <a href="updates.html"><i class="ri-notification-3-line"></i> Updates</a>
       <a href="index.html#exam-info"><i class="ri-file-list-3-line"></i> Exam Info</a>
       <a href="login.html" class="nav-btn">Get Started</a>
     </nav>
@@ -674,11 +785,44 @@
     </div>
   </section>
 
-  <section class="app-section">
-    <div>
-      <h2>Download Our Mobile App</h2>
-      <p>Learn anytime, anywhere with our smart learning app.</p>
-      <a href="#" class="btn">Download Now</a>
+  <!-- PREMIUM APP DOWNLOAD SECTION -->
+  <section class="container">
+    <div class="app-download-section">
+      <div class="app-content">
+        <h2>Join 15 Million students on the app today!</h2>
+
+        <div class="app-features">
+          <div class="feature-item">
+            <i class="ri-checkbox-circle-fill"></i>
+            <span>Live & recorded classes available at ease</span>
+          </div>
+          <div class="feature-item">
+            <i class="ri-checkbox-circle-fill"></i>
+            <span>Dashboard for progress tracking</span>
+          </div>
+          <div class="feature-item">
+            <i class="ri-checkbox-circle-fill"></i>
+            <span>Lakhs of practice questions</span>
+          </div>
+        </div>
+
+        <div class="store-badges">
+          <a href="https://play.google.com/store" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+              alt="Google Play">
+          </a>
+          <a href="https://apple.com/app-store" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"
+              alt="App Store">
+          </a>
+        </div>
+      </div>
+
+      <div class="app-image-container">
+        <!-- Using a high-quality placeholder mockup -->
+        <img src="https://static.pw.live/5eb393ee95fab7468a79d189/GLOBAL_CMS/download-app-right-image.aaca3c09.webp"
+          alt="edHills App Mockup" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135755.png'">
+      </div>
     </div>
   </section>
 
