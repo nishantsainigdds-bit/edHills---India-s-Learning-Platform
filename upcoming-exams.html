@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Examinations - edHills</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0e2f69;
+            --secondary-blue: #1746a2;
+            --accent-yellow: #facc15;
+            --accent-orange: #F15E03;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f4f6fb;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: rgba(14, 47, 105, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 26px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo span {
+            color: var(--accent-yellow);
+        }
+
+        .logo i {
+            font-size: 32px;
+            color: var(--accent-yellow);
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .nav-btn {
+            background: var(--accent-yellow);
+            color: var(--primary-blue) !important;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            padding: 80px 8% 60px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Stream Heading */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .stream-section {
+            margin-bottom: 80px;
+        }
+
+        .stream-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .stream-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .stream-icon i {
+            font-size: 32px;
+            color: var(--primary-blue);
+        }
+
+        .stream-info h2 {
+            font-size: 28px;
+            color: var(--primary-blue);
+        }
+
+        .stream-info span {
+            font-size: 14px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Exam Grid */
+        .exam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .exam-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .exam-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-blue);
+        }
+
+        .pcb-stream .exam-card::before {
+            background: #10b981;
+            /* Green for Bio/PCB */
+        }
+
+        .exam-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .exam-name i {
+            color: var(--accent-yellow);
+        }
+
+        .exam-details {
+            list-style: none;
+        }
+
+        .exam-details li {
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .exam-details li strong {
+            color: var(--text-light);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .exam-details li span {
+            font-weight: 500;
+        }
+
+        .session-badge {
+            display: inline-block;
+            background: var(--bg-light);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 80px 8% 40px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-column h3 {
+            color: var(--accent-yellow);
+            margin-bottom: 25px;
+            font-size: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent-yellow);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            header {
+                padding: 15px 5%;
+            }
+
+            nav a {
+                margin-left: 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <i class="ri-graduation-cap-fill"></i>
+            ed<span>Hills</span>
+        </a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="free-resources.html">Free Materials</a>
+            <a href="upcoming-exams.html">Upcoming Exams</a>
+            <a href="login.html" class="nav-btn">Get Started</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Upcoming Examinations 2025</h1>
+        <p>Keep track of all important dates for major competitive exams. Stay ahead with our comprehensive examination
+            calendar.</p>
+    </section>
+
+    <div class="container">
+        <!-- PCM Section -->
+        <section class="stream-section">
+            <div class="stream-header">
+                <div class="stream-icon">
+                    <i class="ri-ruler-2-line"></i>
+                </div>
+                <div class="stream-info">
+                    <span>Engineering & Science</span>
+                    <h2>Stream: PCM</h2>
+                </div>
+            </div>
+
+            <div class="exam-grid">
+                <!-- JEE Main -->
+                <div class="exam-card">
+                    <div class="exam-name">
+                        JEE Main
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>1 Feb 2025 - 25 Feb 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>Last week of March</span></li>
+                        <li><strong>Exam Date</strong> <span>1st week of April</span></li>
+                        <li><strong>Result</strong> <span>15 April 2025</span></li>
+                    </ul>
+                </div>
+
+                <!-- JEE Advanced -->
+                <div class="exam-card">
+                    <div class="exam-name">
+                        JEE Advanced
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>23 April 2025 - 02 May 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>11-18 May 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>18 May 2025</span></li>
+                        <li><strong>Result</strong> <span>02 June 2025</span></li>
+                    </ul>
+                </div>
+
+                <!-- AAT -->
+                <div class="exam-card">
+                    <div class="exam-name">
+                        AAT
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>02-03 June 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>02-05 June 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>05 June 2025</span></li>
+                        <li><strong>Result</strong> <span>08 June 2025</span></li>
+                    </ul>
+                </div>
+
+                <!-- BITSAT Session 1 -->
+                <div class="exam-card">
+                    <div class="exam-name">
+                        BITSAT
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>21 Jan - 18 April 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>23 May 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>26-30 May 2025</span></li>
+                        <li><strong>Result</strong> <span>09 July 2025</span></li>
+                    </ul>
+                    <span class="session-badge">Session-1</span>
+                </div>
+
+                <!-- BITSAT Session 2 -->
+                <div class="exam-card">
+                    <div class="exam-name">
+                        BITSAT
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>26 May - 20 June 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>20 June 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>22-30 June 2025</span></li>
+                        <li><strong>Result</strong> <span>10 July 2025</span></li>
+                    </ul>
+                    <span class="session-badge">Session-2</span>
+                </div>
+
+                <!-- IAT -->
+                <div class="exam-card">
+                    <div class="exam-name">
+                        IAT (IISER)
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>05 March - 15 April 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>15 May 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>25 May 2025</span></li>
+                        <li><strong>Result</strong> <span>Second week of June</span></li>
+                    </ul>
+                </div>
+
+                <!-- NEST -->
+                <div class="exam-card">
+                    <div class="exam-name">
+                        NEST
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>17 February 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>02 June 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>22 June 2025</span></li>
+                        <li><strong>Result</strong> <span>Second week of July</span></li>
+                    </ul>
+                </div>
+
+                <!-- CUET(UG) -->
+                <div class="exam-card">
+                    <div class="exam-name">
+                        CUET (UG)
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>1st week of Feb - Last week of March</span></li>
+                        <li><strong>Admit Card</strong> <span>1st week of May</span></li>
+                        <li><strong>Exam Date</strong> <span>20-30 May 2025</span></li>
+                        <li><strong>Result</strong> <span>Last week of June</span></li>
+                    </ul>
+                </div>
+
+                <!-- CMI -->
+                <div class="exam-card">
+                    <div class="exam-name">
+                        CMI
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>1 March 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>2nd week of May 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>24 May 2025</span></li>
+                        <li><strong>Result</strong> <span>Second week of June</span></li>
+                    </ul>
+                </div>
+
+                <!-- NATA -->
+                <div class="exam-card">
+                    <div class="exam-name">
+                        NATA
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>3 Feb 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>Last week of Feb 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>01 March onwards till June 2025</span></li>
+                        <li><strong>Result</strong> <span>Second week of June</span></li>
+                    </ul>
+                </div>
+
+                <!-- VITEEE -->
+                <div class="exam-card">
+                    <div class="exam-name">
+                        VITEEE
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>Upto 31 March 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>2nd week of April 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>21-27 April 2025</span></li>
+                        <li><strong>Result</strong> <span>30 April 2025</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PCB Section -->
+        <section class="stream-section pcb-stream">
+            <div class="stream-header">
+                <div class="stream-icon" style="background: #ecfdf5;">
+                    <i class="ri-microscope-line" style="color: #10b981;"></i>
+                </div>
+                <div class="stream-info">
+                    <span style="color: #10b981;">Medical & Bio-Sciences</span>
+                    <h2 style="color: #065f46;">Stream: PCB</h2>
+                </div>
+            </div>
+
+            <div class="exam-grid">
+                <!-- NEET (UG) -->
+                <div class="exam-card">
+                    <div class="exam-name" style="color: #065f46;">
+                        NEET (UG)
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>2nd week of February</span></li>
+                        <li><strong>Admit Card</strong> <span>Last week of April 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>1st week of May</span></li>
+                        <li><strong>Result</strong> <span>Second week of June</span></li>
+                    </ul>
+                </div>
+
+                <!-- NEST -->
+                <div class="exam-card">
+                    <div class="exam-name" style="color: #065f46;">
+                        NEST
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>17 February 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>02 June 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>22 June 2025</span></li>
+                        <li><strong>Result</strong> <span>Second week of July</span></li>
+                    </ul>
+                </div>
+
+                <!-- IAT -->
+                <div class="exam-card">
+                    <div class="exam-name" style="color: #065f46;">
+                        IAT (IISER)
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>05 March - 15 April 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>15 May 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>25 May 2025</span></li>
+                        <li><strong>Result</strong> <span>Second week of June</span></li>
+                    </ul>
+                </div>
+
+                <!-- CUET(UG) -->
+                <div class="exam-card">
+                    <div class="exam-name" style="color: #065f46;">
+                        CUET (UG)
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>1st week of Feb - Last week of March</span></li>
+                        <li><strong>Admit Card</strong> <span>1st week of May</span></li>
+                        <li><strong>Exam Date</strong> <span>20-30 May 2025</span></li>
+                        <li><strong>Result</strong> <span>Last week of June</span></li>
+                    </ul>
+                </div>
+
+                <!-- BITSAT Session 1 -->
+                <div class="exam-card">
+                    <div class="exam-name" style="color: #065f46;">
+                        BITSAT
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>21 Jan - 18 April 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>23 May 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>26-30 May 2025</span></li>
+                        <li><strong>Result</strong> <span>09 July 2025</span></li>
+                    </ul>
+                    <span class="session-badge">Session-1</span>
+                </div>
+
+                <!-- BITSAT Session 2 -->
+                <div class="exam-card">
+                    <div class="exam-name" style="color: #065f46;">
+                        BITSAT
+                        <i class="ri-calendar-event-line"></i>
+                    </div>
+                    <ul class="exam-details">
+                        <li><strong>Registration</strong> <span>26 May - 20 June 2025</span></li>
+                        <li><strong>Admit Card</strong> <span>20 June 2025</span></li>
+                        <li><strong>Exam Date</strong> <span>22-30 June 2025</span></li>
+                        <li><strong>Result</strong> <span>10 July 2025</span></li>
+                    </ul>
+                    <span class="session-badge">Session-2</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-flex;">
+                    <i class="ri-graduation-cap-fill"></i>
+                    ed<span>Hills</span>
+                </a>
+                <p>India's leading learning platform for JEE, NEET, and competitive exams.</p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="free-resources.html">Free Materials</a></li>
+                    <li><a href="upcoming-exams.html">Upcoming Exams</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><a href="#"><i class="ri-mail-line"></i> support@edhills.com</a></li>
+                    <li><a href="#"><i class="ri-phone-line"></i> +91 9876543210</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 edHills - India's Premium Learning Platform. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

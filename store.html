@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edHills Store - Premium Education Gear & Resources</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0e2f69;
+            --secondary-blue: #1746a2;
+            --accent-yellow: #facc15;
+            --accent-orange: #F15E03;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f4f6fb;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: rgba(14, 47, 105, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 26px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo span {
+            color: var(--accent-yellow);
+        }
+
+        .logo i {
+            font-size: 32px;
+            color: var(--accent-yellow);
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 24px;
+            color: var(--white);
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--accent-orange);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-weight: 700;
+        }
+
+        /* Store Hero */
+        .store-hero {
+            position: relative;
+            height: 450px;
+            background: linear-gradient(rgba(14, 47, 105, 0.8), rgba(14, 47, 105, 0.8)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        .store-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .store-hero p {
+            font-size: 20px;
+            max-width: 600px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .hero-shapes div {
+            position: absolute;
+            background: rgba(250, 204, 21, 0.1);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Categories Section */
+        .container {
+            max-width: 1250px;
+            margin: -60px auto 100px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--white);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-btn i {
+            font-size: 20px;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .tab-btn:hover:not(.active) {
+            transform: translateY(-3px);
+            background: #f8fafc;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-img {
+            position: relative;
+            height: 250px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-img img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-orange);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .product-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-tag {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .product-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .current-price {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent-orange);
+        }
+
+        .old-price {
+            font-size: 16px;
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
+
+        .add-to-cart {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary-blue);
+        }
+
+        /* Promo Sections */
+        .promo-banner {
+            background: linear-gradient(135deg, #facc15, #f59e0b);
+            border-radius: 30px;
+            padding: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 100px auto;
+            max-width: 1200px;
+            color: var(--primary-blue);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .promo-content {
+            max-width: 50%;
+            z-index: 2;
+        }
+
+        .promo-content h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .promo-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 15px 40px;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .promo-btn:hover {
+            transform: scale(1.05);
+            background: var(--secondary-blue);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 80px 8% 40px;
+            margin-top: 100px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-column h3 {
+            color: var(--accent-yellow);
+            margin-bottom: 25px;
+            font-size: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .store-hero h1 {
+                font-size: 36px;
+            }
+
+            .promo-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px;
+            }
+
+            .promo-content {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <i class="ri-graduation-cap-fill"></i>
+            ed<span>Hills</span>
+        </a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="store.html">Store</a>
+            <a href="free-resources.html">Free Materials</a>
+            <div class="cart-icon">
+                <i class="ri-shopping-bag-line"></i>
+                <span class="cart-badge">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="store-hero">
+        <h1>Official edHills Store</h1>
+        <p>Premium merchandise, high-performance tech, and comprehensive study materials designed for the elite learner.
+        </p>
+    </section>
+
+    <div class="container">
+        <div class="category-tabs">
+            <button class="tab-btn active" data-filter="all"><i class="ri-grid-fill"></i> All Products</button>
+            <button class="tab-btn" data-filter="merch"><i class="ri-shirt-line"></i> Merchandise</button>
+            <button class="tab-btn" data-filter="study"><i class="ri-book-2-line"></i> Study Material</button>
+            <button class="tab-btn" data-filter="tech"><i class="ri-laptop-line"></i> Tech & Laptops</button>
+        </div>
+
+        <div class="product-grid">
+            <!-- T-Shirt -->
+            <div class="product-card merch">
+                <div class="product-img">
+                    <span class="product-badge">New Arrival</span>
+                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1780&auto=format&fit=crop"
+                        alt="edHills T-Shirt">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Apparel</span>
+                    <h3 class="product-name">edHills Elite Cotton T-Shirt</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹899</span>
+                        <span class="old-price">₹1,299</span>
+                    </div>
+                    <button class="add-to-cart"><i class="ri-shopping-cart-2-line"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Bottle -->
+            <div class="product-card merch">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1602143307185-84dc07b38c2a?q=80&w=1780&auto=format&fit=crop"
+                        alt="Smart Water Bottle">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Lifestyle</span>
+                    <h3 class="product-name">Smart Hydration Water Bottle</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹649</span>
+                        <span class="old-price">₹899</span>
+                    </div>
+                    <button class="add-to-cart"><i class="ri-shopping-cart-2-line"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Study Material 1 -->
+            <div class="product-card study">
+                <div class="product-img">
+                    <span class="product-badge">Best Seller</span>
+                    <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2073&auto=format&fit=crop"
+                        alt="JEE Study Material">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Study Guides</span>
+                    <h3 class="product-name">JEE Mastermind 2026 Set</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹4,499</span>
+                        <span class="old-price">₹5,999</span>
+                    </div>
+                    <button class="add-to-cart"><i class="ri-shopping-cart-2-line"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Laptop -->
+            <div class="product-card tech">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=2071&auto=format&fit=crop"
+                        alt="Student Laptop">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Computing</span>
+                    <h3 class="product-name">edHills Student Edition Laptop</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹42,999</span>
+                        <span class="old-price">₹49,999</span>
+                    </div>
+                    <button class="add-to-cart"><i class="ri-shopping-cart-2-line"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Backpack -->
+            <div class="product-card merch">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=1887&auto=format&fit=crop"
+                        alt="Tech Backpack">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Accessories</span>
+                    <h3 class="product-name">Premium Tech Backpack</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹2,499</span>
+                        <span class="old-price">₹3,499</span>
+                    </div>
+                    <button class="add-to-cart"><i class="ri-shopping-cart-2-line"></i> Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Tablet for Study -->
+            <div class="product-card tech">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=1780&auto=format&fit=crop"
+                        alt="Edu-Tab Pro">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Digital Learning</span>
+                    <h3 class="product-name">Edu-Tab Pro (128GB)</h3>
+                    <div class="product-price">
+                        <span class="current-price">₹18,999</span>
+                        <span class="old-price">₹22,999</span>
+                    </div>
+                    <button class="add-to-cart"><i class="ri-shopping-cart-2-line"></i> Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="promo-banner">
+            <div class="promo-content">
+                <h2>Join the edHills Club</h2>
+                <p>Unlock exclusive student discounts, early access to new launches, and points on every purchase.</p>
+                <a href="#" class="promo-btn">Join Now For Free</a>
+            </div>
+            <i class="ri-vip-crown-line"
+                style="font-size: 180px; color: rgba(14, 47, 105, 0.1); position: absolute; right: 20px; bottom: -20px;"></i>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-flex;">
+                    <i class="ri-graduation-cap-fill"></i>
+                    ed<span>Hills</span>
+                </a>
+                <p>Equipping students with the tools they need to redefine excellence.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Shop Categories</h3>
+                <ul>
+                    <li><a href="#">Merchandise</a></li>
+                    <li><a href="#">Study Material</a></li>
+                    <li><a href="#">Laptops & Tablets</a></li>
+                    <li><a href="#">Digital Notes</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Care</h3>
+                <ul>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Return & Refund</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Help Center</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 edHills Store - Premium Educational Ecommerce. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab-btn');
+        const products = document.querySelectorAll('.product-card');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filter = tab.getAttribute('data-filter');
+
+                products.forEach(product => {
+                    if (filter === 'all' || product.classList.contains(filter)) {
+                        product.style.display = 'flex';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
