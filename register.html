@@ -505,7 +505,14 @@
         </a>
     </div>
 
-    <script>
+    <script type="module">
+        import { auth } from './js/firebase-config.js';
+        import {
+            createUserWithEmailAndPassword,
+            updateProfile,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
         // Mobile Menu Toggle
         const mobileMenu = document.getElementById('mobile-menu');
         const navMenu = document.getElementById('nav-menu');
@@ -524,7 +531,7 @@
             });
         }
 
-        function showToast(msg, type = 'error') {
+        window.showToast = function (msg, type = 'error') {
             const t = document.getElementById('regToast');
             if (t) {
                 t.className = 'toast show ' + type;
@@ -533,11 +540,12 @@
             }
         }
 
-        window.onload = () => {
-            if (localStorage.getItem('currentUser')) {
+        // Firebase Auth State Check
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
                 window.location.href = 'student-dashboard.html';
             }
-        };
+        });
 
         const registerForm = document.getElementById('registerForm');
         if (registerForm) {
@@ -545,43 +553,51 @@
                 e.preventDefault();
                 const btn = document.getElementById('regBtn');
                 const originalHTML = btn.innerHTML;
-                btn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> Creating Account...';
+                btn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> Initializing Firebase...';
                 btn.disabled = true;
 
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const userClass = document.getElementById('class').value;
                 const password = document.getElementById('password').value;
+
                 if (password.length < 6) {
                     showToast('Password must be at least 6 characters.', 'error');
                     btn.innerHTML = originalHTML; btn.disabled = false; return;
                 }
 
-                const userData = {
-                    name: document.getElementById('name').value.trim(),
-                    email: document.getElementById('email').value.trim(),
-                    phone: document.getElementById('phone').value.trim(),
-                    class: document.getElementById('class').value,
-                    password
-                };
-
                 try {
-                    const response = await fetch('http://localhost:5000/api/register', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(userData)
-                    });
-                    const result = await response.json();
+                    // Create User with Firebase Auth
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
 
-                    if (response.ok) {
-                        localStorage.setItem('edHillsToken', result.token);
-                        localStorage.setItem('currentUser', JSON.stringify(result.user));
-                        showToast('Account created! Welcome to edHills 🎉', 'success');
-                        setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1500);
-                    } else {
-                        showToast(result.error || result.message || 'Registration failed.', 'error');
-                        btn.innerHTML = originalHTML; btn.disabled = false;
-                    }
+                    // Update Profile with Name
+                    await updateProfile(user, {
+                        displayName: name
+                    });
+
+                    // Store additional data in localStorage (or Firestore if needed)
+                    const userData = {
+                        uid: user.uid,
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        class: userClass
+                    };
+
+                    localStorage.setItem('currentUser', JSON.stringify(userData));
+
+                    showToast('Account created! Welcome to edHills 🎉', 'success');
+                    setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1500);
+
                 } catch (error) {
                     console.error('Registration Error:', error);
-                    showToast('Cannot connect to server. Run: npm start in your project folder.', 'error');
+                    let msg = 'Registration failed.';
+                    if (error.code === 'auth/email-already-in-use') msg = 'Email is already registered.';
+                    if (error.code === 'auth/invalid-email') msg = 'Invalid email address.';
+                    if (error.code === 'auth/weak-password') msg = 'Password is too weak.';
+                    showToast(msg, 'error');
                     btn.innerHTML = originalHTML; btn.disabled = false;
                 }
             });

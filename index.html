@@ -1126,67 +1126,88 @@
     </a>
   </div>
 
-  <script>
-    // Show Popup after 15 seconds
-    window.onload = function () {
-      // Check login status for navigation button
-      const userStr = localStorage.getItem('currentUser');
-      const getStartedBtn = document.querySelector('.nav-btn');
-      const headerProfileIcon = document.getElementById('headerProfileIcon');
-      const bottomProfileLink = document.getElementById('bottomProfileLink');
+  <script type="module">
+    import { auth } from './js/firebase-config.js';
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
+    // Global load handler
+    window.addEventListener('load', () => {
+      // Check localStorage for immediate UI (prevents flicker)
+      const userStr = localStorage.getItem('currentUser');
       if (userStr) {
         try {
           const user = JSON.parse(userStr);
-          if (user && user.name) {
-            // Update Desktop Button
-            if (getStartedBtn) {
-              getStartedBtn.innerHTML = '<i class="ri-dashboard-line"></i> Dashboard';
-              getStartedBtn.href = 'student-dashboard.html';
-            }
-            // Update Mobile Icons
-            if (headerProfileIcon) {
-              headerProfileIcon.href = 'student-dashboard.html';
-              headerProfileIcon.innerHTML = '<i class="ri-user-shared-line"></i>';
-            }
-            if (bottomProfileLink) {
-              bottomProfileLink.href = 'student-dashboard.html';
-              bottomProfileLink.querySelector('span').innerText = 'Dashboard';
-              bottomProfileLink.querySelector('i').className = 'ri-layout-grid-line';
-            }
-          }
-        } catch (e) {
-          localStorage.removeItem('currentUser');
-        }
+          updateHeaderUI(user);
+        } catch (e) { }
       }
 
+      // Sync with Firebase Auth for source of truth
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const userData = {
+            uid: user.uid,
+            name: user.displayName || user.email.split('@')[0],
+            email: user.email
+          };
+          localStorage.setItem('currentUser', JSON.stringify(userData));
+          updateHeaderUI(userData);
+        } else {
+          // If Firebase says no user, clear local cache but keep it simple
+          // We don't force logout here as student might have been offline
+        }
+      });
+
+      // Show welcome popup for guest users
       if (!userStr) {
-        setTimeout(function () {
+        setTimeout(() => {
           const popup = document.getElementById('loginPopup');
           if (popup) popup.style.display = 'flex';
         }, 15000);
       }
-    };
+    });
 
-    function closePopup() {
+    function updateHeaderUI(user) {
+      const getStartedBtn = document.getElementById('navAction');
+      const headerProfileIcon = document.getElementById('headerProfileIcon');
+      const bottomProfileLink = document.getElementById('bottomProfileLink');
+
+      if (user && user.name) {
+        if (getStartedBtn) {
+          getStartedBtn.innerHTML = '<i class="ri-dashboard-line"></i> Dashboard';
+          getStartedBtn.href = 'student-dashboard.html';
+        }
+        if (headerProfileIcon) {
+          headerProfileIcon.href = 'student-dashboard.html';
+          headerProfileIcon.innerHTML = '<i class="ri-user-shared-line"></i>';
+        }
+        if (bottomProfileLink) {
+          bottomProfileLink.href = 'student-dashboard.html';
+          bottomProfileLink.querySelector('span').innerText = 'Dashboard';
+          bottomProfileLink.querySelector('i').className = 'ri-layout-grid-line';
+        }
+      }
+    }
+
+    window.closePopup = () => {
       document.getElementById('loginPopup').style.display = 'none';
     }
 
     // Mobile Menu Toggle
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
-
-    mobileMenu.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      const icon = mobileMenu.querySelector('i');
-      if (navMenu.classList.contains('active')) {
-        icon.classList.remove('ri-menu-3-line');
-        icon.classList.add('ri-close-line');
-      } else {
-        icon.classList.remove('ri-close-line');
-        icon.classList.add('ri-menu-3-line');
-      }
-    });
+    if (mobileMenu && navMenu) {
+      mobileMenu.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        const icon = mobileMenu.querySelector('i');
+        if (navMenu.classList.contains('active')) {
+          icon.classList.remove('ri-menu-3-line');
+          icon.classList.add('ri-close-line');
+        } else {
+          icon.classList.remove('ri-close-line');
+          icon.classList.add('ri-menu-3-line');
+        }
+      });
+    }
   </script>
 
 </body>

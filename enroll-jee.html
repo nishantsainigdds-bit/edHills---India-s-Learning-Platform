@@ -241,14 +241,28 @@
 
 <body>
 
-    <header>
+    <header id="main-header">
         <a href="index.html" class="logo">
             <i class="ri-graduation-cap-fill"></i>
             ed<span>Hills</span>
         </a>
-        <a href="courses.html" style="color: white; text-decoration: none; font-weight: 500;">
-            <i class="ri-arrow-left-line"></i> Back to Courses
-        </a>
+
+        <div class="header-actions">
+            <a href="login.html" class="mobile-profile-icon" id="headerProfileIcon">
+                <i class="ri-user-line"></i>
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="ri-menu-3-line"></i>
+            </div>
+        </div>
+
+        <nav id="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="test-series.html">Test Series</a>
+            <a href="updates.html">Updates</a>
+            <a href="login.html" class="nav-btn" id="navAction">Get Started</a>
+        </nav>
     </header>
 
     <div class="enroll-hero">
@@ -283,64 +297,80 @@
         </div>
     </div>
 
-    <main class="enrollment-main">
-        <div class="course-details">
-            <h2>Course Highlights</h2>
-            <p>Our JEE program is strictly aligned with the latest NTA guidelines. We offer a balanced mix of live
-                classes, record lectures, and personalized doubt resolution.</p>
-
-            <ul class="curriculum-list">
-                <li><i class="ri-shield-check-fill"></i> 500+ Hours of Live Interactive Sessions</li>
-                <li><i class="ri-shield-check-fill"></i> Comprehensive Study Material & Question Bank</li>
-                <li><i class="ri-shield-check-fill"></i> Daily Practice Problems (DPPs) & Solutions</li>
-                <li><i class="ri-shield-check-fill"></i> All India Test Series (AITS)</li>
-                <li><i class="ri-shield-check-fill"></i> Dedicated Doubt Support 24/7</li>
-            </ul>
-
-            <h2 style="margin-top: 40px;">Expert Mentors</h2>
-            <p>Led by Dr. R.K. Sharma (IIT Delhi) and a team of passionate educators dedicated to your success.</p>
-        </div>
-
-        <div class="enroll-form-card">
-            <h3>Confirm Enrollment</h3>
-            <form id="courseEnrollForm">
-                <div class="input-group">
-                    <label>Confirm Full Name</label>
-                    <input type="text" id="studentName" placeholder="Enter Full Name" required>
-                </div>
-                <div class="input-group">
-                    <label>WhatsApp Number</label>
-                    <input type="tel" id="studentPhone" placeholder="+91 XXXXX XXXXX" required>
-                </div>
-                <div class="input-group">
-                    <label>Current Standard</label>
-                    <select id="examGoal">
-                        <option value="class11">Class 11th</option>
-                        <option value="class12">Class 12th</option>
-                        <option value="dropper">Dropper / Repeater</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>Promo Code</label>
-                    <input type="text" placeholder="e.g. JEE60" readonly value="JEE60">
-                </div>
-
-                <div
-                    style="margin: 20px 0; padding: 15px; background: #fffdf5; border-radius: 12px; border: 1px dashed var(--accent);">
-                    <div style="display: flex; justify-content: space-between; font-weight: 700;">
-                        <span>Total Payable:</span>
-                        <span style="color: var(--primary);">₹4,999</span>
-                    </div>
-                </div>
-
-                <button type="submit" class="submit-enroll" id="enrollBtn">
-                    Proceed to Payment <i class="ri-bank-card-line"></i>
-                </button>
-            </form>
-        </div>
     </main>
 
+    <div class="mobile-bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i class="ri-home-4-line"></i>
+            <span>Home</span>
+        </a>
+        <a href="courses.html" class="bottom-nav-item">
+            <i class="ri-book-open-line"></i>
+            <span>Courses</span>
+        </a>
+        <a href="store.html" class="bottom-nav-item">
+            <i class="ri-shopping-bag-line"></i>
+            <span>Store</span>
+        </a>
+        <a href="updates.html" class="bottom-nav-item">
+            <i class="ri-notification-3-line"></i>
+            <span>Updates</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item" id="bottomProfileLink">
+            <i class="ri-user-3-line"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+
     <script>
+        // Header Profile Login & Mobile Menu Logic
+        window.addEventListener('load', () => {
+            const userStr = localStorage.getItem('currentUser');
+            const navBtn = document.getElementById('navAction');
+            const headerProfileIcon = document.getElementById('headerProfileIcon');
+            const bottomProfileLink = document.getElementById('bottomProfileLink');
+
+            if (userStr) {
+                try {
+                    const user = JSON.parse(userStr);
+                    if (user && user.name) {
+                        if (navBtn) {
+                            navBtn.innerHTML = '<i class="ri-dashboard-line"></i> Dashboard';
+                            navBtn.href = 'student-dashboard.html';
+                        }
+                        if (headerProfileIcon) {
+                            headerProfileIcon.href = 'student-dashboard.html';
+                            headerProfileIcon.innerHTML = '<i class="ri-user-shared-line"></i>';
+                        }
+                        if (bottomProfileLink) {
+                            bottomProfileLink.href = 'student-dashboard.html';
+                            bottomProfileLink.querySelector('span').innerText = 'Dashboard';
+                            bottomProfileLink.querySelector('i').className = 'ri-layout-grid-line';
+                        }
+                    }
+                } catch (e) {
+                    localStorage.removeItem('currentUser');
+                }
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        if (mobileMenu && navMenu) {
+            mobileMenu.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                const icon = mobileMenu.querySelector('i');
+                if (navMenu.classList.contains('active')) {
+                    icon.classList.remove('ri-menu-3-line');
+                    icon.classList.add('ri-close-line');
+                } else {
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-3-line');
+                }
+            });
+        }
         document.getElementById('courseEnrollForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const btn = document.getElementById('enrollBtn');

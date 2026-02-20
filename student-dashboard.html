@@ -483,11 +483,16 @@
         </a>
     </div>
 
-    <script>
+    <script type="module">
+        import { auth } from './js/firebase-config.js';
+        import {
+            signOut,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
         // Mobile Menu Toggle
         const mobileMenu = document.getElementById('mobile-menu');
         const navMenu = document.getElementById('nav-menu');
-
         if (mobileMenu && navMenu) {
             mobileMenu.addEventListener('click', () => {
                 navMenu.classList.toggle('active');
@@ -502,24 +507,34 @@
             });
         }
 
+        // Auth Guardian
+        onAuthStateChanged(auth, (user) => {
+            if (!user && !localStorage.getItem('currentUser')) {
+                window.location.href = 'login.html';
+            }
+        });
+
         window.onload = async () => {
             const cachedUser = JSON.parse(localStorage.getItem('currentUser'));
 
             if (!cachedUser || !cachedUser.email) {
-                window.location.href = 'login.html';
-                return;
+                // Double check with Firebase before kicking out
+                if (!auth.currentUser) {
+                    window.location.href = 'login.html';
+                    return;
+                }
             }
 
-            // Immediately show cached data (works even without backend)
+            // Immediately show cached data
             function renderUser(user) {
-                document.getElementById('headerName').innerText = user.name || 'Student';
-                document.getElementById('sidebarName').innerText = user.name || 'Anonymous';
-                document.getElementById('sidebarEmail').innerText = user.email || '';
-                document.getElementById('dispName').innerText = user.name || 'N/A';
-                document.getElementById('dispEmail').innerText = user.email || 'N/A';
-                document.getElementById('dispRoll').innerText = user.rollNumber || 'PENDING';
-                document.getElementById('dispClass').innerText = user.class || 'N/A';
-                document.getElementById('dispPhone').innerText = user.phone || 'N/A';
+                if (document.getElementById('headerName')) document.getElementById('headerName').innerText = user.name || 'Student';
+                if (document.getElementById('sidebarName')) document.getElementById('sidebarName').innerText = user.name || 'Anonymous';
+                if (document.getElementById('sidebarEmail')) document.getElementById('sidebarEmail').innerText = user.email || '';
+                if (document.getElementById('dispName')) document.getElementById('dispName').innerText = user.name || 'N/A';
+                if (document.getElementById('dispEmail')) document.getElementById('dispEmail').innerText = user.email || 'N/A';
+                if (document.getElementById('dispRoll')) document.getElementById('dispRoll').innerText = user.rollNumber || 'PENDING';
+                if (document.getElementById('dispClass')) document.getElementById('dispClass').innerText = user.class || 'N/A';
+                if (document.getElementById('dispPhone')) document.getElementById('dispPhone').innerText = user.phone || 'N/A';
 
                 if (user.enrolledCourses && user.enrolledCourses.length > 0) {
                     const old = document.getElementById('coursesGrid');
@@ -530,47 +545,56 @@
                                 <i class="ri-book-read-line"></i> My Active Courses
                             </div>
                             <div class="info-grid" id="coursesGrid"></div>`;
-                        document.querySelector('.main-content').insertBefore(section, document.querySelector('.logout-btn'));
+                        const logoutBtn = document.querySelector('.logout-btn');
+                        if (logoutBtn) logoutBtn.parentNode.insertBefore(section, logoutBtn);
                     }
-                    const grid = document.getElementById('coursesGrid') || old;
-                    grid.innerHTML = '';
-                    user.enrolledCourses.forEach(course => {
-                        const card = document.createElement('div');
-                        card.className = 'info-item';
-                        card.style.background = 'linear-gradient(to right, #f0f4ff, #fff)';
-                        card.innerHTML = `
-                            <div class="info-label">Active Batch</div>
-                            <div class="info-value" style="color:var(--secondary);">${course}</div>
-                            <div style="margin-top:8px;font-size:12px;color:#38a169;">
-                                <i class="ri-checkbox-circle-line"></i> Enrollment Active
-                            </div>`;
-                        grid.appendChild(card);
-                    });
+                    const grid = document.getElementById('coursesGrid');
+                    if (grid) {
+                        grid.innerHTML = '';
+                        user.enrolledCourses.forEach(course => {
+                            const card = document.createElement('div');
+                            card.className = 'info-item';
+                            card.style.background = 'linear-gradient(to right, #f0f4ff, #fff)';
+                            card.innerHTML = `
+                                <div class="info-label">Active Batch</div>
+                                <div class="info-value" style="color:var(--secondary);">${course}</div>
+                                <div style="margin-top:8px;font-size:12px;color:#38a169;">
+                                    <i class="ri-checkbox-circle-line"></i> Enrollment Active
+                                </div>`;
+                            grid.appendChild(card);
+                        });
+                    }
                 }
             }
 
-            renderUser(cachedUser);
+            if (cachedUser) renderUser(cachedUser);
 
-            // Try to refresh from API (optional — works if server is running)
-            try {
-                const res = await fetch(`http://localhost:5000/api/student/profile/${cachedUser.email}`);
-                if (res.ok) {
-                    const liveUser = await res.json();
-                    // Merge and update cache
-                    const merged = { ...cachedUser, ...liveUser };
-                    localStorage.setItem('currentUser', JSON.stringify(merged));
-                    renderUser(merged);
-                }
-            } catch (_) {
-                // Server offline — cached data already shown above, no crash
+            // Legacy API sync (Optional)
+            if (cachedUser && cachedUser.email) {
+                try {
+                    const res = await fetch(`http://localhost:5000/api/student/profile/${cachedUser.email}`);
+                    if (res.ok) {
+                        const liveUser = await res.json();
+                        const merged = { ...cachedUser, ...liveUser };
+                        localStorage.setItem('currentUser', JSON.stringify(merged));
+                        renderUser(merged);
+                    }
+                } catch (_) { }
             }
         };
 
-        function logout() {
+        window.logout = function () {
             if (confirm('Are you sure you want to logout?')) {
-                localStorage.removeItem('currentUser');
-                localStorage.removeItem('edHillsToken');
-                window.location.href = 'index.html';
+                signOut(auth).then(() => {
+                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('edHillsToken');
+                    window.location.href = 'index.html';
+                }).catch((error) => {
+                    console.error('Logout Error:', error);
+                    // Fallback to local clear
+                    localStorage.removeItem('currentUser');
+                    window.location.href = 'index.html';
+                });
             }
         }
     </script>
