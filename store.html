@@ -101,13 +101,6 @@
             font-weight: 700;
         }
 
-        .menu-toggle {
-            display: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: var(--white);
-        }
-
         /* Store Hero */
         .store-hero {
             position: relative;
@@ -401,45 +394,6 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        @media (max-width: 900px) {
-            header {
-                padding: 15px 5%;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            nav {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--primary-blue);
-                padding: 30px 0;
-                text-align: center;
-                z-index: 1000;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-                gap: 20px;
-            }
-
-            nav.active {
-                display: flex;
-            }
-
-            nav a {
-                margin: 0;
-                font-size: 18px;
-            }
-
-            .cart-icon {
-                margin: 0;
-                display: inline-block;
-            }
-        }
-
         @media (max-width: 768px) {
             .store-hero h1 {
                 font-size: 36px;
@@ -466,11 +420,7 @@
             ed<span>Hills</span>
         </a>
 
-        <div class="menu-toggle" id="mobile-menu">
-            <i class="ri-menu-3-line"></i>
-        </div>
-
-        <nav id="nav-menu">
+        <nav>
             <a href="index.html">Home</a>
             <a href="courses.html">Courses</a>
             <a href="store.html">Store</a>
@@ -665,22 +615,6 @@
                     }
                 });
             });
-        });
-
-        // Mobile Menu Toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navMenu = document.getElementById('nav-menu');
-
-        mobileMenu.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            const icon = mobileMenu.querySelector('i');
-            if (navMenu.classList.contains('active')) {
-                icon.classList.remove('ri-menu-3-line');
-                icon.classList.add('ri-close-line');
-            } else {
-                icon.classList.remove('ri-close-line');
-                icon.classList.add('ri-menu-3-line');
-            }
         });
     </script>
 </body>

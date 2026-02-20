@@ -27,54 +27,32 @@
         }
 
         /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(14, 47, 105, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
         .logo span {
             color: var(--accent);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: white;
-        }
-
-        /* RESPONSIVE HEADER */
-        @media (max-width: 900px) {
-            header {
-                padding: 15px 5%;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            nav {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: #0e2f69;
-                padding: 30px 0;
-                text-align: center;
-                z-index: 1000;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-                gap: 20px;
-            }
-
-            nav.active {
-                display: flex;
-            }
-
-            nav a {
-                margin: 0 !important;
-                font-size: 18px;
-            }
-
-            .nav-btn {
-                margin-left: 0;
-            }
         }
 
         /* HERO SECTION */
@@ -258,16 +236,11 @@
 
 <body>
 
-    <header id="main-header">
+    <header>
         <a href="index.html" class="logo">
             <i class="ri-graduation-cap-fill"></i>
             ed<span>Hills</span>
         </a>
-
-        <div class="menu-toggle" id="mobile-menu">
-            <i class="ri-menu-3-line"></i>
-        </div>
-
         <nav id="nav-menu">
             <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
             <a href="index.html#popular-courses"><i class="ri-star-line"></i> Popular Courses</a>
@@ -394,22 +367,6 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navMenu = document.getElementById('nav-menu');
-
-        mobileMenu.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            const icon = mobileMenu.querySelector('i');
-            if (navMenu.classList.contains('active')) {
-                icon.classList.remove('ri-menu-3-line');
-                icon.classList.add('ri-close-line');
-            } else {
-                icon.classList.remove('ri-close-line');
-                icon.classList.add('ri-menu-3-line');
-            }
-        });
-
         // Session detection
         window.addEventListener('load', () => {
             const userStr = localStorage.getItem('currentUser');
