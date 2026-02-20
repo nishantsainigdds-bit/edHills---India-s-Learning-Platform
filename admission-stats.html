@@ -86,6 +86,13 @@
             box-shadow: 0 4px 15px rgba(250, 204, 21, 0.2);
         }
 
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+        }
+
         /* HERO */
         .hero {
             padding: 60px 8%;
@@ -238,6 +245,44 @@
             box-shadow: 0 8px 20px rgba(250, 204, 21, 0.3);
         }
 
+        @media (max-width: 900px) {
+            header {
+                padding: 15px 5%;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #0e2f69;
+                padding: 30px 0;
+                text-align: center;
+                z-index: 1000;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                gap: 20px;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            nav a {
+                margin: 0;
+                font-size: 18px;
+            }
+
+            .nav-btn {
+                margin-left: 0;
+            }
+        }
+
         @media (max-width: 768px) {
             .content-section {
                 flex-direction: column;
@@ -307,6 +352,10 @@
             <i class="ri-graduation-cap-fill"></i>
             ed<span>Hills</span>
         </a>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="ri-menu-3-line"></i>
+        </div>
 
         <nav id="nav-menu">
             <a href="index.html">Home</a>
@@ -391,6 +440,40 @@
         </div>
     </footer>
 
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('ri-menu-3-line');
+                icon.classList.add('ri-close-line');
+            } else {
+                icon.classList.remove('ri-close-line');
+                icon.classList.add('ri-menu-3-line');
+            }
+        });
+
+        // User Greeting (Session Check)
+        window.addEventListener('load', () => {
+            const userStr = localStorage.getItem('currentUser');
+            const navBtn = document.querySelector('.nav-btn');
+            if (userStr && navBtn) {
+                try {
+                    const user = JSON.parse(userStr);
+                    if (user && user.name) {
+                        navBtn.innerHTML = '<i class="ri-dashboard-line"></i> Dashboard';
+                        navBtn.href = 'student-dashboard.html';
+                    }
+                } catch (e) {
+                    localStorage.removeItem('currentUser');
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -990,9 +990,25 @@
     }
 
     startAutoPlay();
+
+    // Session Check
+    window.addEventListener('load', () => {
+      const userStr = localStorage.getItem('currentUser');
+      const navBtn = document.querySelector('.nav-btn');
+      if (userStr && navBtn) {
+        try {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            navBtn.innerHTML = '<i class="ri-dashboard-line"></i> Dashboard';
+            navBtn.href = 'student-dashboard.html';
+          }
+        } catch (e) {
+          localStorage.removeItem('currentUser');
+        }
+      }
+    });
   </script>
 
 </body>
-
 
 </html>

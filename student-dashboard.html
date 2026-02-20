@@ -154,6 +154,13 @@
             border: 1px solid #edf2ff;
         }
 
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+        }
+
         .info-label {
             font-size: 13px;
             color: #888;
@@ -197,12 +204,39 @@
         }
 
         @media (max-width: 800px) {
+            header {
+                padding: 15px 5%;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
             .dashboard-container {
                 grid-template-columns: 1fr;
             }
 
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                width: 280px;
+                height: calc(100vh - 70px);
+                z-index: 999;
+                transition: 0.3s;
+                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
             .info-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                padding: 30px 20px;
             }
         }
     </style>
@@ -211,10 +245,15 @@
 <body>
 
     <header>
-        <a href="index.html" class="logo">
-            <i class="ri-graduation-cap-fill"></i>
-            ed<span>Hills</span>
-        </a>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="menu-toggle" id="mobile-menu" style="display: none; font-size: 26px; cursor: pointer;">
+                <i class="ri-menu-2-line"></i>
+            </div>
+            <a href="index.html" class="logo">
+                <i class="ri-graduation-cap-fill"></i>
+                ed<span>Hills</span>
+            </a>
+        </div>
         <div class="user-pill">
             <i class="ri-user-smile-line"></i>
             <span id="headerName">Student Portal</span>
@@ -356,8 +395,41 @@
                 window.location.href = 'index.html';
             }
         }
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const sidebar = document.querySelector('.sidebar');
+
+        mobileMenu.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            if (sidebar.classList.contains('active')) {
+                icon.classList.remove('ri-menu-2-line');
+                icon.classList.add('ri-close-line');
+            } else {
+                icon.classList.remove('ri-close-line');
+                icon.classList.add('ri-menu-2-line');
+            }
+        });
+
+        window.addEventListener('load', () => {
+            const userStr = localStorage.getItem('currentUser');
+            const navBtn = document.querySelector('.nav-btn');
+            if (userStr && navBtn) {
+                try {
+                    const user = JSON.parse(userStr);
+                    if (user && user.name) {
+                        navBtn.innerHTML = '<i class="ri-dashboard-line"></i> Dashboard';
+                        navBtn.href = 'student-dashboard.html';
+                    }
+                } catch (e) {
+                    localStorage.removeItem('currentUser');
+                }
+            }
+        });
     </script>
 
 </body>
 
 </html>
+```
