@@ -85,6 +85,34 @@
             box-shadow: 0 5px 15px rgba(14, 47, 105, 0.2);
         }
 
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--primary);
+            padding: 5px;
+            transition: 0.3s;
+        }
+
+        .header-actions {
+            display: none;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .mobile-profile-icon {
+            font-size: 24px;
+            color: var(--accent);
+            background: rgba(250, 204, 21, 0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+        }
+
         /* HERO SECTION */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
@@ -293,7 +321,69 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            header {
+                padding: 12px 5%;
+            }
+
+            .header-actions {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 30px 0;
+                text-align: center;
+                z-index: 1000;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                gap: 20px;
+                backdrop-filter: blur(15px);
+                border-top: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            nav.active {
+                display: flex;
+                animation: slideDown 0.4s ease forwards;
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            nav a {
+                margin: 0;
+                font-size: 18px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-btn {
+                margin: 10px auto;
+                width: 80%;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
             .update-card {
                 flex-direction: column;
                 padding: 20px;
@@ -312,41 +402,92 @@
             .update-date span {
                 font-size: 18px;
             }
+        }
 
-            .hero h1 {
-                font-size: 32px;
+        /* MOBILE BOTTOM NAV */
+        .mobile-bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            justify-content: space-around;
+            align-items: center;
+            padding: 12px 0;
+            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.08);
+            z-index: 2000;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding-bottom: env(safe-area-inset-bottom, 12px);
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: #64748b;
+            transition: 0.3s;
+            flex: 1;
+        }
+
+        .bottom-nav-item i {
+            font-size: 22px;
+            transition: 0.3s;
+        }
+
+        .bottom-nav-item span {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .bottom-nav-item:hover,
+        .bottom-nav-item.active {
+            color: #0e2f69;
+        }
+
+        .bottom-nav-item.active i {
+            transform: translateY(-2px);
+            color: #0e2f69;
+        }
+
+        @media (max-width: 900px) {
+            .mobile-bottom-nav {
+                display: flex;
             }
-        }
 
-        footer {
-            background: var(--primary);
-            padding: 60px 8% 30px;
-            color: white;
-            text-align: center;
-        }
-
-        .footer-bottom {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 14px;
-            color: #94a3b8;
+            body {
+                padding-bottom: 70px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <header>
+    <header id="main-header">
         <a href="index.html" class="logo">
             <i class="ri-graduation-cap-fill"></i>
             ed<span>Hills</span>
         </a>
+
+        <div class="header-actions">
+            <a href="login.html" class="mobile-profile-icon" id="headerProfileIcon">
+                <i class="ri-user-3-line"></i>
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="ri-menu-3-line"></i>
+            </div>
+        </div>
+
         <nav id="nav-menu">
-            <a href="index.html">Home</a>
-            <a href="courses.html">Courses</a>
-            <a href="free-resources.html">Free Materials</a>
-            <a href="updates.html" style="color: var(--primary); font-weight: 700;">Updates</a>
+            <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
+            <a href="courses.html"><i class="ri-book-open-line"></i> Courses</a>
+            <a href="test-series.html"><i class="ri-file-list-3-line"></i> Test Series</a>
+            <a href="updates.html"><i class="ri-notification-3-line"></i> Updates</a>
             <a href="login.html" class="nav-btn" id="navAction">Get Started</a>
         </nav>
     </header>
@@ -461,7 +602,8 @@
     <footer>
         <div class="logo" style="justify-content: center; margin-bottom: 20px;">
             <i class="ri-graduation-cap-fill" style="color: var(--accent);"></i>
-            <span style="color: white;">ed<span>Hills</span></span>
+            <span style="color: white; display: flex; align-items: center; gap: 5px;">ed<span
+                    style="color:#facc15;">Hills</span></span>
         </div>
         <p>Your Trusted Partner in Academic Excellence.</p>
         <div class="footer-bottom">
@@ -469,23 +611,78 @@
         </div>
     </footer>
 
+    <div class="mobile-bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i class="ri-home-4-line"></i>
+            <span>Home</span>
+        </a>
+        <a href="courses.html" class="bottom-nav-item">
+            <i class="ri-book-open-line"></i>
+            <span>Courses</span>
+        </a>
+        <a href="store.html" class="bottom-nav-item">
+            <i class="ri-shopping-bag-line"></i>
+            <span>Store</span>
+        </a>
+        <a href="updates.html" class="bottom-nav-item active">
+            <i class="ri-notification-3-line"></i>
+            <span>Updates</span>
+        </a>
+        <a href="login.html" class="bottom-nav-item" id="bottomProfileLink">
+            <i class="ri-user-3-line"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+
     <script>
-        // Use the same login status logic as other pages
+        // Header Profile Login & Mobile Menu Logic
         window.onload = () => {
             const userStr = localStorage.getItem('currentUser');
             const navBtn = document.getElementById('navAction');
-            if (userStr && navBtn) {
+            const headerProfileIcon = document.getElementById('headerProfileIcon');
+            const bottomProfileLink = document.getElementById('bottomProfileLink');
+
+            if (userStr) {
                 try {
                     const user = JSON.parse(userStr);
                     if (user && user.name) {
-                        navBtn.innerHTML = '<i class="ri-dashboard-line"></i> Dashboard';
-                        navBtn.href = 'student-dashboard.html';
+                        if (navBtn) {
+                            navBtn.innerHTML = '<i class="ri-dashboard-line"></i> Dashboard';
+                            navAction.href = 'student-dashboard.html';
+                        }
+                        if (headerProfileIcon) {
+                            headerProfileIcon.href = 'student-dashboard.html';
+                            headerProfileIcon.innerHTML = '<i class="ri-user-shared-line"></i>';
+                        }
+                        if (bottomProfileLink) {
+                            bottomProfileLink.href = 'student-dashboard.html';
+                            bottomProfileLink.querySelector('span').innerText = 'Dashboard';
+                            bottomProfileLink.querySelector('i').className = 'ri-layout-grid-line';
+                        }
                     }
                 } catch (e) {
                     localStorage.removeItem('currentUser');
                 }
             }
         };
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        if (mobileMenu && navMenu) {
+            mobileMenu.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                const icon = mobileMenu.querySelector('i');
+                if (navMenu.classList.contains('active')) {
+                    icon.classList.remove('ri-menu-3-line');
+                    icon.classList.add('ri-close-line');
+                } else {
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-3-line');
+                }
+            });
+        }
 
         // Filter functionality
         const tabs = document.querySelectorAll('.tab');

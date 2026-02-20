@@ -21,11 +21,87 @@
             margin: 0;
             font-family: 'Outfit', sans-serif;
             background: var(--bg);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* PREMIUM HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(14, 47, 105, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .header-actions {
+            display: none;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            padding: 5px;
+            transition: 0.3s;
+        }
+
+        .logo-h {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 26px;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-h span {
+            color: #facc15;
+        }
+
+        .logo-h i {
+            font-size: 32px;
+            color: #facc15;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #facc15;
+        }
+
+        /* MAIN CONTENT */
+        .register-page-content {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
+            padding: 60px 20px;
+            min-height: calc(100vh - 75px);
+            position: relative;
         }
 
         /* Background Shapes */
@@ -241,9 +317,26 @@
         }
 
         .login-link a {
-            color: var(--secondary);
+            align-items: center;
+            gap: 4px;
             text-decoration: none;
-            font-weight: 700;
+            color: #64748b;
+            transition: 0.3s;
+            flex: 1;
+        }
+
+        .bottom-nav-item i {
+            font-size: 22px;
+        }
+
+        .bottom-nav-item span {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .bottom-nav-item:hover,
+        .bottom-nav-item.active {
+            color: #0e2f69;
         }
 
         @media (max-width: 850px) {
@@ -277,157 +370,167 @@
 </head>
 
 <body>
+    <header id="main-header">
+        <a href="index.html" class="logo-h">
+            <i class="ri-graduation-cap-fill"></i>
+            ed<span>Hills</span>
+        </a>
 
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-
-    <div class="register-container">
-        <div class="branding-side">
-            <a href="index.html" class="logo">
-                <i class="ri-graduation-cap-fill"></i>
-                ed<span>Hills</span>
-            </a>
-            <h1>Join the Community of High Achievers.</h1>
-            <p style="opacity: 0.8; margin-bottom: 40px;">Create your student profile to access premium courses, live
-                classes, and free study materials.</p>
-
-            <div class="benefit-item">
-                <i class="ri-checkbox-circle-fill"></i>
-                <span>Access to JEE, NEET & CUET Resources</span>
-            </div>
-            <div class="benefit-item">
-                <i class="ri-checkbox-circle-fill"></i>
-                <span>Weekly Mock Tests & Performance Reports</span>
-            </div>
-            <div class="benefit-item">
-                <i class="ri-checkbox-circle-fill"></i>
-                <span>Direct Mentorship from Top Educators</span>
+        <div class="header-actions">
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="ri-menu-3-line"></i>
             </div>
         </div>
 
-        <div class="form-side">
-            <div class="form-header">
-                <h2>Create Account</h2>
-                <p>Please enter your student details to get started.</p>
+        <nav id="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="test-series.html">Test Series</a>
+            <a href="updates.html">Updates</a>
+        </nav>
+    </header>
+
+    <div class="register-page-content">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+
+        <div class="register-container">
+            <!-- Branding Side -->
+            <div class="branding-side">
+                <a href="index.html" class="logo"
+                    style="margin-bottom: 40px; text-decoration: none; color: white; display: flex; align-items: center; gap: 10px;">
+                    <i class="ri-graduation-cap-fill"
+                        style="background: rgba(250, 204, 21, 0.1); padding: 8px; border-radius: 12px; color: #facc15; font-size: 32px;"></i>
+                    <span style="font-size: 28px; font-weight: 700;">ed<span style="color:#facc15;">Hills</span></span>
+                </a>
+                <h1>Join the Community of High Achievers.</h1>
+                <p style="opacity: 0.8; margin-bottom: 30px;">Create your student profile to access premium courses,
+                    live classes, and free study materials.</p>
+                <div class="benefit-item"><i class="ri-checkbox-circle-fill" style="color:#facc15;"></i> Access to JEE,
+                    NEET & CUET Resources</div>
+                <div class="benefit-item"><i class="ri-checkbox-circle-fill" style="color:#facc15;"></i> Weekly Mock
+                    Tests & Performance Reports</div>
+                <div class="benefit-item"><i class="ri-checkbox-circle-fill" style="color:#facc15;"></i> Direct
+                    Mentorship from Top Educators</div>
             </div>
 
-            <form id="registerForm">
-                <div class="form-grid">
-                    <!-- Full Name -->
-                    <div class="input-group full-width">
-                        <label>Student Full Name</label>
-                        <div class="input-wrapper">
-                            <i class="ri-user-line"></i>
-                            <input type="text" id="name" placeholder="Enter your full name" required>
-                        </div>
-                    </div>
-
-                    <!-- Email -->
-                    <div class="input-group">
-                        <label>Email Address</label>
-                        <div class="input-wrapper">
-                            <i class="ri-mail-line"></i>
-                            <input type="email" id="email" placeholder="email@example.com" required>
-                        </div>
-                    </div>
-
-                    <!-- Phone -->
-                    <div class="input-group">
-                        <label>Phone Number</label>
-                        <div class="input-wrapper">
-                            <i class="ri-phone-line"></i>
-                            <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX">
-                        </div>
-                    </div>
-
-                    <!-- Class -->
-                    <div class="input-group">
-                        <label>Standard / Class</label>
-                        <div class="input-wrapper">
-                            <i class="ri-book-open-line"></i>
-                            <select id="class" style="padding-left: 45px;">
-                                <option value="Class 10">Class 10th</option>
-                                <option value="Class 11">Class 11th</option>
-                                <option value="Class 12">Class 12th</option>
-                                <option value="Dropper">Dropper / Repeater</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-
-                    <!-- Password -->
-                    <div class="input-group full-width">
-                        <label>Create Password</label>
-                        <div class="input-wrapper">
-                            <i class="ri-lock-password-line"></i>
-                            <input type="password" id="password" placeholder="Min. 8 characters" required>
-                        </div>
-                    </div>
+            <!-- Form Side -->
+            <div class="form-side">
+                <div class="form-header">
+                    <h2>Create Account</h2>
+                    <p>Enter your student details to get started.</p>
                 </div>
 
-                <div style="display: flex; gap: 15px; margin-top: 20px;">
-                    <button type="submit" class="submit-btn" id="regBtn" style="flex: 2;">
-                        Create My Account <i class="ri-arrow-right-line"></i>
-                    </button>
-                    <a href="login.html" class="submit-btn"
-                        style="flex: 1; min-width: 120px; background: #f0f4ff; color: #0e2f69; border: 1px solid #0e2f69; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 14px;">
-                        Sign In
-                    </a>
-                </div>
-            </form>
+                <form id="registerForm">
+                    <div class="form-grid">
+                        <div class="input-group full-width">
+                            <label>Student Full Name</label>
+                            <div class="input-wrapper">
+                                <i class="ri-user-line"></i>
+                                <input type="text" id="name" placeholder="Enrolment Name" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Email Address</label>
+                            <div class="input-wrapper">
+                                <i class="ri-mail-line"></i>
+                                <input type="email" id="email" placeholder="email@example.com" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Phone Number</label>
+                            <div class="input-wrapper">
+                                <i class="ri-phone-line"></i>
+                                <input type="tel" id="phone" placeholder="Contact number" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Standard / Class</label>
+                            <div class="input-wrapper">
+                                <i class="ri-book-open-line"></i>
+                                <select id="class" style="padding-left: 45px;">
+                                    <option value="Class 10">Class 10th</option>
+                                    <option value="Class 11">Class 11th</option>
+                                    <option value="Class 12">Class 12th</option>
+                                    <option value="Dropper">Dropper / Repeater</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-group full-width">
+                            <label>Create Password</label>
+                            <div class="input-wrapper">
+                                <i class="ri-lock-password-line"></i>
+                                <input type="password" id="password" placeholder="Min. 6 characters" required>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="login-link">
-                Already have an account? <a href="login.html">Login Here</a>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <button type="submit" class="submit-btn" id="regBtn" style="flex: 2;">
+                            Create My Account <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="login-link">
+                    Already have an account? <a href="login.html"
+                        style="color: var(--primary); font-weight: 700; text-decoration: none;">Login Here</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Toast notification -->
-    <style>
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1e293b;
-            color: white;
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 500;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-            z-index: 9999;
-            transition: 0.4s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            opacity: 0;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-
-        .toast.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .toast.success {
-            background: #065f46;
-        }
-
-        .toast.error {
-            background: #991b1b;
-        }
-    </style>
     <div class="toast" id="regToast"></div>
 
+    <div class="mobile-bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <i class="ri-home-4-line"></i>
+            <span>Home</span>
+        </a>
+        <a href="courses.html" class="bottom-nav-item">
+            <i class="ri-book-open-line"></i>
+            <span>Courses</span>
+        </a>
+        <a href="store.html" class="bottom-nav-item">
+            <i class="ri-shopping-bag-line"></i>
+            <span>Store</span>
+        </a>
+        <a href="updates.html" class="bottom-nav-item">
+            <i class="ri-notification-3-line"></i>
+            <span>Updates</span>
+        </a>
+        <a href="register.html" class="bottom-nav-item active">
+            <i class="ri-user-add-fill"></i>
+            <span>Register</span>
+        </a>
+    </div>
+
     <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        if (mobileMenu && navMenu) {
+            mobileMenu.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                const icon = mobileMenu.querySelector('i');
+                if (navMenu.classList.contains('active')) {
+                    icon.classList.remove('ri-menu-3-line');
+                    icon.classList.add('ri-close-line');
+                } else {
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-3-line');
+                }
+            });
+        }
+
         function showToast(msg, type = 'error') {
             const t = document.getElementById('regToast');
-            t.className = 'toast show ' + type;
-            t.innerHTML = (type === 'success' ? '&#9989; ' : '&#9888; ') + msg;
-            setTimeout(() => t.className = 'toast', 4000);
+            if (t) {
+                t.className = 'toast show ' + type;
+                t.innerHTML = (type === 'success' ? '&#9989; ' : '&#9888; ') + msg;
+                setTimeout(() => t.className = 'toast', 4000);
+            }
         }
 
         window.onload = () => {
@@ -436,53 +539,52 @@
             }
         };
 
-        document.getElementById('registerForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('regBtn');
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> Creating Account...';
-            btn.disabled = true;
+        const registerForm = document.getElementById('registerForm');
+        if (registerForm) {
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('regBtn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> Creating Account...';
+                btn.disabled = true;
 
-            const password = document.getElementById('password').value;
-            if (password.length < 6) {
-                showToast('Password must be at least 6 characters.', 'error');
-                btn.innerHTML = originalHTML; btn.disabled = false; return;
-            }
+                const password = document.getElementById('password').value;
+                if (password.length < 6) {
+                    showToast('Password must be at least 6 characters.', 'error');
+                    btn.innerHTML = originalHTML; btn.disabled = false; return;
+                }
 
-            const userData = {
-                name: document.getElementById('name').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                phone: document.getElementById('phone').value.trim(),
-                class: document.getElementById('class').value,
-                rollNumber: document.getElementById('rollNumber').value.trim(),
-                password
-            };
+                const userData = {
+                    name: document.getElementById('name').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    class: document.getElementById('class').value,
+                    password
+                };
 
-            try {
-                const response = await fetch('http://localhost:5000/api/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(userData)
-                });
-                const result = await response.json();
+                try {
+                    const response = await fetch('http://localhost:5000/api/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(userData)
+                    });
+                    const result = await response.json();
 
-                if (response.ok) {
-                    localStorage.setItem('edHillsToken', result.token);
-                    localStorage.setItem('currentUser', JSON.stringify(result.user));
-                    showToast('Account created! Welcome to edHills 🎉', 'success');
-                    setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1500);
-                } else {
-                    showToast(result.error || result.message || 'Registration failed.', 'error');
+                    if (response.ok) {
+                        localStorage.setItem('edHillsToken', result.token);
+                        localStorage.setItem('currentUser', JSON.stringify(result.user));
+                        showToast('Account created! Welcome to edHills 🎉', 'success');
+                        setTimeout(() => { window.location.href = 'student-dashboard.html'; }, 1500);
+                    } else {
+                        showToast(result.error || result.message || 'Registration failed.', 'error');
+                        btn.innerHTML = originalHTML; btn.disabled = false;
+                    }
+                } catch (error) {
+                    console.error('Registration Error:', error);
+                    showToast('Cannot connect to server. Run: npm start in your project folder.', 'error');
                     btn.innerHTML = originalHTML; btn.disabled = false;
                 }
-            } catch (error) {
-                console.error('Registration Error:', error);
-                showToast('Cannot connect to server. Run: npm start in your project folder.', 'error');
-                btn.innerHTML = originalHTML; btn.disabled = false;
-            }
-        });
+            });
+        }
     </script>
-
 </body>
-
-</html>
