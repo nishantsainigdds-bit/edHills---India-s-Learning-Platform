@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cut-offs & Ranks - edHills</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            background: #f4f6fb;
+            color: #1e293b;
+        }
+
+        /* HEADER */
+        header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(14, 47, 105, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 26px;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #facc15;
+        }
+
+        .logo i {
+            font-size: 32px;
+            color: #facc15;
+            background: rgba(250, 204, 21, 0.1);
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        nav a:hover {
+            color: #facc15;
+        }
+
+        .nav-btn {
+            background: #facc15;
+            color: #0e2f69 !important;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-left: 30px;
+            box-shadow: 0 4px 15px rgba(250, 204, 21, 0.2);
+        }
+
+        /* HERO */
+        .hero {
+            padding: 60px 8%;
+            background: linear-gradient(135deg, #0e2f69, #1746a2);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .hero h1 span {
+            color: #facc15;
+        }
+
+        /* CONTENT SECTION */
+        .content-section {
+            padding: 80px 8%;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .text-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .text-content h2 {
+            font-size: 32px;
+            color: #0e2f69;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        .text-content span {
+            color: #F15E03;
+        }
+
+        .text-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .image-content {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .image-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* DIVIDER */
+        .divider {
+            margin: 40px 8%;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        /* DATA CARDS */
+        .data-section {
+            padding: 60px 8%;
+            background: #f8fafc;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .data-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: 0.3s;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            text-align: center;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .data-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-card figure {
+            margin: 0 0 20px;
+            width: 100%;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .data-card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .data-card h3 {
+            font-size: 19px;
+            color: #0e2f69;
+            margin-bottom: 10px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .data-card p {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .view-btn {
+            padding: 10px 25px;
+            background: #0e2f69;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .view-btn:hover {
+            background: #facc15;
+            color: #0e2f69;
+        }
+
+        @media (max-width: 768px) {
+            .content-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 5%;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0e2f69;
+            color: white;
+            padding: 80px 8% 40px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            color: #facc15;
+            margin-bottom: 25px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul li a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            opacity: 1;
+            color: #facc15;
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.6;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="main-header">
+        <a href="index.html" class="logo">
+            <i class="ri-graduation-cap-fill"></i>
+            ed<span>Hills</span>
+        </a>
+
+        <nav id="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="free-resources.html">Free Materials</a>
+            <a href="login.html" class="nav-btn">Get Started</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Predict Your <span>Success</span></h1>
+    </section>
+
+    <section class="content-section">
+        <div class="text-content">
+            <h2>Cut-offs <span>& Ranks</span></h2>
+            <p>Stay ahead with the latest cut-off trends and rank predictions to plan your next steps wisely. Access
+                updated information across top institutes, understand previous years’ patterns, and set clear targets
+                for your exam performance. Our insights into cut-offs and ranking systems will help you evaluate your
+                standing, choose the right colleges, and make informed decisions for your future. With accurate data at
+                your fingertips, strategize better and move forward with confidence.</p>
+        </div>
+        <div class="image-content">
+            <img src="https://competishun.com/wp-content/uploads/2025/04/christin-hume-Hcfwew744z4-unsplash-1.png"
+                alt="Cut-offs and Ranks Analysis">
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="data-section">
+        <div class="data-grid">
+            <!-- JEE Mains Cut-offs -->
+            <div class="data-card">
+                <figure><img src="https://competishun.com/wp-content/uploads/2025/04/Group-1120.svg"
+                        alt="JEE Mains Cut-offs"></figure>
+                <h3>JEE Mains Cut-offs</h3>
+                <p>JEE Main cutoffs (last 5 years)</p>
+                <a href="#" class="view-btn">View More</a>
+            </div>
+
+            <!-- JEE Advance Cut-offs -->
+            <div class="data-card">
+                <figure><img src="https://competishun.com/wp-content/uploads/2025/04/Group-1121.svg"
+                        alt="JEE Advance Cut-offs"></figure>
+                <h3>JEE Advance Cut-offs</h3>
+                <p>JEE Advanced cutoffs (last 5 years)</p>
+                <a href="#" class="view-btn">View More</a>
+            </div>
+
+            <!-- BITSAT Cut-Offs -->
+            <div class="data-card">
+                <figure><img src="https://competishun.com/wp-content/uploads/2025/04/Group-1120.svg"
+                        alt="BITSAT Cut-Offs"></figure>
+                <h3>BITSAT Cut-Offs</h3>
+                <p>BITSAT cutoffs (last 5 years)</p>
+                <a href="#" class="view-btn">View More</a>
+            </div>
+
+            <!-- JEE Mains 2025 Trends -->
+            <div class="data-card">
+                <figure><img
+                        src="https://competishun.com/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-17-at-11.17.01-AM.jpeg"
+                        alt="JEE Mains 2025 Trends"></figure>
+                <h3>JEE Mains 2025 Cut-offs and trends</h3>
+                <p>JEE Main cutoffs (Percentile trends)</p>
+                <a href="#" class="view-btn">View More</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-flex;">
+                    <i class="ri-graduation-cap-fill"></i>
+                    ed<span>Hills</span>
+                </a>
+                <p>Empowering students with data-driven insights and academic excellence.</p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="free-resources.html">Free Materials</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><a href="mailto:info@edhills.com">info@edhills.com</a></li>
+                    <li><a href="#">Support Center</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 edHills. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
