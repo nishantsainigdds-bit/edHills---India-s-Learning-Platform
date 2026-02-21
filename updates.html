@@ -463,6 +463,132 @@
                 padding-bottom: 70px;
             }
         }
+
+        /* PREMIUM DETAILED FOOTER */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 80px 8% 40px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            color: var(--accent);
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-column p {
+            line-height: 1.6;
+            font-size: 15px;
+            opacity: 0.8;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-column ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            opacity: 0.8;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-column ul li a:hover {
+            opacity: 1;
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .footer-socials a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 20px;
+        }
+
+        .footer-socials a:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                padding: 60px 5% 30px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer-column ul li a {
+                justify-content: center;
+            }
+
+            .footer-socials {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 
@@ -600,14 +726,57 @@
     </div>
 
     <footer>
-        <div class="logo" style="justify-content: center; margin-bottom: 20px;">
-            <i class="ri-graduation-cap-fill" style="color: var(--accent);"></i>
-            <span style="color: white; display: flex; align-items: center; gap: 5px;">ed<span
-                    style="color:#facc15;">Hills</span></span>
+        <div class="footer-container">
+            <div class="footer-column">
+                <a href="index.html" class="logo" style="margin-bottom: 20px; display: inline-flex; color: white;">
+                    <i class="ri-graduation-cap-fill"></i>
+                    ed<span>Hills</span>
+                </a>
+                <p>Empowering students with high-quality education and smart learning tools. Join edHills to clear your
+                    dream entrance exams with ease.</p>
+                <div class="footer-socials">
+                    <a href="#"><i class="ri-facebook-fill"></i></a>
+                    <a href="#"><i class="ri-twitter-x-fill"></i></a>
+                    <a href="#"><i class="ri-instagram-line"></i></a>
+                    <a href="#"><i class="ri-youtube-fill"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html"><i class="ri-home-line"></i> Home</a></li>
+                    <li><a href="courses.html"><i class="ri-book-open-line"></i> Courses</a></li>
+                    <li><a href="test-series.html"><i class="ri-file-list-3-line"></i> Test Series</a></li>
+                    <li><a href="updates.html"><i class="ri-notification-badge-line"></i> Updates</a></li>
+                    <li><a href="free-resources.html"><i class="ri-gift-line"></i> Free Materials</a></li>
+                    <li><a href="login.html"><i class="ri-user-heart-line"></i> Student Portal</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Syllabus</h3>
+                <ul>
+                    <li><a href="jee-syllabus.html"><i class="ri-pencil-ruler-line"></i> JEE Main</a></li>
+                    <li><a href="neet-syllabus.html"><i class="ri-pulse-line"></i> NEET UG</a></li>
+                    <li><a href="cuet-syllabus.html"><i class="ri-graduation-cap-line"></i> CUET 2026</a></li>
+                    <li><a href="board-syllabus.html"><i class="ri-government-line"></i> Board Exams</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><a href="mailto:info@edhills.com"><i class="ri-mail-send-line"></i> info@edhills.com</a></li>
+                    <li><a href="#"><i class="ri-map-pin-2-line"></i> New Delhi, India</a></li>
+                    <li><a href="#"><i class="ri-customer-service-2-line"></i> Support Center</a></li>
+                    <li><a href="#"><i class="ri-shield-user-line"></i> Privacy Policy</a></li>
+                </ul>
+            </div>
         </div>
-        <p>Your Trusted Partner in Academic Excellence.</p>
+
         <div class="footer-bottom">
-            <p>&copy; 2026 edHills. All Rights Reserved.</p>
+            <p>&copy; 2026 edHills. All Rights Reserved. Designed for Excellence.</p>
         </div>
     </footer>
 
