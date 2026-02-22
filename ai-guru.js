@@ -46,7 +46,7 @@
     },
     {
       keywords: ['dashboard', 'progress', 'enrolled'],
-      reply: '📊 Your <strong>Student Dashboard</strong> shows enrolled courses, progress charts, daily schedule, and AI-powered analytics. <a href="student-dashboard.html" style="color:#facc15">Go to Dashboard →</a>'
+      reply: '📊 Your <strong>Student Dashboard</strong> shows enrolled courses, progress charts, daily schedule, and AI-powered analytics. <a href="student-details.html" style="color:#facc15">Go to Dashboard →</a>'
     },
     {
       keywords: ['contact', 'support', 'help', 'email'],

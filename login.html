@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Student Login - e-Gurukul</title>
+  <title>Student Login - edhills</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -245,7 +245,7 @@
     <div class="branding-section">
       <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" class="branding-img"
         alt="Learning illustration">
-      <h1>Welcome to <span>e-Gurukul</span></h1>
+      <h1>Welcome to <span>edhills</span></h1>
       <p>Join thousands of students achieving their dreams with India's best learning platform.</p>
     </div>
 
@@ -411,7 +411,7 @@
             if (response.ok) {
               localStorage.setItem('currentUser', JSON.stringify(data.user));
               alert('Login Successful! Welcome ' + (data.user.name));
-              window.location.href = 'student-profile.html';
+              window.location.href = 'student-details.html';
               return;
             }
 
@@ -422,8 +422,8 @@
 
             // ── LOCAL FALLBACK logic ──
             // Default Demo Account
-            const DEMO_EMAIL = 'egurukul@gmail.com';
-            const DEMO_PW = 'egurukul';
+            const DEMO_EMAIL = 'edhills@gmail.com';
+            const DEMO_PW = 'edhills';
 
             // Check if user is logging in with Demo credentials
             if (body.email === DEMO_EMAIL && (body.password === DEMO_PW || body.otp === '123456')) {
@@ -437,7 +437,7 @@
               };
               localStorage.setItem('currentUser', JSON.stringify(demoUser));
               alert('Logged in via Demo Account! Redirecting...');
-              window.location.href = 'student-profile.html';
+              window.location.href = 'student-details.html';
               return;
             }
 
@@ -446,7 +446,7 @@
             if (localUser && localUser.email === body.email) {
               if (body.password === localUser.password || body.otp === '123456') {
                 alert('Login Successful! Welcome ' + localUser.name);
-                window.location.href = 'student-profile.html';
+                window.location.href = 'student-details.html';
                 return;
               }
             }

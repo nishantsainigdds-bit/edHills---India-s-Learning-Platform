@@ -4,476 +4,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Created | Student Details — e-Gurukul</title>
+    <title>Student Dashboard | edHills</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0e2f69;
             --secondary: #1746a2;
             --accent: #facc15;
-            --bg: #f0f4ff;
+            --bg: #f4f6fb;
             --white: #ffffff;
-            --success: #22c55e;
-            --card-shadow: 0 20px 60px rgba(14, 47, 105, 0.12);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
         }
 
         body {
+            margin: 0;
             font-family: 'Outfit', sans-serif;
             background: var(--bg);
-            min-height: 100vh;
             color: #333;
         }
 
-        /* ── HEADER ── */
         header {
             background: var(--primary);
-            padding: 16px 6%;
+            padding: 15px 8%;
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             color: white;
             text-decoration: none;
-        }
-
-        .logo i {
-            color: var(--accent);
-            font-size: 28px;
         }
 
         .logo span {
             color: var(--accent);
         }
 
-        .header-badge {
-            background: rgba(250, 204, 21, 0.15);
-            border: 1px solid rgba(250, 204, 21, 0.3);
-            color: var(--accent);
-            padding: 7px 16px;
+        .user-pill {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
             border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 10px;
+            font-size: 14px;
         }
 
-        /* ── SUCCESS BANNER ── */
-        .success-banner {
-            background: linear-gradient(135deg, #0e2f69 0%, #1746a2 100%);
-            padding: 50px 6% 80px;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .success-banner::before {
-            content: '';
-            position: absolute;
-            top: -80px;
-            right: -80px;
-            width: 300px;
-            height: 300px;
-            background: rgba(250, 204, 21, 0.08);
-            border-radius: 50%;
-        }
-
-        .success-banner::after {
-            content: '';
-            position: absolute;
-            bottom: -60px;
-            left: -60px;
-            width: 250px;
-            height: 250px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-        }
-
-        .success-icon-wrap {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--success), #16a34a);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 36px;
-            color: white;
-            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
-            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-        }
-
-        @keyframes pop {
-            0% {
-                transform: scale(0);
-                opacity: 0;
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .success-banner h1 {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            animation: fadeUp 0.6s ease 0.2s both;
-        }
-
-        .success-banner p {
-            font-size: 16px;
-            opacity: 0.8;
-            animation: fadeUp 0.6s ease 0.35s both;
-        }
-
-        @keyframes fadeUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* ── MAIN CARD ── */
-        .card-wrapper {
-            max-width: 860px;
-            margin: -50px auto 50px;
+        .dashboard-container {
+            max-width: 1100px;
+            margin: 50px auto;
             padding: 0 20px;
-            animation: fadeUp 0.7s ease 0.4s both;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            height: fit-content;
         }
 
         .profile-card {
-            background: white;
-            border-radius: 24px;
-            box-shadow: var(--card-shadow);
-            overflow: hidden;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #f0f0f0;
         }
 
-        /* Profile Top */
-        .card-top {
-            background: linear-gradient(135deg, #f8faff, #edf2ff);
-            padding: 36px 40px 30px;
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            border-bottom: 1px solid #edf2ff;
-        }
-
-        .avatar {
-            width: 90px;
-            height: 90px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            background: var(--bg);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
-            color: white;
-            flex-shrink: 0;
-            box-shadow: 0 8px 20px rgba(14, 47, 105, 0.25);
-            border: 4px solid white;
-        }
-
-        .avatar-initials {
-            font-size: 32px;
-            font-weight: 700;
-            color: white;
-            line-height: 1;
-        }
-
-        .profile-meta h2 {
-            font-size: 26px;
-            font-weight: 700;
+            margin: 0 auto 15px;
+            font-size: 40px;
             color: var(--primary);
-            margin-bottom: 5px;
+            border: 4px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .profile-meta p {
-            color: #777;
-            font-size: 14px;
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-item {
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 12px;
+            transition: 0.3s;
+            color: #555;
         }
 
-        .status-dot {
-            width: 9px;
-            height: 9px;
-            background: var(--success);
-            border-radius: 50%;
-            display: inline-block;
-            animation: pulse 2s infinite;
+        .menu-item.active {
+            background: var(--primary);
+            color: white;
         }
 
-        @keyframes pulse {
-
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
-            }
-
-            50% {
-                box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
-            }
+        .menu-item:hover:not(.active) {
+            background: #f0f4ff;
+            color: var(--primary);
         }
 
-        /* ── INFO GRID ── */
-        .details-section {
-            padding: 36px 40px;
+        /* Main Content */
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
-        .section-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 20px;
+        .section-title {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-
-        .section-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: #f0f0f0;
+            gap: 12px;
         }
 
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 30px;
         }
 
-        .info-card {
-            background: #f8faff;
-            border: 1.5px solid #edf2ff;
-            border-radius: 16px;
-            padding: 20px 22px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            transition: all 0.3s;
+        .info-item {
+            padding: 20px;
+            background: #f9fbff;
+            border-radius: 15px;
+            border: 1px solid #edf2ff;
         }
-
-        .info-card:hover {
-            border-color: var(--secondary);
-            box-shadow: 0 6px 20px rgba(23, 70, 162, 0.08);
-            transform: translateY(-2px);
-        }
-
-        .info-icon {
-            width: 46px;
-            height: 46px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .icon-blue {
-            background: #dbeafe;
-            color: #1746a2;
-        }
-
-        .icon-yellow {
-            background: #fef9c3;
-            color: #a16207;
-        }
-
-        .icon-green {
-            background: #dcfce7;
-            color: #15803d;
-        }
-
-        .icon-purple {
-            background: #f3e8ff;
-            color: #7e22ce;
-        }
-
-        .icon-pink {
-            background: #fce7f3;
-            color: #be185d;
-        }
-
-        .icon-gray {
-            background: #f1f5f9;
-            color: #475569;
-        }
-
-        .info-content {}
 
         .info-label {
-            font-size: 11px;
-            color: #999;
+            font-size: 13px;
+            color: #888;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }
 
         .info-value {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--primary);
-            word-break: break-all;
-        }
-
-        .info-value.password-field {
-            letter-spacing: 4px;
-            color: #888;
-        }
-
-        /* Password toggle */
-        .info-card.password-card {
-            position: relative;
-        }
-
-        .toggle-pw {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #aaa;
             font-size: 18px;
-            padding: 4px;
-            transition: color 0.2s;
-        }
-
-        .toggle-pw:hover {
-            color: var(--secondary);
-        }
-
-        /* ── ACTIONS ── */
-        .card-actions {
-            display: flex;
-            gap: 14px;
-            padding: 0 40px 36px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 13px 28px;
-            border-radius: 12px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 15px;
             font-weight: 600;
-            cursor: pointer;
-            border: none;
-            text-decoration: none;
-            transition: all 0.3s;
+            color: var(--primary);
         }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            flex: 1;
-            justify-content: center;
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #e6fffa;
+            color: #2d3748;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
-        .btn-primary:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(23, 70, 162, 0.25);
-        }
-
-        .btn-ghost {
+        .logout-btn {
+            margin-top: 40px;
+            padding: 12px 25px;
             background: #fff0f0;
             color: #e53e3e;
-            border: 1.5px solid #feb2b2;
+            border: 1px solid #feb2b2;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
         }
 
-        .btn-ghost:hover {
+        .logout-btn:hover {
             background: #e53e3e;
             color: white;
-            border-color: #e53e3e;
         }
 
-        /* ── TOAST ── */
-        #toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(80px);
-            background: var(--primary);
-            color: white;
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s;
-            opacity: 0;
-            z-index: 9999;
-            white-space: nowrap;
-        }
-
-        #toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            .card-top {
-                flex-direction: column;
-                text-align: center;
-                padding: 28px 24px 24px;
-            }
-
-            .details-section {
-                padding: 28px 24px;
+        @media (max-width: 800px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
             }
 
             .info-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .card-actions {
-                padding: 0 24px 28px;
-                flex-direction: column;
-            }
-
-            .success-banner h1 {
-                font-size: 24px;
             }
         }
     </style>
@@ -481,212 +210,106 @@
 
 <body>
 
-    <!-- HEADER -->
     <header>
         <a href="index.html" class="logo">
             <i class="ri-graduation-cap-fill"></i>
-            <span>e-Gurukul</span>
+            ed<span>Hills</span>
         </a>
-        <div class="header-badge">
-            <i class="ri-shield-check-fill"></i>
+        <div class="user-pill">
+            <i class="ri-user-smile-line"></i>
             <span id="headerName">Student Portal</span>
         </div>
     </header>
 
-    <!-- SUCCESS BANNER -->
-    <div class="success-banner">
-        <div class="success-icon-wrap">
-            <i class="ri-checkbox-circle-fill"></i>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile-card">
+                <div class="profile-img">
+                    <i class="ri-user-star-fill"></i>
+                </div>
+                <h3 id="sidebarName">Student Name</h3>
+                <p id="sidebarEmail" style="font-size: 13px; color: #888;">email@example.com</p>
+            </div>
+
+            <ul class="menu-list">
+                <li class="menu-item active"><i class="ri-dashboard-line"></i> Dashboard</li>
+                <li class="menu-item"><i class="ri-book-3-line"></i> My Courses</li>
+                <li class="menu-item"><i class="ri-file-list-3-line"></i> Test Results</li>
+                <li class="menu-item"><i class="ri-settings-4-line"></i> Settings</li>
+            </ul>
         </div>
-        <h1>🎉 Account Created Successfully!</h1>
-        <p>Welcome to e-Gurukul. Your student profile is now active.</p>
-    </div>
 
-    <!-- PROFILE CARD -->
-    <div class="card-wrapper">
-        <div class="profile-card">
-
-            <!-- Top: Avatar + Name -->
-            <div class="card-top">
-                <div class="avatar">
-                    <span class="avatar-initials" id="avatarInitials">?</span>
-                </div>
-                <div class="profile-meta">
-                    <h2 id="dispName">Loading...</h2>
-                    <p>
-                        <span class="status-dot"></span>
-                        Verified Student &nbsp;•&nbsp; <span id="dispClass">—</span>
-                    </p>
-                </div>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="section-title">
+                <i class="ri-shield-user-line"></i> Student Academic Profile
             </div>
 
-            <!-- Details Grid -->
-            <div class="details-section">
-                <div class="section-label"><i class="ri-file-user-line"></i> Registered Details</div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Full Name</div>
+                    <div class="info-value" id="dispName">N/A</div>
+                </div>
 
-                <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Current Roll Number</div>
+                    <div class="info-value"><span class="badge" id="dispRoll">N/A</span></div>
+                </div>
 
-                    <!-- Name -->
-                    <div class="info-card">
-                        <div class="info-icon icon-blue"><i class="ri-user-fill"></i></div>
-                        <div class="info-content">
-                            <div class="info-label">Full Name</div>
-                            <div class="info-value" id="cardName">—</div>
-                        </div>
-                    </div>
+                <div class="info-item">
+                    <div class="info-label">Assigned Class</div>
+                    <div class="info-value" id="dispClass">N/A</div>
+                </div>
 
-                    <!-- Email -->
-                    <div class="info-card">
-                        <div class="info-icon icon-purple"><i class="ri-mail-fill"></i></div>
-                        <div class="info-content">
-                            <div class="info-label">Email ID</div>
-                            <div class="info-value" id="cardEmail">—</div>
-                        </div>
-                    </div>
+                <div class="info-item">
+                    <div class="info-label">Contact Email</div>
+                    <div class="info-value" id="dispEmail">N/A</div>
+                </div>
 
-                    <!-- Mobile -->
-                    <div class="info-card">
-                        <div class="info-icon icon-green"><i class="ri-phone-fill"></i></div>
-                        <div class="info-content">
-                            <div class="info-label">Mobile No.</div>
-                            <div class="info-value" id="cardPhone">—</div>
-                        </div>
-                    </div>
+                <div class="info-item">
+                    <div class="info-label">Phone Number</div>
+                    <div class="info-value" id="dispPhone">N/A</div>
+                </div>
 
-                    <!-- Class -->
-                    <div class="info-card">
-                        <div class="info-icon icon-yellow"><i class="ri-book-open-fill"></i></div>
-                        <div class="info-content">
-                            <div class="info-label">Standard / Class</div>
-                            <div class="info-value" id="cardClass">—</div>
-                        </div>
-                    </div>
-
-                    <!-- Roll Number -->
-                    <div class="info-card">
-                        <div class="info-icon icon-pink"><i class="ri-hashtag"></i></div>
-                        <div class="info-content">
-                            <div class="info-label">Roll Number</div>
-                            <div class="info-value" id="cardRoll">—</div>
-                        </div>
-                    </div>
-
-                    <!-- Password (masked) -->
-                    <div class="info-card password-card">
-                        <div class="info-icon icon-gray"><i class="ri-lock-fill"></i></div>
-                        <div class="info-content">
-                            <div class="info-label">Password</div>
-                            <div class="info-value password-field" id="cardPassword">••••••••</div>
-                        </div>
-                        <button class="toggle-pw" id="togglePwBtn" onclick="togglePassword()"
-                            title="Show / Hide password">
-                            <i class="ri-eye-line" id="eyeIcon"></i>
-                        </button>
-                    </div>
-
+                <div class="info-item">
+                    <div class="info-label">Portal Status</div>
+                    <div class="info-value" style="color: #38a169;">● Verified Student</div>
                 </div>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="card-actions">
-                <a href="student-dashboard.html" class="btn btn-primary">
-                    <i class="ri-dashboard-3-fill"></i> Go to Dashboard
-                </a>
-                <button class="btn btn-ghost" onclick="logout()">
-                    <i class="ri-logout-box-r-line"></i> Logout
-                </button>
-            </div>
-
+            <button class="logout-btn" onclick="logout()">
+                <i class="ri-logout-box-r-line"></i> Logout Session
+            </button>
         </div>
-    </div>
-
-    <!-- Toast -->
-    <div id="toast">
-        <i class="ri-checkbox-circle-fill" style="color:#facc15;font-size:20px;"></i>
-        <span id="toastMsg">Done!</span>
     </div>
 
     <script>
-        let rawPassword = '';
-        let showingPassword = false;
-
+        // In a real app, this data would come from the login session/API
+        // Let's mock the population of data for demonstration
         window.onload = () => {
-            let user = JSON.parse(localStorage.getItem('currentUser'));
-            let isDemo = false;
+            // Try to get data from localStorage (set during registration/login)
+            const user = JSON.parse(localStorage.getItem('currentUser'));
 
-            // ── DEMO MODE: No real account? Load demo data ──
-            if (!user) {
-                isDemo = true;
-                user = {
-                    name: 'Demo Student',
-                    email: 'demo@narayan-gurukul.com',
-                    phone: '+91 98765 43210',
-                    class: 'Class 12th',
-                    password: 'demo@1234'
-                };
-
-                // Show demo notice banner
-                document.getElementById('demoBanner').style.display = 'flex';
-
-                // Update success banner text for demo
-                document.querySelector('.success-banner h1').textContent = '👋 Demo Account Preview';
-                document.querySelector('.success-banner p').textContent =
-                    'This is a demo preview. Create a real account to save your details.';
-            }
-
-            rawPassword = user.password || '';
-
-            // Header
-            document.getElementById('headerName').textContent = isDemo ? '🔵 Demo Mode' : (user.name || 'Student');
-
-            // Avatar initials
-            const nameParts = (user.name || 'S').trim().split(' ');
-            const initials = nameParts.length >= 2
-                ? (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase()
-                : nameParts[0][0].toUpperCase();
-            document.getElementById('avatarInitials').textContent = initials;
-
-            // Profile top
-            document.getElementById('dispName').textContent = user.name || '—';
-            document.getElementById('dispClass').textContent = user.class || '—';
-
-            // Cards
-            document.getElementById('cardName').textContent = user.name || '—';
-            document.getElementById('cardEmail').textContent = user.email || '—';
-            document.getElementById('cardPhone').textContent = user.phone || 'Not provided';
-            document.getElementById('cardClass').textContent = user.class || '—';
-            document.getElementById('cardRoll').textContent = user.rollNumber || '—';
-
-            // Toast
-            showToast(isDemo ? '👀 Demo Mode — showing sample data' : 'Welcome, ' + user.name.split(' ')[0] + '! 🎉');
-        };
-
-        function togglePassword() {
-            const field = document.getElementById('cardPassword');
-            const eyeIcon = document.getElementById('eyeIcon');
-            showingPassword = !showingPassword;
-
-            if (showingPassword) {
-                field.textContent = rawPassword;
-                field.classList.remove('password-field');
-                eyeIcon.className = 'ri-eye-off-line';
+            if (user) {
+                document.getElementById('headerName').innerText = user.name || 'Student';
+                document.getElementById('sidebarName').innerText = user.name || 'Anonymous';
+                document.getElementById('sidebarEmail').innerText = user.email;
+                document.getElementById('dispName').innerText = user.name;
+                document.getElementById('dispEmail').innerText = user.email;
+                document.getElementById('dispRoll').innerText = user.rollNumber || 'PENDING';
+                document.getElementById('dispClass').innerText = user.class || 'N/A';
+                document.getElementById('dispPhone').innerText = user.phone || 'N/A';
             } else {
-                field.textContent = '••••••••';
-                field.classList.add('password-field');
-                eyeIcon.className = 'ri-eye-line';
+                // Redirect to login if no user session
+                alert('Please login to access student details.');
+                window.location.href = 'login.html';
             }
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').textContent = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3500);
-        }
+        };
 
         function logout() {
             localStorage.removeItem('currentUser');
-            window.location.href = 'register.html';
+            window.location.href = 'index.html';
         }
     </script>
 
