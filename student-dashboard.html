@@ -4,325 +4,615 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard | edHills</title>
+    <title>Student Dashboard | edHills - Modern Learning</title>
+    <!-- Fonts and Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
-            --primary: #0e2f69;
-            --secondary: #1746a2;
-            --accent: #facc15;
-            --bg: #f4f6fb;
-            --white: #ffffff;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #0f172a;
+            --accent: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-main: #f8fafc;
+            --sidebar-width: 280px;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            --glass: rgba(255, 255, 255, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
         }
 
         body {
-            margin: 0;
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg);
-            color: #333;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Dashboard Layout */
+        .dashboard-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--secondary);
+            color: white;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 3rem;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .nav-sections {
+            flex: 1;
+        }
+
+        .nav-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.875rem 1rem;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+        }
+
+        .nav-link i {
+            font-size: 1.25rem;
+        }
+
+        .sidebar-footer {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logout-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.875rem 1rem;
+            color: #f87171;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .logout-link:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 2rem;
+            max-width: calc(100vw - var(--sidebar-width));
         }
 
         header {
-            position: sticky;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(14, 47, 105, 0.95);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 15px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
+            margin-bottom: 2.5rem;
         }
 
-        .header-actions {
-            display: none;
-            align-items: center;
-            gap: 15px;
+        .header-left h1 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--secondary);
         }
 
-        .menu-toggle {
-            display: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: white;
-            padding: 5px;
-            transition: 0.3s;
+        .header-left p {
+            color: var(--text-muted);
+            margin-top: 0.25rem;
         }
 
-        .mobile-profile-icon {
-            font-size: 24px;
-            color: #facc15;
-            background: rgba(250, 204, 21, 0.1);
-            width: 40px;
-            height: 40px;
+        .header-right {
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            text-decoration: none;
+            gap: 1.5rem;
         }
 
-        .logo {
+        .search-bar {
+            background: white;
+            padding: 0.625rem 1.25rem;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 24px;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
+            border: 1px solid #e2e8f0;
+            width: 300px;
         }
 
-        .logo span {
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 0.875rem;
+        }
+
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .badge-dot {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 8px;
+            height: 8px;
+            background: var(--danger);
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 5px;
+            background: white;
+            border-radius: 50px;
+            border: 1px solid #e2e8f0;
+            padding-right: 15px;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .user-info .name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        /* Stats Cards */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #f1f5f9;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .stat-card.blue .stat-icon {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+        }
+
+        .stat-card.green .stat-icon {
+            background: rgba(16, 185, 129, 0.1);
             color: var(--accent);
         }
 
-        .user-pill {
+        .stat-card.orange .stat-icon {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* Welcome Card */
+        .welcome-card {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            border-radius: 24px;
+            padding: 2.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.4);
+        }
+
+        .welcome-card::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
             background: rgba(255, 255, 255, 0.1);
-            padding: 8px 15px;
-            border-radius: 50px;
+            border-radius: 50%;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+            max-width: 60%;
+        }
+
+        .welcome-content h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-content p {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-white:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Section Container */
+        .section-box {
+            background: white;
+            border-radius: 24px;
+            padding: 1.75rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #f1f5f9;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Course Cards */
+        .course-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .course-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 14px;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 16px;
+            background: #f8fafc;
+            border: 1px solid transparent;
+            transition: all 0.2s;
         }
 
-        .dashboard-container {
-            max-width: 1100px;
-            margin: 50px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 30px;
-        }
-
-        /* Sidebar */
-        .sidebar {
+        .course-item:hover {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            height: fit-content;
+            border-color: #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
-        .profile-card {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .profile-img {
-            width: 100px;
-            height: 100px;
-            background: var(--bg);
-            border-radius: 50%;
+        .course-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 40px;
-            color: var(--primary);
-            border: 4px solid white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            color: white;
+            font-size: 1.5rem;
         }
 
-        .menu-list {
-            list-style: none;
-            padding: 0;
+        .course-info {
+            flex: 1;
         }
 
-        .menu-item {
-            padding: 12px 15px;
+        .course-name {
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .course-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
             border-radius: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.3s;
-            color: #555;
+            margin-top: 0.5rem;
         }
 
-        .menu-item.active {
+        .progress-fill {
+            height: 100%;
             background: var(--primary);
-            color: white;
-        }
-
-        .menu-item:hover:not(.active) {
-            background: #f0f4ff;
-            color: var(--primary);
-        }
-
-        /* Main Content */
-        .main-content {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        }
-
-        .section-title {
-            font-size: 24px;
-            color: var(--primary);
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .info-item {
-            padding: 20px;
-            background: #f9fbff;
-            border-radius: 15px;
-            border: 1px solid #edf2ff;
-        }
-
-        .info-label {
-            font-size: 13px;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-
-        .info-value {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 5px 12px;
-            background: #e6fffa;
-            color: #2d3748;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .logout-btn {
-            margin-top: 40px;
-            padding: 12px 25px;
-            background: #fff0f0;
-            color: #e53e3e;
-            border: 1px solid #feb2b2;
             border-radius: 10px;
-            cursor: pointer;
+        }
+
+        .progress-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Right Column */
+        .side-col {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .schedule-card {
+            background: white;
+            padding: 1.75rem;
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .schedule-item {
+            display: flex;
+            gap: 1rem;
+            padding-bottom: 1.5rem;
+            border-left: 2px solid #e2e8f0;
+            margin-left: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .schedule-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid white;
+        }
+
+        .schedule-item.done::before {
+            background: var(--accent);
+        }
+
+        .schedule-item.pending::before {
+            background: var(--warning);
+        }
+
+        .schedule-time {
+            font-size: 0.75rem;
             font-weight: 600;
-            transition: 0.3s;
+            color: var(--text-muted);
+            min-width: 60px;
         }
 
-        .logout-btn:hover {
-            background: #e53e3e;
-            color: white;
+        .schedule-detail h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 2px;
         }
 
-        @media (max-width: 900px) {
-            header {
-                padding: 12px 5%;
-            }
+        .schedule-detail p {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
 
-            .header-actions {
-                display: flex;
-            }
+        /* Mobile Adjustments */
+        .mobile-nav-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
 
-            .menu-toggle {
-                display: block;
-            }
-
-            nav {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(14, 47, 105, 0.98);
-                padding: 30px 0;
-                text-align: center;
-                z-index: 1000;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-                gap: 20px;
-                backdrop-filter: blur(15px);
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            nav.active {
-                display: flex;
-                animation: slideDown 0.4s ease forwards;
-            }
-
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            nav a {
-                color: white;
-                text-decoration: none;
-                font-size: 18px;
-                width: 100%;
-                justify-content: center;
-                padding: 10px 0;
-            }
-
-            .dashboard-container {
-                grid-template-columns: 1fr;
-                margin-top: 20px;
-            }
-
+        @media (max-width: 1024px) {
             .sidebar {
-                display: none;
-                /* Hide sidebar on mobile in favor of bottom nav */
+                transform: translateX(-100%);
             }
 
-            .info-grid {
-                grid-template-columns: 1fr;
+            .sidebar.show {
+                transform: translateX(0);
             }
 
             .main-content {
-                padding: 25px;
+                margin-left: 0;
+                max-width: 100%;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
             }
         }
 
-        /* MOBILE BOTTOM NAV */
+        @media (max-width: 768px) {
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+
+            .header-right .search-bar {
+                display: none;
+            }
+
+            .welcome-content {
+                max-width: 100%;
+            }
+        }
+
+        /* Mobile Bottom Nav (Already exists in project but updated to match) */
         .mobile-bottom-nav {
             display: none;
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: white;
+            padding: 0.75rem 1rem;
+            box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            display: none;
+            /* Initially hidden, shown in media query */
             justify-content: space-around;
-            align-items: center;
-            padding: 12px 0;
-            box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.08);
-            z-index: 2000;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            padding-bottom: env(safe-area-inset-bottom, 12px);
+            border-top: 1px solid #f1f5f9;
         }
 
         .bottom-nav-item {
@@ -331,32 +621,20 @@
             align-items: center;
             gap: 4px;
             text-decoration: none;
-            color: #64748b;
-            transition: 0.3s;
-            flex: 1;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .bottom-nav-item.active {
+            color: var(--primary);
         }
 
         .bottom-nav-item i {
-            font-size: 22px;
-            transition: 0.3s;
+            font-size: 1.25rem;
         }
 
-        .bottom-nav-item span {
-            font-size: 11px;
-            font-weight: 500;
-        }
-
-        .bottom-nav-item:hover,
-        .bottom-nav-item.active {
-            color: #0e2f69;
-        }
-
-        .bottom-nav-item.active i {
-            transform: translateY(-2px);
-            color: #0e2f69;
-        }
-
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
             .mobile-bottom-nav {
                 display: flex;
             }
@@ -370,96 +648,211 @@
 
 <body>
 
-    <header id="main-header">
-        <a href="index.html" class="logo">
-            <i class="ri-graduation-cap-fill"></i>
-            ed<span>Hills</span>
-        </a>
-
-        <div class="header-actions">
-            <a href="student-dashboard.html" class="mobile-profile-icon">
-                <i class="ri-user-shared-line"></i>
-            </a>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="ri-menu-3-line"></i>
-            </div>
-        </div>
-
-        <nav id="nav-menu">
-            <a href="index.html"><i class="ri-home-4-line"></i> Home</a>
-            <a href="courses.html"><i class="ri-book-open-line"></i> Courses</a>
-            <a href="test-series.html"><i class="ri-file-list-3-line"></i> Test Series</a>
-            <a href="updates.html"><i class="ri-notification-3-line"></i> Updates</a>
-            <div class="user-pill" style="margin-left: 20px;">
-                <i class="ri-user-smile-line"></i>
-                <span id="headerName">Student Portal</span>
-            </div>
-        </nav>
-    </header>
-
-    <div class="dashboard-container">
+    <div class="dashboard-wrapper">
         <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="profile-card">
-                <div class="profile-img">
-                    <i class="ri-user-star-fill"></i>
+        <aside class="sidebar" id="sidebar">
+            <a href="index.html" class="logo-container">
+                <div class="logo-icon">
+                    <i class="ri-graduation-cap-fill"></i>
                 </div>
-                <h3 id="sidebarName">Student Name</h3>
-                <p id="sidebarEmail" style="font-size: 13px; color: #888;">email@example.com</p>
+                <div class="logo-text">ed<span>Hills</span></div>
+            </a>
+
+            <div class="nav-sections">
+                <p class="nav-label">Main Menu</p>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="student-dashboard.html" class="nav-link active">
+                            <i class="ri-layout-grid-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="courses.html" class="nav-link">
+                            <i class="ri-book-open-line"></i>
+                            <span>My Courses</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="test-series.html" class="nav-link">
+                            <i class="ri-file-list-3-line"></i>
+                            <span>Test Series</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="updates.html" class="nav-link">
+                            <i class="ri-notification-3-line"></i>
+                            <span>Updates</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <p class="nav-label">Academic</p>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="exam-papers.html" class="nav-link">
+                            <i class="ri-file-pdf-line"></i>
+                            <span>Resources</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="store.html" class="nav-link">
+                            <i class="ri-shopping-bag-line"></i>
+                            <span>Store</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="campus-fee.html" class="nav-link">
+                            <i class="ri-bank-card-line"></i>
+                            <span>Fees</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
 
-            <ul class="menu-list">
-                <li class="menu-item active"><i class="ri-dashboard-line"></i> Dashboard</li>
-                <li class="menu-item"><i class="ri-book-3-line"></i> My Courses</li>
-                <li class="menu-item"><i class="ri-file-list-3-line"></i> Test Results</li>
-                <li class="menu-item"><i class="ri-settings-4-line"></i> Settings</li>
-            </ul>
-        </div>
+            <div class="sidebar-footer">
+                <a href="#" class="logout-link" onclick="logout()">
+                    <i class="ri-logout-box-r-line"></i>
+                    <span>Log Out</span>
+                </a>
+            </div>
+        </aside>
 
         <!-- Main Content -->
-        <div class="main-content">
-            <div class="section-title">
-                <i class="ri-shield-user-line"></i> Student Academic Profile
+        <main class="main-content">
+            <header>
+                <div class="header-left">
+                    <div class="mobile-nav-toggle" id="menuToggle">
+                        <i class="ri-menu-2-line"></i>
+                    </div>
+                    <h1 id="welcomeText">Welcome Back!</h1>
+                    <p id="currentDate">Loading date...</p>
+                </div>
+
+                <div class="header-right">
+                    <div class="search-bar">
+                        <i class="ri-search-line"></i>
+                        <input type="text" placeholder="Search for courses, tests...">
+                    </div>
+
+                    <div class="icon-btn">
+                        <i class="ri-notification-3-line"></i>
+                        <span class="badge-dot"></span>
+                    </div>
+
+                    <a href="student-dashboard.html" class="user-profile">
+                        <div class="user-avatar" id="avatarInitial">S</div>
+                        <div class="user-info">
+                            <span class="name" id="userName">Student</span>
+                        </div>
+                    </a>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Left Column -->
+                <div class="main-col">
+                    <!-- Welcome Hero -->
+                    <div class="welcome-card">
+                        <div class="welcome-content">
+                            <h2>Ready to boost your learning?</h2>
+                            <p>You have completed 75% of your weekly goal. Keep it up and you'll reach your target in no
+                                time!</p>
+                            <a href="courses.html" class="btn-white">
+                                Continue Learning <i class="ri-arrow-right-line"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Stats Row -->
+                    <div class="stats-row">
+                        <div class="stat-card blue">
+                            <div class="stat-icon"><i class="ri-book-open-line"></i></div>
+                            <div class="stat-label">Active Courses</div>
+                            <div class="stat-value" id="courseCount">0</div>
+                        </div>
+                        <div class="stat-card green">
+                            <div class="stat-icon"><i class="ri-medal-line"></i></div>
+                            <div class="stat-label">Test Points</div>
+                            <div class="stat-value">2,450</div>
+                        </div>
+                        <div class="stat-card orange">
+                            <div class="stat-icon"><i class="ri-timer-line"></i></div>
+                            <div class="stat-label">Hours Learned</div>
+                            <div class="stat-value">42.5h</div>
+                        </div>
+                    </div>
+
+                    <!-- Active Courses -->
+                    <div class="section-box">
+                        <div class="section-header">
+                            <h3>My Active Courses</h3>
+                            <a href="courses.html" class="view-all">See All Courses</a>
+                        </div>
+                        <div class="course-list" id="coursesGrid">
+                            <p style="color:var(--text-muted); text-align:center; padding: 20px;">No active courses
+                                found.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="side-col">
+                    <!-- Progress Card -->
+                    <div class="section-box">
+                        <div class="section-header">
+                            <h3>Profile Details</h3>
+                            <i class="ri-shield-check-line" style="color:var(--accent)"></i>
+                        </div>
+                        <div style="font-size: 0.9rem;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom: 12px;">
+                                <span style="color:var(--text-muted)">Roll Number</span>
+                                <span id="dispRoll" style="font-weight:600">N/A</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; margin-bottom: 12px;">
+                                <span style="color:var(--text-muted)">Class</span>
+                                <span id="dispClass" style="font-weight:600">N/A</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; margin-bottom: 12px;">
+                                <span style="color:var(--text-muted)">Email</span>
+                                <span id="dispEmail" style="font-size: 0.8rem; font-weight:600">N/A</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between;">
+                                <span style="color:var(--text-muted)">Phone</span>
+                                <span id="dispPhone" style="font-weight:600">N/A</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Schedule -->
+                    <div class="schedule-card">
+                        <div class="section-header">
+                            <h3>Today's Schedule</h3>
+                            <span style="font-size: 0.8rem; color:var(--text-muted)">Feb 22</span>
+                        </div>
+                        <div class="schedule-list">
+                            <div class="schedule-item pending">
+                                <span class="schedule-time">04:00 PM</span>
+                                <div class="schedule-detail">
+                                    <h4>Physics Live Class</h4>
+                                    <p>Quantum Mechanics basics</p>
+                                </div>
+                            </div>
+                            <div class="schedule-item">
+                                <span class="schedule-time">06:30 PM</span>
+                                <div class="schedule-detail">
+                                    <h4>Maths Mock Test</h4>
+                                    <p>Chapter 4 & 5</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="info-label">Full Name</div>
-                    <div class="info-value" id="dispName">N/A</div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-label">Current Roll Number</div>
-                    <div class="info-value"><span class="badge" id="dispRoll">N/A</span></div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-label">Assigned Class</div>
-                    <div class="info-value" id="dispClass">N/A</div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-label">Contact Email</div>
-                    <div class="info-value" id="dispEmail">N/A</div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-label">Phone Number</div>
-                    <div class="info-value" id="dispPhone">N/A</div>
-                </div>
-
-                <div class="info-item">
-                    <div class="info-label">Portal Status</div>
-                    <div class="info-value" style="color: #38a169;">● Verified Student</div>
-                </div>
-            </div>
-
-            <button class="logout-btn" onclick="logout()">
-                <i class="ri-logout-box-r-line"></i> Logout Session
-            </button>
-        </div>
+        </main>
     </div>
 
+    <!-- Mobile Bottom Nav -->
     <div class="mobile-bottom-nav">
         <a href="index.html" class="bottom-nav-item">
             <i class="ri-home-4-line"></i>
@@ -469,42 +862,45 @@
             <i class="ri-book-open-line"></i>
             <span>Courses</span>
         </a>
-        <a href="store.html" class="bottom-nav-item">
-            <i class="ri-shopping-bag-line"></i>
-            <span>Store</span>
+        <a href="student-dashboard.html" class="bottom-nav-item active">
+            <i class="ri-layout-grid-line"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="test-series.html" class="bottom-nav-item">
+            <i class="ri-file-list-3-line"></i>
+            <span>Tests</span>
         </a>
         <a href="updates.html" class="bottom-nav-item">
             <i class="ri-notification-3-line"></i>
             <span>Updates</span>
         </a>
-        <a href="student-dashboard.html" class="bottom-nav-item active">
-            <i class="ri-layout-grid-line"></i>
-            <span>Dashboard</span>
-        </a>
     </div>
 
     <script type="module">
         import { auth } from './js/firebase-config.js';
-        import {
-            signOut,
-            onAuthStateChanged
-        } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+        import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
-        // Mobile Menu Toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navMenu = document.getElementById('nav-menu');
-        if (mobileMenu && navMenu) {
-            mobileMenu.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                const icon = mobileMenu.querySelector('i');
-                if (navMenu.classList.contains('active')) {
-                    icon.classList.remove('ri-menu-3-line');
-                    icon.classList.add('ri-close-line');
-                } else {
-                    icon.classList.remove('ri-close-line');
-                    icon.classList.add('ri-menu-3-line');
-                }
+        // Mobile Sidebar Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('show');
             });
+        }
+
+        // Close sidebar on click outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 1024 && !sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                sidebar.classList.remove('show');
+            }
+        });
+
+        // Set Date
+        const dateEl = document.getElementById('currentDate');
+        if (dateEl) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            dateEl.innerText = new Date().toLocaleDateString(undefined, options);
         }
 
         // Auth Guardian
@@ -518,50 +914,44 @@
             const cachedUser = JSON.parse(localStorage.getItem('currentUser'));
 
             if (!cachedUser || !cachedUser.email) {
-                // Double check with Firebase before kicking out
                 if (!auth.currentUser) {
                     window.location.href = 'login.html';
                     return;
                 }
             }
 
-            // Immediately show cached data
             function renderUser(user) {
-                if (document.getElementById('headerName')) document.getElementById('headerName').innerText = user.name || 'Student';
-                if (document.getElementById('sidebarName')) document.getElementById('sidebarName').innerText = user.name || 'Anonymous';
-                if (document.getElementById('sidebarEmail')) document.getElementById('sidebarEmail').innerText = user.email || '';
-                if (document.getElementById('dispName')) document.getElementById('dispName').innerText = user.name || 'N/A';
+                const name = user.name || 'Student';
+                if (document.getElementById('welcomeText')) document.getElementById('welcomeText').innerText = `Welcome Back, ${name.split(' ')[0]}!`;
+                if (document.getElementById('userName')) document.getElementById('userName').innerText = name;
+                if (document.getElementById('avatarInitial')) document.getElementById('avatarInitial').innerText = name.charAt(0);
+
+                // Sidebar details
                 if (document.getElementById('dispEmail')) document.getElementById('dispEmail').innerText = user.email || 'N/A';
                 if (document.getElementById('dispRoll')) document.getElementById('dispRoll').innerText = user.rollNumber || 'PENDING';
                 if (document.getElementById('dispClass')) document.getElementById('dispClass').innerText = user.class || 'N/A';
                 if (document.getElementById('dispPhone')) document.getElementById('dispPhone').innerText = user.phone || 'N/A';
 
+                // Enrolled Courses
                 if (user.enrolledCourses && user.enrolledCourses.length > 0) {
-                    const old = document.getElementById('coursesGrid');
-                    if (!old) {
-                        const section = document.createElement('div');
-                        section.innerHTML = `
-                            <div class="section-title" style="margin-top:40px;">
-                                <i class="ri-book-read-line"></i> My Active Courses
-                            </div>
-                            <div class="info-grid" id="coursesGrid"></div>`;
-                        const logoutBtn = document.querySelector('.logout-btn');
-                        if (logoutBtn) logoutBtn.parentNode.insertBefore(section, logoutBtn);
-                    }
                     const grid = document.getElementById('coursesGrid');
                     if (grid) {
                         grid.innerHTML = '';
+                        document.getElementById('courseCount').innerText = user.enrolledCourses.length;
                         user.enrolledCourses.forEach(course => {
-                            const card = document.createElement('div');
-                            card.className = 'info-item';
-                            card.style.background = 'linear-gradient(to right, #f0f4ff, #fff)';
-                            card.innerHTML = `
-                                <div class="info-label">Active Batch</div>
-                                <div class="info-value" style="color:var(--secondary);">${course}</div>
-                                <div style="margin-top:8px;font-size:12px;color:#38a169;">
-                                    <i class="ri-checkbox-circle-line"></i> Enrollment Active
-                                </div>`;
-                            grid.appendChild(card);
+                            const item = document.createElement('div');
+                            item.className = 'course-item';
+                            item.innerHTML = `
+                                <div class="course-img"><i class="ri-book-3-line"></i></div>
+                                <div class="course-info">
+                                    <div class="course-name">${course}</div>
+                                    <div class="course-progress-bar">
+                                        <div class="progress-fill" style="width: 45%;"></div>
+                                    </div>
+                                    <span class="progress-text">45% Completed • Next: Module 3</span>
+                                </div>
+                                <i class="ri-arrow-right-s-line" style="color:var(--text-muted)"></i>`;
+                            grid.appendChild(item);
                         });
                     }
                 }
@@ -569,7 +959,7 @@
 
             if (cachedUser) renderUser(cachedUser);
 
-            // Legacy API sync (Optional)
+            // Sync with backend if available
             if (cachedUser && cachedUser.email) {
                 try {
                     const res = await fetch(`http://localhost:5000/api/student/profile/${cachedUser.email}`);
@@ -590,17 +980,13 @@
                     localStorage.removeItem('edHillsToken');
                     window.location.href = 'index.html';
                 }).catch((error) => {
-                    console.error('Logout Error:', error);
-                    // Fallback to local clear
                     localStorage.removeItem('currentUser');
                     window.location.href = 'index.html';
                 });
             }
         }
     </script>
-    <!-- AI Guru Ji Chatbot Widget -->
     <script src="js/ai-guru.js"></script>
-
 </body>
 
 </html>
